@@ -40,8 +40,8 @@ CREATE TABLE train (
   factory VARCHAR(30) NOT NULL,
   departure VARCHAR(50) NOT NULL,
   arrival VARCHAR(50) NOT NULL,
-  departure_hour DATETIME NOT NULL,
-  arrival_hour DATETIME NOT NULL,
+  departure_datetime DATETIME NOT NULL,
+  arrival_datetime DATETIME NOT NULL,
   FOREIGN KEY (factory) REFERENCES train_factory(factory_name) 
   		ON UPDATE CASCADE
   		ON DELETE CASCADE,

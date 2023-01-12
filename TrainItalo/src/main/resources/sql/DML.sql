@@ -260,7 +260,7 @@ INSERT INTO train_factory (factory_name, passenger_seats, disabled_passenger_sea
 ('TreNord', 500, 30, 3000, 100, 300, 500, 200),
 ('FrecciaRossa', 500, 30, 3000, 100, 300, 500, 200);
 
-INSERT INTO train (mat_train, factory, departure, arrival, departure_hour, arrival_hour) VALUES 
+INSERT INTO train (mat_train, factory, departure, arrival, departure_datetime, arrival_datetime) VALUES 
 ('HCCCCC', 'Italo', 'Burundi', 'Austria', '9999-12-31 23:59:59', '9999-12-31 23:59:59'),
 ('HPPRPP', 'Italo', 'Burundi', 'Venezuela', '9999-12-31 23:59:59', '9999-12-31 23:59:59'),
 ('HCCCCC', 'FrecciaRossa', 'San Marino', 'Italia', '9999-12-31 23:59:59', '9999-12-31 23:59:59');
