@@ -14,11 +14,11 @@ public class Alias implements Bean {
 	public void setCountryAlias(String countryAlias) {
 		this.countryAlias = countryAlias;
 	}
-	public Country getCountryName() {
+	public Country getCountry() {
 		return countryName;
 	}
-	public void setCountryName(Country countryName) {
-		this.countryName = countryName;
+	public void setCountry(Country country) {
+		this.countryName = country;
 	}
 	public boolean isApproved() {
 		return approved;
