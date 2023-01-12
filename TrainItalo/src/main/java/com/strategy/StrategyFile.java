@@ -2,6 +2,8 @@ package com.strategy;
 
 import java.util.Collection;
 import java.util.Date;
+import java.util.List;
+import java.util.Map;
 
 import com.beans.Alias;
 import com.beans.Country;
@@ -10,7 +12,7 @@ import com.beans.TrainFactory;
 import com.beans.User;
 
 public class StrategyFile implements Strategy {
-	
+
 	@Override
 	public void addUser(String userMail, String userPassword, String userName, String userSurname) {
 		// TODO Auto-generated method stub
@@ -43,6 +45,12 @@ public class StrategyFile implements Strategy {
 			double restaurantWeight) {
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public Map<String, List<String>> dataMap() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	@Override
@@ -98,4 +106,5 @@ public class StrategyFile implements Strategy {
 		// TODO Auto-generated method stub
 		
 	}
+	
 }

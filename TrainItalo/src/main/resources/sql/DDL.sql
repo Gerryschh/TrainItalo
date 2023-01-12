@@ -23,10 +23,10 @@ CREATE TABLE country (
 DROP TABLE IF EXISTS alias;
 CREATE TABLE alias (
   country_alias VARCHAR(50) PRIMARY KEY,
-  country_name VARCHAR(50) NOT NULL,
+  country_name VARCHAR(50) DEFAULT NULL,
   approved BOOLEAN DEFAULT FALSE NOT NULL,
-  algorithm VARCHAR(20) NOT NULL,
-  threshold_value DOUBLE(3,2),
+  algorithm VARCHAR(20) DEFAULT NULL,
+  threshold_value DOUBLE(3,2) DEFAULT 0,
   is_found BOOLEAN DEFAULT FALSE NOT NULL,
   FOREIGN KEY (country_name) REFERENCES country(country_name)
   		ON UPDATE CASCADE

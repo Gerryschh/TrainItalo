@@ -2,6 +2,8 @@ package com.strategy;
 
 import java.util.Collection;
 import java.util.Date;
+import java.util.List;
+import java.util.Map;
 
 import com.beans.Alias;
 import com.beans.Country;
@@ -24,10 +26,9 @@ public interface Strategy {
 	/*
 	 * METODI GET
 	 */
-	
-	//public Map<String,List<String>> dataMap();
-	
+		
 	//GET ALL
+	public Map<String,List<String>> dataMap();
 	public Collection<Country> getAllCountries();
 	public Collection<Alias> getAllUnapprovedAliases();
 	public Collection<Train> getAllTrains();
