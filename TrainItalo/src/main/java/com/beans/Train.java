@@ -5,7 +5,7 @@ import java.util.Date;
 public class Train implements Bean {
 	private int idTrain;
 	private String matTrain;
-	private TrainFactory trainFactory;
+	private TrainFactory factory;
 	private String departure;
 	private String arrival;
 	private Date departureDatetime;
@@ -24,10 +24,10 @@ public class Train implements Bean {
 		this.matTrain = matTrain;
 	}
 	public TrainFactory getTrainFactory() {
-		return trainFactory;
+		return factory;
 	}
-	public void setTrainFactory(TrainFactory trainFactory) {
-		this.trainFactory = trainFactory;
+	public void setTrainFactory(TrainFactory factory) {
+		this.factory = factory;
 	}
 	public String getDeparture() {
 		return departure;

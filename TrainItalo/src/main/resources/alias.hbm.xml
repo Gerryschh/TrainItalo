@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>  
+<!DOCTYPE hibernate-mapping PUBLIC  
+ "-//Hibernate/Hibernate Mapping DTD 5.3//EN"  
+ "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">  
+  
+ <hibernate-mapping>  
+  <class name="com.beans.Alias" table="alias">  
+            
+    <id name="countryAlias" column="country_alias"></id>  
+   	<many-to-one name="country_name" class="com.beans.Country" column="country_name"></many-to-one>
+   	<property name="approved" column="approved"></property>
+   	<property name="algorithm" column="algorithm"></property>
+   	<property name="thresholdValue" column="threshold_value"></property>
+   	<property name="isFound" column="is_found"></property>
+            
+  </class>  
+            
+ </hibernate-mapping>

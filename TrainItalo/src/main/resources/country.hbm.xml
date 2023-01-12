@@ -1,0 +1,14 @@
+<?xml version='1.0' encoding='UTF-8'?>  
+<!DOCTYPE hibernate-mapping PUBLIC  
+ "-//Hibernate/Hibernate Mapping DTD 5.3//EN"  
+ "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">  
+  
+ <hibernate-mapping>  
+  <class name="com.beans.Country" table="country">  
+  	
+  	<id name="countryName" column="country_name"></id>
+  	<property name="alpha2code" column="alpha2_code"></property>
+  
+  </class>  
+            
+ </hibernate-mapping> 

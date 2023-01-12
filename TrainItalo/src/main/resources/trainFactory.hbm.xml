@@ -1,0 +1,21 @@
+<?xml version='1.0' encoding='UTF-8'?>  
+<!DOCTYPE hibernate-mapping PUBLIC  
+ "-//Hibernate/Hibernate Mapping DTD 5.3//EN"  
+ "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">  
+  
+ <hibernate-mapping> 
+  
+  <class name="com.beans.Factory" table="train_factory">  
+  	
+  	<id name="factoryName" column="factory_name"></id>
+  	<property name="passengerSeats" column="passenger_seats"></property>
+  	<property name="disabledPassengerSeats" column="disabled_passenger_seats"></property>
+  	<property name="towableWeight" column="towable_w"></property>
+  	<property name="headWeight" column="head_w"></property>
+  	<property name="passengerWeight" column="passenger_w"></property>
+  	<property name="cargoWeight" column="cargo_w"></property>
+  	<property name="restaurantWeight" column="restaurant_w"></property>
+
+  </class>  
+  
+</hibernate-mapping> 
