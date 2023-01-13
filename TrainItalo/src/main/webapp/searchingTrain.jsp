@@ -61,7 +61,8 @@ List<TrainFactory> factory = (List<TrainFactory>) db.getAllFactories();%>
 										<th scope="col">Codice treno</th>
 										<th scope="col">Partenza</th>
 										<th scope="col">Ora Partenza</th>
-										<th scope="col">Destinazione</th>
+										<th scope="col">Arrivo</th>
+										<th scope="col">Ora Arrivo</th>
 										</tr>
 										<%
 										int i = 0;
@@ -77,6 +78,7 @@ List<TrainFactory> factory = (List<TrainFactory>) db.getAllFactories();%>
 											<td scope="<%= id %>"> <%= t.getDeparture()%></td>
 										    <td scope="<%= id %>"> <%= t.getDepartureDatetime() %> </td>
 										    <td scope="<%= id %>"> <%= t.getArrival()%></td>
+										    <td scope="<%= id %>"> <%= t.getArrivalDatetime() %></td>
 										    <% i ++; %>
 										    </tr>
 

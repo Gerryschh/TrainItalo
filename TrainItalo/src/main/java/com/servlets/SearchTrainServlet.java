@@ -15,7 +15,9 @@ import javax.servlet.http.HttpSession;
 
 import com.ChainResponsibility.CheckChain;
 import com.ChainResponsibility.CheckChainBuilder;
+import com.beans.Alias;
 import com.beans.Train;
+import com.manager.AliasManager;
 import com.strategy.Strategy;
 import com.strategy.StrategyDB;
 
@@ -33,9 +35,8 @@ public class SearchTrainServlet extends HttpServlet{
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/html");
-		StrategyDB s= new StrategyDB();
 		//Map<String, List<String>> map= s.dataMap();
-		CheckChain chain=CheckChainBuilder.getChain(s);
+		//<CheckChain chain=CheckChainBuilder.getChain(s);
 		
 		String id = request.getParameter("train");
 		System.out.println("ID " + id);
@@ -43,17 +44,22 @@ public class SearchTrainServlet extends HttpServlet{
 		int idFactory = Integer.parseInt(id);
 		
 		String departure = request.getParameter("departure");
-		System.out.println("DEP " + departure);
+		AliasManager am = new AliasManager();
+		List<Alias> listUnAlias = (List<Alias>) am.getAllUnapprovedAliases(); //prendo tutti gli alias non approvati
+		if (listUnAlias.contains(departure)) { //se la partenza è contenuta tra quelli 
+			
+		}
+		
 		String arrival = request.getParameter("arrival");
-		System.out.println("ARR " + arrival);
-		String correctDeparture = chain.check(departure);
-		System.out.println("STR CORRETTA PART " + correctDeparture);
+		
+		//String correctDeparture = chain.check(departure);
+		
 		String correctArrival = arrival;
 		//String correctArrival = chain.check(arrival);
-		//System.out.println("STR CORRETTA ARRIV " + correctArrival);
+		
 		
 		HttpSession session = request.getSession(true);
-		
+		/*
 		if(correctDeparture == null) {
 			session.setAttribute("errorDeparture", "Paese di partenza inesistente");
 		}
@@ -63,11 +69,12 @@ public class SearchTrainServlet extends HttpServlet{
 		}
 		
 		if(correctDeparture != null && correctArrival != null) {
-			List<Train> collectionTrains = (List<Train>) s.getTrainsWithParameter(idFactory, correctDeparture, correctArrival);
+			//List<Train> collectionTrains = (List<Train>) .getTrainsWithParameter(idFactory, correctDeparture, correctArrival);
 			//System.out.println("LIST TRENI SERVLET " +collectionTrains);
-			session.setAttribute("trainList", collectionTrains);
+			//session.setAttribute("trainList", collectionTrains);
 			
 		}
+		*/
 		
 		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/searchingTrain.jsp");
 		dispatcher.forward(request, response);

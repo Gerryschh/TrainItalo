@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.beans.User;
+import com.manager.UserManager;
 import com.strategy.StrategyDB;
 
 @WebServlet("/RegisterServlet")
@@ -25,12 +27,18 @@ public class RegisterServlet extends HttpServlet{
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/html");
-		StrategyDB s = new StrategyDB();
+		UserManager um = new UserManager();
 		String email = request.getParameter("email");
 		String password = request.getParameter("password");
 		String name = request.getParameter("name");
 		String surname = request.getParameter("surname");
-		s.addUser(email, password, name, surname);
+		User u = new User();
+		u.setUserMail(email);
+		u.setUserPassword(password);
+		u.setUserName(name);
+		u.setUserSurname(surname);
+		u.setAdmin(false);
+		um.addUser(u);
 		HttpSession session = request.getSession(true);
 		session.setAttribute("email", email);
 		session.setAttribute("name", name);

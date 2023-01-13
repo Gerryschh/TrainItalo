@@ -57,23 +57,4 @@ public class AliasDAOImpl extends BaseDAO implements AliasDAO {
 			super.getSession().getTransaction().commit();
 			super.getSession().close();
 	}
-
-	@Override
-	public Map<String, List<String>> getMap(List<String> countries) {
-		HashMap<String, List<String>> map = new HashMap<String, List<String>>();
-		
-		for (String s: countries) {
-			map.put(s.toLowerCase(), new ArrayList<String>());
-		}
-		NativeQuery<Object []> mq = super.getSession().createSQLQuery("Select alias_country, country_name from alias");
-		List<Object[]>  l =mq.list();
-		System.out.println(l.size());
-		for(Object[] o: l) { 
-			List<String> temp = map.get(((String)o[1]).toLowerCase());
-			temp.add((String) o[0]);
-			map.put((String) o[1], temp);            
-		}
-		Map<String,List<String>> dataMap = map;
-		return map;
-	}
 }

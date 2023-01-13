@@ -5,13 +5,15 @@ import com.DAO.impl.CountryDAOImpl;
 import com.DAO.AliasDAO;
 import com.DAO.CountryDAO;
 import com.beans.Alias;
+import com.manager.AliasManager;
+import com.manager.CountryManager;
 import com.strategy.Strategy;
 
 public abstract class CheckChain {
 	private CheckChain nextChain;
 	private static Strategy strategy;
-	private AliasDAO aliasDAO = new AliasDAOImpl();
-	private CountryDAO countryDAO = new CountryDAOImpl();	
+	private AliasManager aliasManager = new AliasManager();
+	private CountryManager countryManager = new CountryManager();
 	
 	public void setNextChain(CheckChain nextChain) {
 		this.nextChain=nextChain;
@@ -21,11 +23,11 @@ public abstract class CheckChain {
 		if(result != null) {
 			Alias a = new Alias();
 			a.setCountryAlias(input);
-			a.setCountryName(countryDAO.get(result));
+			a.setCountryName(countryManager.getCountry(result));
 			a.setApproved(false);
 			a.setAlgorithm(this.getClass().getSimpleName());
 			a.setFound(true);
-			aliasDAO.create(a);
+			aliasManager.addAlias(a);
 			System.out.println("Il risultato è "+result);
 			return result;
 		}
@@ -33,7 +35,13 @@ public abstract class CheckChain {
 		if (nextChain!= null)
 			return this.nextChain.check(input);
 		else {
-			strategy.addAlias(input, null, null, 0, false);
+			Alias a = new Alias();
+			a.setCountryAlias(input);
+			a.setCountryName(null);
+			a.setAlgorithm(null);
+			a.setThresholdValue(0);
+			a.setFound(false);
+			aliasManager.addAlias(a);
         	return null;
 			}
 		}

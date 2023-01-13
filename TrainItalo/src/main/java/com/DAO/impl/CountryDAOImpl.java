@@ -40,10 +40,4 @@ public class CountryDAOImpl extends BaseDAO implements CountryDAO {
 		}
 		return cc;
 	}
-
-	@Override
-	public List<String> getNames() {
-		NativeQuery<String> q = super.getSession().createSQLQuery("Select country_name From country");
-		return q.getResultList();
-	}
 }

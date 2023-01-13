@@ -11,5 +11,4 @@ public interface CountryDAO {
 	public Country get(String countryName);
 	public String getNameByAlias(String alias); //Get a country by an Alias name
 	public Collection<Country> getAll(); //Get all countries
-	public List<String> getNames(); //Get all country names
 }

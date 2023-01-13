@@ -1,10 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"
-	import="java.util.*,com.beans.*,com.strategy.*"%>
+	import="java.util.*,com.beans.*,com.strategy.*,com.manager.*"%>
 
 <%
-Strategy db = new StrategyDB();
-Collection<?> aliases = (Collection<?>) db.getAllUnapprovedAliases();
+AliasManager am = new AliasManager();
+Collection<?> aliases = (Collection<?>) am.getAllUnapprovedAliases();
 %>
 <!DOCTYPE html>
 <html>
@@ -33,7 +33,7 @@ Collection<?> aliases = (Collection<?>) db.getAllUnapprovedAliases();
 
 	<div class="container">
 		<h1 class="py-4 text-center text-white bg-dark">Alias Table</h1>
-		<form action="AliasApprovingServlet" method="GET">
+		<form action="admin/checkAliases" method="GET">
 			<table class="table table-dark table-striped">
 				<thead>
 					<tr>

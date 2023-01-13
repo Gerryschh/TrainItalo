@@ -52,7 +52,6 @@ public class TrainDAOImpl extends BaseDAO implements TrainDAO {
 		NativeQuery<Object []> mq = super.getSession().createSQLQuery("Select * from train where factory = " + factory 
 				+ " AND departure = '" + departure + "' AND arrival = '"+ arrival + "'");
 		List<Object[]> trains = mq.list();
-		System.out.println("LISTA DAL DB DEI TRENI: " + ct);
 		for (Object[] o: trains) {
 			Train t = new Train();
 			t.setIdTrain((Integer) o[0]);
