@@ -76,7 +76,6 @@
 		<h1 class="py-4 text-center text-white bg-dark">LEADERBOARD</h1>
 		<!-- FORM PER LA VISUALIZZAZIONE DELLA LEADERBOARD. INIZIALMENTE LO SCORE DELL'UTENTE NON è VISIBILE.
 		 SE L'UTENTE REGISTRA IL PUNTEGGIO BISOGNA RIAGGIORNARE LA LEADERBOARD -->
-		<!--  
 		<form action="TrainGameLeaderboardServlet" method="POST">
 			<table class="table table-dark table-striped">
 				<thead>
@@ -87,7 +86,8 @@
 				</thead>
 				<tbody>
 					<tr>
-					
+						<td></td>
+						<td></td>
 						
 					</tr>
 				</tbody>
@@ -96,7 +96,6 @@
 				<input class="btn btn-outline-light" type="submit" value="Approve">
 			</p>
 		</form>
-		-->
 
 	</div>
 
