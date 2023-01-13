@@ -102,7 +102,7 @@ public class StrategyFile implements Strategy {
 	}
 
 	@Override
-	public void approveAlias(String[] list) {
+	public void approveAlias(String[] aliases) {
 		// TODO Auto-generated method stub
 		
 	}

@@ -148,7 +148,7 @@ public class StrategyDB implements Strategy{
 	 */
 
 	@Override
-	public void approveAlias(String[] list) {
-		aliasDAO.approveAlias(list);
+	public void approveAlias(String[] aliases) {
+		aliasDAO.approveAlias(aliases);
 	}
 }

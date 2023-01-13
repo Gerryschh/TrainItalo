@@ -11,6 +11,6 @@ public interface AliasDAO {
 	public void create(Alias a);
 	public Alias get(String countryAlias);
 	public Collection<Alias> getAllUnapproved(); //Get all unapproved Aliases
-	public void approveAlias(String[] list); //Approve an Alias setting the "approved" field on "true"
+	public void approveAlias(String[] aliases); //Approve an Alias setting the "approved" field on "true"
 	public Map<String,List<String>> getMap(List<String> countries); //Get a map where Aliases are referenced with countries
 }

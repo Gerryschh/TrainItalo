@@ -43,5 +43,5 @@ public interface Strategy {
 	/*
 	 * METODI SET
 	 */
-	public void approveAlias(String[] list);
+	public void approveAlias(String[] aliases);
 }

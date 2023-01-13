@@ -46,15 +46,16 @@ public class AliasDAOImpl extends BaseDAO implements AliasDAO {
 	}
 
 	@Override
-	public void approveAlias(String[] list) {
-		for(String s : list) {
-			Alias a = this.get(s);
-			a.setApproved(true);
+	public void approveAlias(String[] aliases) {
 			super.getSession().beginTransaction();
-			super.getSession().update(a);
+			for (String s : aliases)
+			{
+				Alias a = this.getSession().get(Alias.class, s);
+				a.setApproved(true);
+				super.getSession().update(a);
+			}
 			super.getSession().getTransaction().commit();
-		}
-		super.getSession().close();
+			super.getSession().close();
 	}
 
 	@Override
