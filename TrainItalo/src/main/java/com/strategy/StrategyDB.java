@@ -40,6 +40,7 @@ public class StrategyDB implements Strategy{
 		u.setUserMail(userMail);
 		u.setUserPassword(userPassword);
 		u.setUserName(userName);
+		u.setUserSurname(userSurname);
 		u.setAdmin(false);
 		userDAO.create(u);
 	}
@@ -53,7 +54,7 @@ public class StrategyDB implements Strategy{
 		t.setArrival(arrival);
 		t.setDepartureDatetime(departureDatetime);
 		t.setArrivalDatetime(arrivalDatetime);
-		t.setTrainFactory(tf);
+		t.setFactory(tf);
 		trainDAO.create(t);
 	}	
 	
@@ -72,7 +73,7 @@ public class StrategyDB implements Strategy{
 		a.setCountryAlias(countryAlias);
 		Country c = new Country();
 		countryDAO.get(countryName);
-		a.setCountry(c);
+		a.setCountryName(c);
 		a.setApproved(false);
 		a.setAlgorithm(algorithm);
 		a.setThresholdValue(thresholdValue);

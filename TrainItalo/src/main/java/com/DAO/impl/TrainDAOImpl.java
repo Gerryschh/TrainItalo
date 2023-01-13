@@ -36,7 +36,7 @@ public class TrainDAOImpl extends BaseDAO implements TrainDAO {
 			t.setMatTrain((String) o[1]);
 			TrainFactory tf = new TrainFactory();
 			tf.setFactoryName((String) o[2]);
-			t.setTrainFactory(tf);
+			t.setFactory(tf);
 			t.setDeparture((String) o[3]);
 			t.setArrival((String) o[4]);
 			t.setDepartureDatetime((Date) o[5]);

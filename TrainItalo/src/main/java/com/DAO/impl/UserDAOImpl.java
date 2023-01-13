@@ -3,6 +3,7 @@ package com.DAO.impl;
 import com.beans.User;
 
 import java.util.Collection;
+import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -64,8 +65,9 @@ public class UserDAOImpl extends BaseDAO implements UserDAO {
 				u.setUserPassword((String) o[1]);
 				u.setUserName((String) o[2]);
 				u.setUserSurname((String) o[3]);
-				u.setAdmin((Boolean) o[4]);
-				u.setTrainGameScore((Integer) o[5]);
+				u.setUserBirthdate((Date) o[4]);
+				u.setAdmin((Boolean) o[5]);
+				u.setTrainGameScore((Integer) o[6]);
 				return u;
 			}
 		}

@@ -47,7 +47,7 @@ if(session.getAttribute("email") != null && session.getAttribute("error") != nul
 					<input class="btn-user" type="submit" value="Accedi">
 				</form>
 				
-				<span>Se non sei registrato, <a href="/TrainViewer/signup/register.jsp">clicca qui!</a></span>
+				<span>Se non sei registrato, <a href="./register.jsp">clicca qui!</a></span>
 			  </div>
 			</div>
 		</div>

@@ -52,7 +52,7 @@ Collection<?> aliases = (Collection<?>) db.getAllUnapprovedAliases();
 								Alias a = (Alias) it.next();
 						%>
 						<td><%=a.getCountryAlias()%></td>
-						<td><%=a.getCountry().getCountryName()%></td>
+						<td><%=a.getCountryName() %></td>
 						<td><%=a.getAlgorithm()%></td>
 						<td><input type="checkbox" name="checkAlias"
 							value="<%=a.getCountryAlias()%>"></td>

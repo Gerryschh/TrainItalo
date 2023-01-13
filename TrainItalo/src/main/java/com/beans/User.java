@@ -8,7 +8,7 @@ public class User implements Bean {
 	private String userName;
 	private String userSurname;
 	private Date userBirthdate;
-	private boolean isAdmin;
+	private boolean admin;
 	private int trainGameScore;
 	
 	public String getUserMail() {
@@ -42,10 +42,10 @@ public class User implements Bean {
 		this.userBirthdate = userBirthdate;
 	}
 	public boolean isAdmin() {
-		return isAdmin;
+		return admin;
 	}
-	public void setAdmin(boolean isAdmin) {
-		this.isAdmin = isAdmin;
+	public void setAdmin(boolean admin) {
+		this.admin = admin;
 	}
 	public int getTrainGameScore() {
 		return trainGameScore;
@@ -53,4 +53,6 @@ public class User implements Bean {
 	public void setTrainGameScore(int trainGameScore) {
 		this.trainGameScore = trainGameScore;
 	}
+	
+	
 }

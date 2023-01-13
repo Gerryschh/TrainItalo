@@ -15,10 +15,10 @@
 			%>
 			<ul class="navbar-nav">
 				<li class="nav-item"><a class="nav-link" aria-current="page"
-					href="/TrainViewer/countrySearch.jsp"><span>Cerca un Treno</span></a></li>
+					href="/TrainItalo/countrySearch.jsp"><span>Cerca un Treno</span></a></li>
 					
 				<li class="nav-item"><a class="nav-link" aria-current="page"
-					href="/TrainViewer/trainGame/trainGame.jsp"><span>TrainGame</span></a>
+					href="/TrainItalo/trainGame/trainGame.jsp"><span>TrainGame</span></a>
 				</li>
 			</ul>
 			<ul class="navbar-nav flex-row flex-wrap ms-md-auto">
@@ -30,12 +30,12 @@
 						    <i class="fas fa-user"></i>
 						  </button>
 						  <ul class="dropdown-menu dropdown-menu-end">
-						    <li><a class="dropdown-item" href="/TrainViewer/userSettings.jsp">User Settings</a></li>
+						    <li><a class="dropdown-item" href="/TrainItalo/userSettings.jsp">User Settings</a></li>
 						    <% if (isAdmin) { %> 
-						    <li><a class="dropdown-item" href="/TrainViewer/admin/admin.jsp">Admin Page</a></li>
+						    <li><a class="dropdown-item" href="/TrainItalo/admin/admin.jsp">Admin Page</a></li>
 						    <% } %>
 						    <li>
-						    	<form id="logout-form" action="/TrainViewer/LogoutServlet" method="POST">
+						    	<form id="logout-form" action="/TrainItalo/LogoutServlet" method="POST">
 								<input class="ms-logout dropdown-item" type="submit" value="Logout"></form></li>
 							</li>
 						  </ul>
@@ -48,16 +48,16 @@
 				
 			<ul class="navbar-nav">
 				<li class="nav-item"><a class="nav-link" aria-current="page"
-					href="/TrainViewer/login.jsp"><span>Cerca un Treno</span></a></li>
+					href="/TrainItalo/login.jsp"><span>Cerca un Treno</span></a></li>
 					
 				<li class="nav-item"><a class="nav-link" aria-current="page"
-					href="/TrainViewer/login.jsp"><span>TrainGame</span></a>
+					href="/TrainItalo/login.jsp"><span>TrainGame</span></a>
 				</li>
 			</ul>
 			<ul class="navbar-nav flex-row flex-wrap ms-md-auto">
 			
 				<li class="nav-item"><a class="nav-link" aria-current="page"
-					href="/TrainViewer/login.jsp"><span>Accedi/Registrati</span></a>
+					href="/TrainItalo/login.jsp"><span>Accedi/Registrati</span></a>
 				</li>
 			</ul>
 				<%

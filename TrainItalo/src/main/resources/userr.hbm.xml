@@ -11,7 +11,7 @@
   	<property name="userName" column="user_name"></property>
   	<property name="userSurname" column="user_surname"></property>
   	<property name="userBirthdate" column="user_birthdate"></property>
-  	<property name="isAdmin" column="is_admin"></property>
+  	<property name="admin" column="is_admin"></property>
   	<property name="trainGameScore" column="train_game_score"></property>
   
   </class>  

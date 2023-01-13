@@ -35,7 +35,7 @@ public class AliasDAOImpl extends BaseDAO implements AliasDAO {
 			a.setCountryAlias((String) o[0]);
 			Country c = new Country();
 			c.setCountryName((String) o[1]);
-			a.setCountry(c);
+			a.setCountryName(c);
 			a.setApproved((Boolean) o[2]);
 			a.setAlgorithm((String) o[3]);
 			a.setThresholdValue((double) o[4]);

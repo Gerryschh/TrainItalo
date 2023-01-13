@@ -5,7 +5,7 @@
   
  <hibernate-mapping> 
   
-  <class name="com.beans.Factory" table="train_factory">  
+  <class name="com.beans.TrainFactory" table="train_factory">  
   	
   	<id name="factoryName" column="factory_name"></id>
   	<property name="passengerSeats" column="passenger_seats"></property>

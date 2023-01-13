@@ -6,19 +6,18 @@ public class Alias implements Bean {
 	private boolean approved;
 	private String algorithm;
 	private double thresholdValue;
-	private boolean isFound;
-	
+	private boolean found;
 	public String getCountryAlias() {
 		return countryAlias;
 	}
 	public void setCountryAlias(String countryAlias) {
 		this.countryAlias = countryAlias;
 	}
-	public Country getCountry() {
+	public Country getCountryName() {
 		return countryName;
 	}
-	public void setCountry(Country country) {
-		this.countryName = country;
+	public void setCountryName(Country countryName) {
+		this.countryName = countryName;
 	}
 	public boolean isApproved() {
 		return approved;
@@ -39,9 +38,13 @@ public class Alias implements Bean {
 		this.thresholdValue = thresholdValue;
 	}
 	public boolean isFound() {
-		return isFound;
+		return found;
 	}
-	public void setFound(boolean isFound) {
-		this.isFound = isFound;
+	public void setFound(boolean found) {
+		this.found = found;
 	}
+	
+	
+	
+	
 }

@@ -23,10 +23,10 @@ public class Train implements Bean {
 	public void setMatTrain(String matTrain) {
 		this.matTrain = matTrain;
 	}
-	public TrainFactory getTrainFactory() {
+	public TrainFactory getFactory() {
 		return factory;
 	}
-	public void setTrainFactory(TrainFactory factory) {
+	public void setFactory(TrainFactory factory) {
 		this.factory = factory;
 	}
 	public String getDeparture() {

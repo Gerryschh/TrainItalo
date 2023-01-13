@@ -21,9 +21,11 @@
 	<jsp:include page="/menu.jsp"></jsp:include>
 
 	<form id="registration-form" onsubmit="return handleSubmit()"
-		action="../RegisterServlet" method="POST">
-		<label for="username">Username:</label> 
-		<input type="text" id="username" name="username" required> 
+		action="./RegisterServlet" method="POST">
+		<label for="username">Nome:</label>
+		<input type="text" id="name" name="name" required>
+		<label for="username">Cognome:</label>
+		<input type="text" id="surname" name="surname" required> 
 		<label for="email">Email:</label> 
 		<input type="text" id="email" name="email" required> 
 		<label for="password">Password:</label>

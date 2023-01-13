@@ -28,12 +28,13 @@ public class RegisterServlet extends HttpServlet{
 		StrategyDB s = new StrategyDB();
 		String email = request.getParameter("email");
 		String password = request.getParameter("password");
-		String username = request.getParameter("username");
+		String name = request.getParameter("name");
 		String surname = request.getParameter("surname");
-		s.addUser(email, password, username, surname);
+		s.addUser(email, password, name, surname);
 		HttpSession session = request.getSession(true);
 		session.setAttribute("email", email);
-		session.setAttribute("username", username);
+		session.setAttribute("name", name);
+		session.setAttribute("surname", surname);
 		session.setAttribute("isAdmin", false);
 		
 		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/index.jsp");

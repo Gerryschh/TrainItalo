@@ -21,7 +21,7 @@ public abstract class CheckChain {
 		if(result != null) {
 			Alias a = new Alias();
 			a.setCountryAlias(input);
-			a.setCountry(countryDAO.get(result));
+			a.setCountryName(countryDAO.get(result));
 			a.setApproved(false);
 			a.setAlgorithm(this.getClass().getSimpleName());
 			a.setFound(true);
