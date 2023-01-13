@@ -32,7 +32,7 @@
 						  <ul class="dropdown-menu dropdown-menu-end">
 						    <li><a class="dropdown-item" href="/TrainItalo/userSettings.jsp">User Settings</a></li>
 						    <% if (isAdmin) { %> 
-						    <li><a class="dropdown-item" href="/TrainItalo/admin/admin.jsp">Admin Page</a></li>
+						    <li><a class="dropdown-item" href="/TrainItalo/admin.jsp">Admin Page</a></li>
 						    <% } %>
 						    <li>
 						    	<form id="logout-form" action="/TrainItalo/LogoutServlet" method="POST">
