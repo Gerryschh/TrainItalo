@@ -100,7 +100,7 @@ List<TrainFactory> factory = (List<TrainFactory>) db.getAllFactories();%>
 						String arr = (String) session.getAttribute("correctArr");
 						//System.out.println("errore dep in jsp " + errorD);
 						//System.out.println("errore dep in jsp " + errorA);
-						if ((errorD != null) || (errorA != null)){
+						if ((errorD != null) || (errorA != null)) {
 					%>		
 							<br>
 							<br>

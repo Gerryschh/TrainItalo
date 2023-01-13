@@ -63,9 +63,9 @@ public class SearchTrainServlet extends HttpServlet{
 		}
 		
 		if(correctDeparture != null && correctArrival != null) {
-			//List<Train> collectionTrains = s.getTrainsWithParameter(idFactory, departure, arrival);
+			List<Train> collectionTrains = (List<Train>) s.getTrainsWithParameter(idFactory, correctDeparture, correctArrival);
 			//System.out.println("LIST TRENI SERVLET " +collectionTrains);
-			//session.setAttribute("trainList", collectionTrains);
+			session.setAttribute("trainList", collectionTrains);
 			
 		}
 		

@@ -124,6 +124,10 @@ public class StrategyDB implements Strategy{
 	public Collection<Train> getAllTrains() {
 		return trainDAO.getAll();
 	}
+	
+	public Collection<Train> getTrainsWithParameter(int factory, String departure, String arrival){
+		return trainDAO.getTrainsWithParameter(factory, departure, arrival);
+	}
 
 	@Override
 	public Collection<User> getAllNormalUsers() {
@@ -142,7 +146,8 @@ public class StrategyDB implements Strategy{
 	public String getCountryNameByAlias(String input) {
 		return countryDAO.getNameByAlias(input);
 	}	
-
+	
+	
 	/*
 	 * METODI SET
 	 */
@@ -151,4 +156,6 @@ public class StrategyDB implements Strategy{
 	public void approveAlias(String[] aliases) {
 		aliasDAO.approveAlias(aliases);
 	}
+
+	
 }
