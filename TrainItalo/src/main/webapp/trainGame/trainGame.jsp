@@ -71,7 +71,6 @@
 	
 	<%
 	Strategy db = new StrategyDB();
-	Collection<?> score = (Collection<?>) db.getAllScore();
 	%>
 	<div class="container">
 		<h1 class="py-4 text-center text-white bg-dark">LEADERBOARD</h1>
@@ -88,18 +87,10 @@
 				<tbody>
 					<tr>
 						<%
-						if (score != null && score.size() != 0) {
-							Iterator<?> it = score.iterator();
-							while (it.hasNext()) {
-								Score s = (Score) it.next();
 						%>
-						<td><%=s.getUserMail().getUserMail()%></td>
-						<td><%=s.getScore()%></td>
+						<td><% %></td>
+						<td><%=%></td>
 					</tr>
-					<%
-					}
-					}
-					%>
 				</tbody>
 			</table>
 			<p class="text-center">

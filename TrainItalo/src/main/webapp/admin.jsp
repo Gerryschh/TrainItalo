@@ -4,7 +4,7 @@
 
 <%
 Strategy db = new StrategyDB();
-Collection<?> aliases = (Collection<?>) db.getUnapprovedAliases();
+Collection<?> aliases = (Collection<?>) db.getAllUnapprovedAliases();
 %>
 <!DOCTYPE html>
 <html>
@@ -51,11 +51,11 @@ Collection<?> aliases = (Collection<?>) db.getUnapprovedAliases();
 							while (it.hasNext()) {
 								Alias a = (Alias) it.next();
 						%>
-						<td><%=a.getAlias()%></td>
+						<td><%=a.getCountryAlias()%></td>
 						<td><%=a.getCountry().getCountryName()%></td>
 						<td><%=a.getAlgorithm()%></td>
 						<td><input type="checkbox" name="checkAlias"
-							value="<%=a.getAlias()%>"></td>
+							value="<%=a.getCountryAlias()%>"></td>
 					</tr>
 					<%
 					}
