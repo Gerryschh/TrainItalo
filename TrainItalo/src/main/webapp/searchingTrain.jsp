@@ -1,9 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"	pageEncoding="ISO-8859-1"	
-import="java.util.*,com.beans.*,com.strategy.*"%>
+import="java.util.*,com.beans.*,com.strategy.*, com.manager.*"%>
 
 <%
-Strategy db = new StrategyDB();
-List<TrainFactory> factory = (List<TrainFactory>) db.getAllFactories();%>
+TrainFactoryManager fm = new TrainFactoryManager();
+List<TrainFactory> factory = (List<TrainFactory>) fm.getAllFactories();%>
 
 <!DOCTYPE html>
 <html>
