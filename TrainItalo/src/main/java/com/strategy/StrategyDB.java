@@ -13,7 +13,6 @@ import com.connectionDB.ConnectionToDB;
 public class StrategyDB implements Strategy{
 	
 	private Session session = ConnectionToDB.getSession();
-	private Map<String,List<String>> dataMap;
 	
 	//Get a map where Aliases are referenced with countries
 	public Map<String,List<String>> dataMap() {

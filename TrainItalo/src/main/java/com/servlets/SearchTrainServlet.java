@@ -1,9 +1,6 @@
 package com.servlets;
 
 import java.io.IOException;
-import java.util.Collection;
-import java.util.List;
-import java.util.Map;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -15,8 +12,6 @@ import javax.servlet.http.HttpSession;
 
 import com.ChainResponsibility.CheckChain;
 import com.ChainResponsibility.CheckChainBuilder;
-import com.beans.Train;
-import com.strategy.Strategy;
 import com.strategy.StrategyDB;
 
 @WebServlet("/SearchTrainServlet")

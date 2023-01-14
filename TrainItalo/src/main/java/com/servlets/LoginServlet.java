@@ -12,8 +12,6 @@ import javax.servlet.http.HttpSession;
 
 import com.beans.User;
 import com.manager.UserManager;
-import com.strategy.StrategyDB;
-
 @WebServlet("/LoginServlet")
 public class LoginServlet extends HttpServlet{
 
