@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+	pageEncoding="ISO-8859-1" import="com.beans.*"%>
+	
+<%
+	User currentUser = (User) session.getAttribute("user");
+%>
 
 <!DOCTYPE html>
 <html>
@@ -26,9 +30,20 @@
 <title>TrainViewer</title>
 </head>
 <body class="bg-white">
-
-	<jsp:include page="/menu.jsp"></jsp:include>
-	
+<%
+if (currentUser != null)
+{
+%>
+<jsp:include page="/menuLogged.jsp"></jsp:include>	
+<%	
+}
+else
+{
+%>
+<jsp:include page="/menu.jsp"></jsp:include>
+<%
+}
+%>
 	<section class="ms-carousel mb-4">
 		<div id="carouselExampleAutoplaying" class="carousel slide" id="carousel" data-bs-ride="carousel">
 		  <div class="carousel-indicators">

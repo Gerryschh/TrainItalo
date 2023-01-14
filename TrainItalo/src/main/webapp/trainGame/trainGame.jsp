@@ -1,6 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"
-	import="java.util.*,com.beans.*,com.strategy.*"%>
+	import="java.util.*,com.beans.*"%>
+<%
+			User currentUser = (User) session.getAttribute("user");
+			if(currentUser != null) {
+%>
 
 <!DOCTYPE html>
 <html>
@@ -24,7 +28,7 @@
 <title>TrainGame</title>
 </head>
 <body id="b01" onkeydown="checkKeyDown(event);" onkeypress="checkKeyPress(event)">
-	<jsp:include page="../menu.jsp"></jsp:include>
+	<jsp:include page="../menuLogged.jsp"></jsp:include>
 	<div class="container">
 		<input type="button" onclick="play()" value="Play" class="btnPlay" id="playButton"></input>
 		<input type="button" onclick="mostraMatriceHTML()" value="mostra matrice"></input>
@@ -51,15 +55,10 @@
 	<p id="posizioneOmino"></p>
 	<p id="messaggioDebug"></p>
 	
-	
-	
-	<%
-	String username = (String) session.getAttribute("username");
-	%>
 	<!-- FORM PER L'INVIO DEL PUNTEGGIO AL DB -->
 	<form id="score-form" onsubmit="return handleSubmit()" action="TrainGameScoreServlet" method="POST">
 		<label for="username">Username:</label><br/>
-		<label for="username"><%= username %></label><br/>
+		<label for="username"><%=currentUser.getUserName() %></label><br/>
 		<label for="score">Score:</label><br/>
 		
 		<!-- SCORE COME VARIABILE DI JAVSCRIPT -->
@@ -68,10 +67,6 @@
 		<!-- <input class="btn-user" type="submit" value="Registra punteggio">  -->
 	</form>
 	<input type="button" onclick="play()" value="Riprova" class="btnPlay"></input>
-	
-	<%
-	Strategy db = new StrategyDB();
-	%>
 	<div class="container">
 		<h1 class="py-4 text-center text-white bg-dark">LEADERBOARD</h1>
 		<!-- FORM PER LA VISUALIZZAZIONE DELLA LEADERBOARD. INIZIALMENTE LO SCORE DELL'UTENTE NON è VISIBILE.
@@ -112,3 +107,6 @@
 	
 </body>
 </html>
+<%
+			}
+%>
