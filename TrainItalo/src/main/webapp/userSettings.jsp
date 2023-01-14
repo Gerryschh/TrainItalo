@@ -1,3 +1,12 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+	pageEncoding="ISO-8859-1" import="com.beans.*"%>
+	
+<%
+	User currentUser = (User) session.getAttribute("user");
+	if(currentUser != null)
+	{
+%>
+<!DOCTYPE html>
 <html>
 <head>
 <meta charset="ISO-8859-1">
@@ -18,11 +27,20 @@
 <title>User Settings</title>
 </head>
 <body class="bg-white">
-	<jsp:include page="/menu.jsp"></jsp:include>
+	<jsp:include page="/menuLogged.jsp"></jsp:include>
 	<div class="ms-loader">
 		<div class="track"></div>
 		<div class="train"></div>
 	</div>
 	<jsp:include page="/fragments/footer.jsp"></jsp:include>
+<%
+	}
+	else
+	{
+%>
+<h2>Error 404 - Utente non loggato, risorsa non disponibile!</h2>
+<%
+	}
+%>
 </body>
 </html>

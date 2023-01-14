@@ -6,6 +6,9 @@
 
 CountryManager cm = new CountryManager();
 Collection<?> countries = (Collection<?>) cm.getAllCountries();
+User currentUser = (User) session.getAttribute("user");
+if(currentUser != null && currentUser.isAdmin())
+{
 
 %>
 
@@ -31,7 +34,7 @@ Collection<?> countries = (Collection<?>) cm.getAllCountries();
 </head>
 <body class="bg-white">
 
-<jsp:include page="/menu.jsp"></jsp:include>
+<jsp:include page="/menuLogged.jsp"></jsp:include>
 
 	<!-- Table of countries -->
 
@@ -70,5 +73,11 @@ Collection<?> countries = (Collection<?>) cm.getAllCountries();
 	
 	</div>
 	<jsp:include page="/fragments/footer.jsp"></jsp:include>
+<%
+	}
+	else {
+%>
+<h2>Error 404 - Utente non abilitato, risorsa non disponibile!</h2>
+<%} %>
 </body>
 </html>

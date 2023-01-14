@@ -1,5 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+	pageEncoding="ISO-8859-1" import="com.beans.*"%>
+	
+<%
+	User currentUser = (User) session.getAttribute("user");
+	if(currentUser != null && currentUser.isAdmin())
+	{
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -21,16 +27,24 @@
 <title>Admin Page</title>
 </head>
 <body class="bg-white">
-	<jsp:include page="/menu.jsp"></jsp:include>
+	<jsp:include page="/menuLogged.jsp"></jsp:include>
 	<div>
 	<h2>Admin Page Actions</h2>
 	<ul>
-	<li><a href="/TrainItalo/aliasApproval.jsp">Alias Approval</a></li>
-	<li><a href="/TrainItalo/insertTrain.jsp">Insert a Train</a></li>
-	<li><a href="/TrainItalo/countryList.jsp">Country List</a></li>
-	<li><a href="/TrainItalo/trainList.jsp">Train List</a></li>
+	<li><a href="checkAliases">Alias Approval</a></li>
+	<li><a href="insertTrain">Insert a Train</a></li>
+	<li><a href="countryList">Country List</a></li>
+	<li><a href="trainList">Train List</a></li>
 	</ul>
 	</div>
 	<jsp:include page="/fragments/footer.jsp"></jsp:include>
+<%
+	}
+	else {
+%>
+<h2>Error 404 - Utente non abilitato, risorsa non disponibile!</h2>
+<%
+} 
+%>
 </body>
 </html>

@@ -1,5 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+	pageEncoding="ISO-8859-1" 
+	import="com.manager.*, com.beans.*, java.util.*"%>
+	
+<%
+TrainFactoryManager tfm = new TrainFactoryManager();
+Collection<?> factories = (Collection<?>) tfm.getAllFactories();
+User currentUser = (User) session.getAttribute("user");
+if(currentUser != null && currentUser.isAdmin())
+{
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -21,45 +30,60 @@
 <title>InsertTrain Admin</title>
 </head>
 <body class="bg-white">
-	<jsp:include page="/menu.jsp"></jsp:include>
+	<jsp:include page="/menuLogged.jsp"></jsp:include>
 	<div class="ms-container d-flex justify-content-center">
 		<form action="InsertTrainServlet" method="POST" class="row">
 	  <div class="col-12">
-	    <label for="inputMatricolaTreno" class="col-sm-2 col-form-label" placeholder="HCCCPR">Matricola Treno</label>
-	    <div class="col-sm-10">
-	      <input type="text" class="form-control" id="inputMatricolaTreno">
+	    <label for="inputMatricolaTreno" class="col-sm-2 col-form-label">Matricola Treno</label>
+	    <div class="col-md-12">
+	      <input type="text" class="form-control" id="inputMatricolaTreno" placeholder="HCCCPR" required>
 	    </div>
-	    <label for="inputDeparture" class="col-sm-2 col-form-label" placeholder="Italia">Partenza</label>
-	    <div class="col-sm-10">
-	      <input type="text" class="form-control" id="inputDeparture">
+	    <label for="TrainFactoryName" class="col-sm-2 col-form-label">TrainBrand</label>
+	    <div class="col-md-12">
+	    <select name="TrainFactoryName" id="TrainFactoryName">
+	    <%
+						if (factories != null && factories.size() != 0) {
+							Iterator<?> it = factories.iterator();
+							while (it.hasNext()) {
+								TrainFactory tf = (TrainFactory) it.next();
+						%>
+	     <option><%=tf.getFactoryName()%></option>
+	     <%
+		 }
+	     } 
+	     %>
+	   	</select>
+	   	</div>
+	    <label for="inputDeparture" class="col-sm-2 col-form-label">Partenza</label>
+	    <div class="col-md-12">
+	      <input type="text" class="form-control" id="inputDeparture" placeholder="Italia" required>
 	    </div>
-	    <label for="inputArrival" class="col-sm-2 col-form-label" placeholder="Spagna">Arrivo</label>
-	    <div class="col-sm-10">
-	      <input type="text" class="form-control" id="inputArrival">
+	    <label for="inputArrival" class="col-sm-2 col-form-label">Arrivo</label>
+	    <div class="col-md-12">
+	      <input type="text" class="form-control" id="inputArrival" placeholder="Spagna" required>
+	    </div>
+	    <label for="inputDepartureHour" class="col-sm-2 col-form-label">Data e ora partenza</label>
+	    <div class="col-md-12">
+	      <input type="datetime-local" class="form-control" id="inputDepartureHour"  min="2023-01-01T00:00" required>
+	    </div>
+	    <label for="inputArrivalHour" class="col-sm-2 col-form-label">Data e ora Arrivo</label>
+	    <div class="col-md-12">
+	      <input type="datetime-local" class="form-control" id="inputArrivalHour" min="2023-01-01T00:00" required>
 	    </div>
 	  </div>
-	  <fieldset class="row mb-3">
-	    <legend class="col-form-label col-sm-2 pt-0">Train Brand</legend>
-	    <div class="col-sm-10">
-	      <div class="form-check">
-	        <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="option1" checked>
-	        <label class="form-check-label" for="gridRadios1">
-	          TreNord
-	        </label>
-	      </div>
-	      <div class="form-check">
-	        <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios2" value="option2">
-	        <label class="form-check-label" for="gridRadios2">
-	          FrecciaRossa
-	        </label>
-	      </div>
-	    </div>
-	  </fieldset>
-	  <div class="col-12">
+	  <div class="col-12 text-center">
+	  <br>
 	  <button type="submit" class="btn btn-primary">Add Train</button>
 	  </div>
 	</form>
 </div>
+	<br>
 	<jsp:include page="/fragments/footer.jsp"></jsp:include>
+<%
+	}
+	else {
+%>
+<h2>Error 404 - Utente non abilitato, risorsa non disponibile!</h2>
+<%} %>
 </body>
 </html>
