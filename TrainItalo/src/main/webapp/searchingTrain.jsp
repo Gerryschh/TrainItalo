@@ -31,8 +31,11 @@ List<TrainFactory> factory = (List<TrainFactory>) fm.getAllFactories();%>
 					<label for="train">Treno: </label>
 					<select id="idFactory" name="train">
 			         <%
-			          for(int i = 0; i < factory.size(); i++){  %>
-			          <option value= "<%= i %>"> <%= factory.get(i).getFactoryName() %></option>
+			          for(int i = 0; i < factory.size(); i++){  
+			        	  String factoryName = factory.get(i).getFactoryName();
+			          %>
+			          
+			          <option value= "<%=factoryName%>"> <%= factoryName %></option>
 			            
 			          <% 
 			          } 
@@ -47,85 +50,84 @@ List<TrainFactory> factory = (List<TrainFactory>) fm.getAllFactories();%>
 					<input class="btn-user" type="submit" value="Cerca">
 				</form>
 					<%
-					Collection<Train> trains = (Collection<Train>) session.getAttribute("trainList");
-					if (trains != null && trains.size() != 0){
-						List<Train> listTrain = new ArrayList(trains);
-					%>
-							<br>
-							<br>
-							<br>
-							<div class="container">
-								<table class="table table-striped">
-									<thead>
-										<tr>
-										<th scope="col">Codice treno</th>
-										<th scope="col">Partenza</th>
-										<th scope="col">Ora Partenza</th>
-										<th scope="col">Arrivo</th>
-										<th scope="col">Ora Arrivo</th>
-										</tr>
-										<%
-										int i = 0;
-										while(i < listTrain.size()) {
-											Train t = (Train) listTrain.get(i);
-										%>
-											
-											<tr>
-											<%
-											int id = t.getIdTrain(); 
-											%>
-											<td scope="<%= id %>"> <%= t.getFactory() %></td>
-											<td scope="<%= id %>"> <%= t.getDeparture()%></td>
-										    <td scope="<%= id %>"> <%= t.getDepartureDatetime() %> </td>
-										    <td scope="<%= id %>"> <%= t.getArrival()%></td>
-										    <td scope="<%= id %>"> <%= t.getArrivalDatetime() %></td>
-										    <% i ++; %>
-										    </tr>
-
-											
-										<% 	
-										}
-										%>
-										
-					  
-										</thead>
-									
-									</table>
-							
-								</div>
-				
-					<% 
-					} else if (session.getAttribute("departure") != null) {
-						String errorD = (String) session.getAttribute("errorDeparture");
-						String errorA = (String) session.getAttribute("errorArrival");
-						String dep = (String) session.getAttribute("departure");
-						String arr = (String) session.getAttribute("correctArr");
-						//System.out.println("errore dep in jsp " + errorD);
-						//System.out.println("errore dep in jsp " + errorA);
-						if ((errorD != null) || (errorA != null)) {
-					%>		
-							<br>
-							<br>
-							<label> ERRORE! PAESE/I NON TROVATI</label>
-			
-						<% 
-						} else if (dep != null) { 
-
+					String s = (String) session.getAttribute("statusDeparture");
+					String s1 = (String) session.getAttribute("statusArrival");
+					String dep = (String) session.getAttribute("departure");
+					System.out.print("PART " + dep);
+					String arr = (String) session.getAttribute("arrival");
+					System.out.print("ARR " + arr);
+					if (s != null && s1 != null){
+						if (s.equals("true") && s1.equals("true")) { // se le parole son state approvate allora faccio vedere i paesi 
+							Collection<Train> trains = (Collection<Train>) session.getAttribute("trainList");
+							if (trains != null && trains.size() != 0){
+								List<Train> listTrain = new ArrayList(trains);
 						%>
-						<br>
-								<label> Forse cercavi, <%= dep %> ? </label>	
-						<%} else if (arr != null) { %>
-								<label> Forse cercavi, <%= arr %> ? </label>
+								<br>
+								<br>
+								<br>
+								<div class="container">
+									<table class="table table-striped">
+										<thead>
+											<tr>
+											<th scope="col">Codice treno</th>
+											<th scope="col">Partenza</th>
+											<th scope="col">Ora Partenza</th>
+											<th scope="col">Arrivo</th>
+											<th scope="col">Ora Arrivo</th>
+											</tr>
+											<%
+											int i = 0;
+											while(i < listTrain.size()) {
+												Train t = (Train) listTrain.get(i);
+											%>
+												
+												<tr>
+												<%
+												int id = t.getIdTrain(); 
+												%>
+												<td scope="<%= id %>"> <%= t.getMatTrain() %></td>
+												<td scope="<%= id %>"> <%= t.getDeparture()%></td>
+											    <td scope="<%= id %>"> <%= t.getDepartureDatetime() %> </td>
+											    <td scope="<%= id %>"> <%= t.getArrival()%></td>
+											    <td scope="<%= id %>"> <%= t.getArrivalDatetime() %></td>
+											    <% i ++; %>
+											    </tr>
+
+												
+											<% 	
+											}
+											%>
+											
+						  
+											</thead>
+										
+										</table>
 								
-						<%} %> 
-						
+									</div>
 							
-							<br>
-							<h4><label> NESSUN TRENO DISPONIBILE</label></h4>
-					    
-					    
-				<% } %>
+							
+							
+							<% } else { %>
+								<label> NESSUN TRENO DISPONIBILE </label>
+							<% }%>
+							
+					<%} else { //se non sono approvati allora chiedo
+							if (s.equals("false")) { %>
+								<label> Forse cercavi per il paese di partenza, <%= dep %> ? </label>
+						<% } else if(s1.equals("false")) { %>
+							         <label> Forse cercavi per il paese di arrivo, <%= arr %> ? </label>
+						
+						<% } else if (s.equals("invalidate") || s1.equals("invaidate")) { // se sono invalidati (che non esistono negli alias) %>
+								<label> NESSUN TRENO DISPONIBILE </label>
+						<% } %>
+						
+				<%} %>
+						
+		
+						
+		<%}%>
 					
+				
 			<br>
 			</div>
 		</div>
@@ -135,9 +137,6 @@ List<TrainFactory> factory = (List<TrainFactory>) fm.getAllFactories();%>
 		<br>
 		<jsp:include page="/fragments/footer.jsp"></jsp:include>
 	</section>
-
-
-
 
 </body>
 </html>

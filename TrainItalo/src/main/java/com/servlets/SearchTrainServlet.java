@@ -18,11 +18,14 @@ import com.ChainResponsibility.CheckChainBuilder;
 import com.beans.Alias;
 import com.beans.Train;
 import com.manager.AliasManager;
+import com.manager.TrainManager;
 import com.strategy.Strategy;
 import com.strategy.StrategyDB;
 
 @WebServlet("/SearchTrainServlet")
 public class SearchTrainServlet extends HttpServlet{
+	private String newDeparture;
+	private String newArrival;
 
 	/**
 	 * 
@@ -35,49 +38,63 @@ public class SearchTrainServlet extends HttpServlet{
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/html");
-		//Map<String, List<String>> map= s.dataMap();
-		//<CheckChain chain=CheckChainBuilder.getChain(s);
+		Strategy s = new StrategyDB();
+		Map<String, List<String>> map= s.dataMap();
+		CheckChain chain = CheckChainBuilder.getChain(s);
+		HttpSession session = request.getSession(true);
 		
-		String id = request.getParameter("train");
-		System.out.println("ID " + id);
+		String factoryName = request.getParameter("train");
 		
-		int idFactory = Integer.parseInt(id);
 		
 		String departure = request.getParameter("departure");
-		AliasManager am = new AliasManager();
-		List<Alias> listUnAlias = (List<Alias>) am.getAllUnapprovedAliases(); //prendo tutti gli alias non approvati
-		if (listUnAlias.contains(departure)) { //se la partenza è contenuta tra quelli 
-			
-		}
-		
 		String arrival = request.getParameter("arrival");
 		
-		//String correctDeparture = chain.check(departure);
 		
-		String correctArrival = arrival;
-		//String correctArrival = chain.check(arrival);
-		
-		
-		HttpSession session = request.getSession(true);
-		/*
-		if(correctDeparture == null) {
-			session.setAttribute("errorDeparture", "Paese di partenza inesistente");
-		}
-		
-		if(correctArrival == null) {
-			session.setAttribute("errorArrival", "Paese di arrivo inesistente");
-		}
-		
-		if(correctDeparture != null && correctArrival != null) {
-			//List<Train> collectionTrains = (List<Train>) .getTrainsWithParameter(idFactory, correctDeparture, correctArrival);
-			//System.out.println("LIST TRENI SERVLET " +collectionTrains);
-			//session.setAttribute("trainList", collectionTrains);
+		AliasManager am = new AliasManager();
+		List<Alias> listAlias = (List<Alias>) am.getAllAliases(); //prendo tutti gli alias
+		System.out.println("LISTA ALIAS" + listAlias);
+		for (Alias a : listAlias) {
+			System.out.println(a.getCountryAlias());
+			if (a.getCountryAlias().equals(departure) && a.isApproved()) { // se lo trovo ed è approvato
+				session.setAttribute("statusDeparture", "true");
+				newDeparture = departure;
+				continue;
+			} else if (a.getCountryAlias().equals(departure) && !a.isApproved()) { //se lo trovo ma non è approvato
+				session.setAttribute("statusDeparture", "false");
+				newDeparture = departure;
+				continue;
+			} else if (a.getCountryAlias().equals(arrival) && a.isApproved()) {
+				session.setAttribute("statusArrival", "true");
+				newArrival = arrival;
+				continue;
+			} else if (a.getCountryAlias().equals(arrival) && !a.isApproved()) {
+				session.setAttribute("statusArrival", "false");
+				newArrival = arrival;
+				continue;
+			}
 			
 		}
-		*/
+		
+		if (newDeparture == null) { // se non è stato trovato l'alias eseguo il checkstring
+			session.setAttribute("statusDeparture", "invalidate");
+			departure = chain.check(departure);
+		} else if (newArrival == null)  {
+			session.setAttribute("statusArrival", "invalidate");
+			arrival = chain.check(arrival);
+		}
+		session.setAttribute("departure", departure);
+		session.setAttribute("arrival", arrival);
+		
+
+		TrainManager tm = new TrainManager();
+		Collection<Train> collectionTrains = tm.getTrainsWithParameter(factoryName, departure, arrival);
+		session.setAttribute("trainList", collectionTrains);
+		
+		
 		
 		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/searchingTrain.jsp");
 		dispatcher.forward(request, response);
+		
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

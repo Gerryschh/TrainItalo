@@ -18,12 +18,12 @@ public class StrategyDB implements Strategy{
     //Get a map where Aliases are referenced with countries
     public Map<String,List<String>> dataMap() {
         HashMap<String, List<String>> map = new HashMap<String, List<String>>();
-        NativeQuery<String> q = session.createSQLQuery("Select country_name From country");
+        NativeQuery<String> q = session.createSQLQuery("Select country_name from country");
 
         for (String s: q.getResultList()) {
             map.put(s.toLowerCase(), new ArrayList<String>());
         }
-        NativeQuery<Object []> mq = session.createSQLQuery("Select alias_country, country_name from alias");
+        NativeQuery<Object []> mq = session.createSQLQuery("Select country_alias, country_name from alias");
         List<Object[]>  l =mq.list();
         System.out.println(l.size());
         for(Object[] o: l) { 

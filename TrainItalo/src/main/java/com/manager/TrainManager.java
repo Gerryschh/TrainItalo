@@ -16,4 +16,9 @@ public class TrainManager {
 	public Collection<Train> getAllTrains() {
 		return trainDAO.getAll();
 	}
+	
+	public Collection<Train> getTrainsWithParameter(String factoryName, String departure, String arrival){
+		return trainDAO.getTrainsWithParameter(factoryName, departure, arrival);
+	}
+	
 }

@@ -47,10 +47,10 @@ public class TrainDAOImpl extends BaseDAO implements TrainDAO {
 		return ct;
 	}
 	
-	public Collection<Train> getTrainsWithParameter(int factory, String departure, String arrival) {
+	public Collection<Train> getTrainsWithParameter(String factoryName, String departure, String arrival) {
 		Collection<Train> ct = new HashSet <Train>();
-		NativeQuery<Object []> mq = super.getSession().createSQLQuery("Select * from train where factory = " + factory 
-				+ " AND departure = '" + departure + "' AND arrival = '"+ arrival + "'");
+		NativeQuery<Object []> mq = super.getSession().createSQLQuery("Select * from train where factory ='" + factoryName 
+				+ "' AND departure = '" + departure + "' AND arrival = '"+ arrival + "'");
 		List<Object[]> trains = mq.list();
 		for (Object[] o: trains) {
 			Train t = new Train();

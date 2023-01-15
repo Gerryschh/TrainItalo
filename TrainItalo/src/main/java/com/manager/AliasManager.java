@@ -22,6 +22,11 @@ public class AliasManager {
 		return aliasDAO.getAllUnapproved();
 	}
 	
+	//Get all Aliases
+	public Collection<Alias> getAllAliases() {
+		return aliasDAO.getAllAlias();
+	}
+	
 	//Approve an Alias setting the "approved" field on "true"
 	public void approveAlias(String[] aliases) {
 		aliasDAO.approveAlias(aliases);
