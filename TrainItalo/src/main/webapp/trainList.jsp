@@ -33,7 +33,7 @@ if(currentUser != null && currentUser.isAdmin())
 	}
 	else {
 %>
-<h2>Error 404 - Utente non abilitato, risorsa non disponibile!</h2>
+<jsp:include page="/error404.jsp"></jsp:include>
 <%} %>
 </body>
 </html>
