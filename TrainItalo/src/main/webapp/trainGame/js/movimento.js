@@ -72,6 +72,8 @@ function gameOver(){
 	document.getElementById("pianoGioco").innerHTML = "hai perso!"; 
 	// musichetta di gameOver
 	piano = null;
+	document.getElementById("ms-gioco-section").setAttribute("d-none");
+	document.getElementById("ms-score-section").removeAttribute("d-none");
 	clearInterval(timer1); 
 	clearInterval(timer2); 
 	clearInterval(timerTempo); 

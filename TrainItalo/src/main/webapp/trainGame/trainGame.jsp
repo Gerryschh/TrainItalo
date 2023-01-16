@@ -29,21 +29,18 @@
 </head>
 <body id="b01" onkeydown="checkKeyDown(event);" onkeypress="checkKeyPress(event)">
 	<jsp:include page="../menuLogged.jsp"></jsp:include>
-	<div class="container">
+	<div id="ms-gioco-section" class="container">
 		<input type="button" onclick="play()" value="Play" class="btnPlay" id="playButton"></input>
-		<input type="button" onclick="mostraMatriceHTML()" value="mostra matrice"></input>
-		<input id="id01" type="button" onclick="om.muovi()" value="muovi oggetto"></input>
 		<!-- <audio id="myAudio" src="audio1/videoplayback.mp3" loop></audio> -->
 		<br><br>
 		<span id="punteggio"></span>
-		<div style="width:800px; background-color:rgb(50,50,50)">
-			<div id="energia" style="width:1px; background-color:rgb(0,0,255)">
+		<div>
+			<div class="rounded-pill" id="energia" style="width:1px; background-color:rgb(0,0,255)">
 				<span>0</span>
 			</div>
-		</div>
-		<div style="width:800px; background-color:rgb(50,50,50)">
+			<br>
 
-			<div id="tempo" style="width:1000px; background-color:rgb(0,255,0)">
+			<div class="rounded-pill" id="tempo" style="width:1000px; background-color:rgb(0,255,0)">
 				<span>1000</span>
 			</div>
 		</div>
@@ -51,52 +48,49 @@
 			
 		</div>
 	</div>
-	<br><br>
-	<p id="posizioneOmino"></p>
-	<p id="messaggioDebug"></p>
 	
-	<!-- FORM PER L'INVIO DEL PUNTEGGIO AL DB -->
-	<form id="score-form" onsubmit="return handleSubmit()" action="TrainGameScoreServlet" method="POST">
-		<label for="username">Username:</label><br/>
-		<label for="username"><%=currentUser.getUserName() %></label><br/>
-		<label for="score">Score:</label><br/>
-		
-		<!-- SCORE COME VARIABILE DI JAVSCRIPT -->
-		<!-- <label for="score">        </label><br/> -->
-		
-		<!-- <input class="btn-user" type="submit" value="Registra punteggio">  -->
-	</form>
-	<input type="button" onclick="play()" value="Riprova" class="btnPlay"></input>
-	<div class="container">
-		<h1 class="py-4 text-center text-white bg-dark">LEADERBOARD</h1>
-		<!-- FORM PER LA VISUALIZZAZIONE DELLA LEADERBOARD. INIZIALMENTE LO SCORE DELL'UTENTE NON è VISIBILE.
-		 SE L'UTENTE REGISTRA IL PUNTEGGIO BISOGNA RIAGGIORNARE LA LEADERBOARD -->
-		<form action="TrainGameLeaderboardServlet" method="POST">
-			<table class="table table-dark table-striped">
-				<thead>
-					<tr>
-						<th scope="col">Player</th>
-						<th scope="col">Score</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr>
-						<td></td>
-						<td></td>
-						
-					</tr>
-				</tbody>
-			</table>
-			<p class="text-center">
-				<input class="btn btn-outline-light" type="submit" value="Approve">
-			</p>
+	<div id="ms-score-section" class="d-none">
+	
+		<!-- FORM PER L'INVIO DEL PUNTEGGIO AL DB -->
+		<form id="score-form" onsubmit="return handleSubmit()" action="TrainGameScoreServlet" method="POST">
+			<label for="username">Username:</label><br/>
+			<label for="username"><%=currentUser.getUserName() %></label><br/>
+			<label for="score">Score:</label><br/>
+			
+			<!-- SCORE COME VARIABILE DI JAVSCRIPT -->
+			<!-- <label for="score">        </label><br/> -->
+			
+			<!-- <input class="btn-user" type="submit" value="Registra punteggio">  -->
 		</form>
-
+		<input type="button" onclick="play()" value="Riprova" class="btnPlay"></input>
+		<div class="container">
+			<h1 class="py-4 text-center">LEADERBOARD</h1>
+			<!-- FORM PER LA VISUALIZZAZIONE DELLA LEADERBOARD. INIZIALMENTE LO SCORE DELL'UTENTE NON è VISIBILE.
+			 SE L'UTENTE REGISTRA IL PUNTEGGIO BISOGNA RIAGGIORNARE LA LEADERBOARD -->
+			<form action="TrainGameLeaderboardServlet" method="POST">
+				<table class="table table-white table-striped">
+					<thead>
+						<tr>
+							<th scope="col">Player</th>
+							<th scope="col">Score</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td></td>
+							<td></td>
+							
+						</tr>
+					</tbody>
+				</table>
+				<p class="text-center">
+					<input class="btn btn-outline-light" type="submit" value="Approve">
+				</p>
+			</form>
+	
+		</div>
+	
 	</div>
-
-
-
-
 
 
 	<jsp:include page="../fragments/footer.jsp"></jsp:include>
