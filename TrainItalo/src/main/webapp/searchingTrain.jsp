@@ -22,7 +22,7 @@ List<TrainFactory> factory = (List<TrainFactory>) fm.getAllFactories();%>
 </head>
 <body class="bg-white">
 
-	<%@include file="/menu.jsp"%>
+	<%@include file="./menu.jsp"%>
 <h1 class="py-4 text-center">Cerca i treni disponibili</h1>
 	<section class="ms-container">
 		<div class="row justify-content-around">
@@ -50,14 +50,12 @@ List<TrainFactory> factory = (List<TrainFactory>) fm.getAllFactories();%>
 					<input class="btn-user" type="submit" value="Cerca">
 				</form>
 					<%
-					String s = (String) session.getAttribute("statusDeparture");
-					String s1 = (String) session.getAttribute("statusArrival");
+					String sd = (String) session.getAttribute("statusDeparture");
+					String sa = (String) session.getAttribute("statusArrival");
 					String dep = (String) session.getAttribute("departure");
-					System.out.print("PART " + dep);
 					String arr = (String) session.getAttribute("arrival");
-					System.out.print("ARR " + arr);
-					if (s != null && s1 != null){
-						if (s.equals("true") && s1.equals("true")) { // se le parole son state approvate allora faccio vedere i paesi 
+					if (sd != null && sa != null) {
+						if (sd.equals("true") && sa.equals("true")) { // se le parole son state approvate allora faccio vedere i paesi 
 							Collection<Train> trains = (Collection<Train>) session.getAttribute("trainList");
 							if (trains != null && trains.size() != 0){
 								List<Train> listTrain = new ArrayList(trains);
@@ -86,9 +84,9 @@ List<TrainFactory> factory = (List<TrainFactory>) fm.getAllFactories();%>
 												int id = t.getIdTrain(); 
 												%>
 												<td scope="<%= id %>"> <%= t.getMatTrain() %></td>
-												<td scope="<%= id %>"> <%= t.getDeparture()%></td>
+												<td scope="<%= id %>"> <%= t.getDeparture() %></td>
 											    <td scope="<%= id %>"> <%= t.getDepartureDatetime() %> </td>
-											    <td scope="<%= id %>"> <%= t.getArrival()%></td>
+											    <td scope="<%= id %>"> <%= t.getArrival() %></td>
 											    <td scope="<%= id %>"> <%= t.getArrivalDatetime() %></td>
 											    <% i ++; %>
 											    </tr>
@@ -108,17 +106,23 @@ List<TrainFactory> factory = (List<TrainFactory>) fm.getAllFactories();%>
 							
 							
 							<% } else { %>
-								<label> NESSUN TRENO DISPONIBILE </label>
+								<br>
+								<br>
+								<h3><label> NESSUN TRENO DISPONIBILE </label></h3>
 							<% }%>
 							
 					<%} else { //se non sono approvati allora chiedo
-							if (s.equals("false")) { %>
+							if (sd.equals("false")) { %>
+								<br>
 								<label> Forse cercavi per il paese di partenza, <%= dep %> ? </label>
-						<% } else if(s1.equals("false")) { %>
-							         <label> Forse cercavi per il paese di arrivo, <%= arr %> ? </label>
+						<% } else if(sa.equals("false")) { %>
+								<br>
+							    <label> Forse cercavi per il paese di arrivo, <%= arr %> ? </label>
 						
-						<% } else if (s.equals("invalidate") || s1.equals("invaidate")) { // se sono invalidati (che non esistono negli alias) %>
-								<label> NESSUN TRENO DISPONIBILE </label>
+						<% } else if (sd.equals("invalidate") || sa.equals("invaidate")) { // se sono invalidati (che non esistono negli alias) %>
+								<br>
+								<br>
+								<h3> <label> NESSUN TRENO DISPONIBILE </label></h3>
 						<% } %>
 						
 				<%} %>

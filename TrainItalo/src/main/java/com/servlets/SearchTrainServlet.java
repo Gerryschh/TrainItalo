@@ -38,28 +38,26 @@ public class SearchTrainServlet extends HttpServlet{
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/html");
-		Strategy s = new StrategyDB();
+		Strategy s = new StrategyDB(); // per la checkChain
 		Map<String, List<String>> map= s.dataMap();
-		CheckChain chain = CheckChainBuilder.getChain(s);
 		HttpSession session = request.getSession(true);
 		
 		String factoryName = request.getParameter("train");
 		
 		
-		String departure = request.getParameter("departure");
-		String arrival = request.getParameter("arrival");
+		String departure = toCauntryCase(request.getParameter("departure"));
+		String arrival = toCauntryCase(request.getParameter("arrival"));
+		
 		
 		
 		AliasManager am = new AliasManager();
-		List<Alias> listAlias = (List<Alias>) am.getAllAliases(); //prendo tutti gli alias
-		System.out.println("LISTA ALIAS" + listAlias);
+		List<Alias> listAlias = (List<Alias>) am.getAllAliases(); //take all aliases
 		for (Alias a : listAlias) {
-			System.out.println(a.getCountryAlias());
-			if (a.getCountryAlias().equals(departure) && a.isApproved()) { // se lo trovo ed è approvato
+			if (a.getCountryAlias().equals(departure) && a.isApproved()) { // find it and it is approved
 				session.setAttribute("statusDeparture", "true");
 				newDeparture = departure;
 				continue;
-			} else if (a.getCountryAlias().equals(departure) && !a.isApproved()) { //se lo trovo ma non è approvato
+			} else if (a.getCountryAlias().equals(departure) && !a.isApproved()) { //find it but not approved
 				session.setAttribute("statusDeparture", "false");
 				newDeparture = departure;
 				continue;
@@ -75,7 +73,8 @@ public class SearchTrainServlet extends HttpServlet{
 			
 		}
 		
-		if (newDeparture == null) { // se non è stato trovato l'alias eseguo il checkstring
+		CheckChain chain = CheckChainBuilder.getChain(s);
+		if (newDeparture == null) { // the alias was not found, so execute the checkstring
 			session.setAttribute("statusDeparture", "invalidate");
 			departure = chain.check(departure);
 		} else if (newArrival == null)  {
@@ -100,6 +99,18 @@ public class SearchTrainServlet extends HttpServlet{
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 	}
+	
+	//increase the initial letters of the word also composed
+	public String toCauntryCase(String country) {
+	    String[] arr = country.split(" ");
+	    StringBuffer sb = new StringBuffer();
+
+	    for (int i = 0; i < arr.length; i++) {
+	        sb.append(Character.toUpperCase(arr[i].charAt(0)))
+	            .append(arr[i].substring(1)).append(" ");
+	    }          
+	    return sb.toString().trim();
+	}  
 
 
 }
