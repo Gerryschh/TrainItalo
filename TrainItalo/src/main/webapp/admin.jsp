@@ -32,7 +32,7 @@
 	<h2>Admin Page Actions</h2>
 	<ul>
 	<li><a href="checkAliases">Alias Approval</a></li>
-	<li><a href="insertTrain">Insert a Train</a></li>
+	<li><a href="preInsertTrain">Insert a Train</a></li>
 	<li><a href="countryList">Country List</a></li>
 	<li><a href="trainList">Train List</a></li>
 	</ul>

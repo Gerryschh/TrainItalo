@@ -12,8 +12,8 @@
   	</id>
   	<property name="matTrain" column="mat_train"></property>
   	<many-to-one name="factory" class="com.beans.TrainFactory" column="factory"></many-to-one>
-  	<many-to-one name="departure" class="com.beans.Country" column="country_name" insert="false" update="false"></many-to-one>
-  	<many-to-one name="arrival" class="com.beans.Country" column="country_name" insert="false" update="false"></many-to-one>
+  	<many-to-one name="departure" class="com.beans.Country" column="departure"></many-to-one>
+  	<many-to-one name="arrival" class="com.beans.Country" column="arrival"></many-to-one>
   	<property name="departureDatetime" column="departure_datetime"></property>
   	<property name="arrivalDatetime" column="arrival_datetime"></property>
  
