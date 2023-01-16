@@ -11,8 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.beans.User;
-import com.strategy.StrategyDB;
-
+import com.manager.UserManager;
 @WebServlet("/LoginServlet")
 public class LoginServlet extends HttpServlet{
 
@@ -26,17 +25,16 @@ public class LoginServlet extends HttpServlet{
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/html");
-		StrategyDB s = new StrategyDB();
+		UserManager um = new UserManager();
 		String email = request.getParameter("email");
 		String password = request.getParameter("password");
-		User u = s.getUserByMailAndPsw(email,password);
+		User u = um.getUserByMailAndPsw(email,password);
 		HttpSession session = request.getSession(true);
-		session.setAttribute("email", email);
 		
 		if(u != null) {
-			session.setAttribute("username", u.getUserName());
+			session.setAttribute("user", u);
 			session.setAttribute("isAdmin", u.isAdmin());
-
+			session.setAttribute("userName", u.getUserName());
 			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/index.jsp");
 			dispatcher.forward(request, response);
 		} else {

@@ -8,7 +8,6 @@ import org.hibernate.query.NativeQuery;
 
 import com.DAO.TrainFactoryDAO;
 import com.beans.TrainFactory;
-import com.beans.User;
 
 public class TrainFactoryDAOImpl extends BaseDAO implements TrainFactoryDAO {
 

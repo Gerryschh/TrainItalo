@@ -1,5 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+	pageEncoding="ISO-8859-1" import="com.beans.*"%>
+	
+<%
+User currentUser = (User) session.getAttribute("user");
+if(currentUser != null && currentUser.isAdmin())
+{
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -21,7 +27,13 @@
 <title>TrainList Admin</title>
 </head>
 <body class="bg-white">
-	<jsp:include page="/menu.jsp"></jsp:include>
+	<jsp:include page="/menuLogged.jsp"></jsp:include>
 	<jsp:include page="/fragments/footer.jsp"></jsp:include>
+<%
+	}
+	else {
+%>
+<h2>Error 404 - Utente non abilitato, risorsa non disponibile!</h2>
+<%} %>
 </body>
 </html>

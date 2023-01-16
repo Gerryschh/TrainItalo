@@ -1,11 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"
-	import="java.util.*,com.beans.*,com.strategy.*"%>
+	import="java.util.*,com.beans.*,com.strategy.*,com.manager.*"%>
 
 <%
 
-Strategy db = new StrategyDB();
-Collection<?> countries = (Collection<?>) db.getAllCountries();
+CountryManager cm = new CountryManager();
+Collection<?> countries = (Collection<?>) cm.getAllCountries();
+User currentUser = (User) session.getAttribute("user");
+if(currentUser != null && currentUser.isAdmin())
+{
 
 %>
 
@@ -31,7 +34,7 @@ Collection<?> countries = (Collection<?>) db.getAllCountries();
 </head>
 <body class="bg-white">
 
-<jsp:include page="/menu.jsp"></jsp:include>
+<jsp:include page="/menuLogged.jsp"></jsp:include>
 
 	<!-- Table of countries -->
 
@@ -70,5 +73,11 @@ Collection<?> countries = (Collection<?>) db.getAllCountries();
 	
 	</div>
 	<jsp:include page="/fragments/footer.jsp"></jsp:include>
+<%
+	}
+	else {
+%>
+<h2>Error 404 - Utente non abilitato, risorsa non disponibile!</h2>
+<%} %>
 </body>
 </html>
