@@ -49,12 +49,13 @@ List<TrainFactory> factory = (List<TrainFactory>) fm.getAllFactories();%>
 					<input type="text" id="arrival" name="arrival" required>
 					<input class="btn" type="submit" value="Cerca">
 				</form>
+
 			</div>
 			<%
 			String sd = (String) session.getAttribute("statusDeparture");
 			String sa = (String) session.getAttribute("statusArrival");
-			String dep = (String) session.getAttribute("departure");
-			String arr = (String) session.getAttribute("arrival");
+			String departure = (String) session.getAttribute("departure");
+			String arrival = (String) session.getAttribute("arrival");
 			if (sd != null && sa != null) {
 				if (sd.equals("true") && sa.equals("true")) { // se le parole son state approvate allora faccio vedere i paesi 
 					Collection<Train> trains = (Collection<Train>) session.getAttribute("trainList");
@@ -73,7 +74,6 @@ List<TrainFactory> factory = (List<TrainFactory>) fm.getAllFactories();%>
 							<th scope="col"></th>
 						</tr>
 					</thead>
-					
 					<tbody>
 					<%
 					int i = 0;
@@ -100,20 +100,20 @@ List<TrainFactory> factory = (List<TrainFactory>) fm.getAllFactories();%>
 					<% } %>
 					</tbody>
 				</table>
+		
+		
 				<% } else { %>
 			<br>
 			<br>
-			<h3>
-				<label> NESSUN TRENO DISPONIBILE </label>
-			</h3>
+			<h3> <label> NESSUN TRENO DISPONIBILE </label> </h3>
 			<% 		}
 			} else { //se non sono approvati allora chiedo
 				if (sd.equals("false")) { %>
 			<br>
-			<label> Forse cercavi per il paese di partenza, <%= dep %>	?	</label>
+			<p> Forse cercavi come paese di partenza, <strong> <i> <%= departure %> </i> </strong> ? </p>
 			<% } else if(sa.equals("false")) { %>
 			<br>
-			<label> Forse cercavi per il paese di arrivo, <%= arr %> ? </label>
+			<p> Forse cercavi come paese di arrivo, <strong> <i><%= arrival %> </i> </strong> ? </p>
 			
 			<% } else if (sd.equals("invalidate") || sa.equals("invaidate")) { // se sono invalidati (che non esistono negli alias) %>
 			<br>
