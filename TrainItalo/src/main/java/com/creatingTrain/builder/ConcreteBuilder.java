@@ -6,7 +6,7 @@ import com.creatingTrain.treno.Locomotiva;
 import com.creatingTrain.treno.Passeggeri;
 import com.creatingTrain.treno.Ristorante;
 
-public class ConcreteBuilder extends TrenoBuilder{
+public class ConcreteBuilder extends TrenoBuilder {
 	private VagoneFactory factory;
 	
 	public ConcreteBuilder(VagoneFactory vagoneFactory) {

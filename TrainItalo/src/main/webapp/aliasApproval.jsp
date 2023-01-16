@@ -3,11 +3,13 @@
 	import="java.util.*,com.beans.*,com.manager.*"%>
 
 <%
-AliasManager am = new AliasManager();
-Collection<?> aliases = (Collection<?>) am.getAllUnapprovedAliases();
 User currentUser = (User) session.getAttribute("user");
 if(currentUser != null && currentUser.isAdmin())
 {
+	AliasManager am = new AliasManager();
+	Collection<?> aliases = (Collection<?>) am.getAllUnapprovedAliases();
+	CountryManager cm = new CountryManager();
+	Collection<?> countries = (Collection<?>) cm.getAllCountries();
 %>
 <!DOCTYPE html>
 <html>
@@ -42,7 +44,8 @@ if(currentUser != null && currentUser.isAdmin())
 					<tr>
 						<th scope="col">Alias</th>
 						<th scope="col">Country</th>
-						<th scope="col">Algorithm</th>
+						<th scope="col">Algoritmo</th>
+						<th scope="col">Soglia</th>
 						<th scope="col">Approved</th>
 					</tr>
 				</thead>
@@ -57,6 +60,7 @@ if(currentUser != null && currentUser.isAdmin())
 						<td><%=a.getCountryAlias()%></td>
 						<td><%=a.getCountryName().getCountryName()%></td>
 						<td><%=a.getAlgorithm()%></td>
+						<td><%=a.getThresholdValue()%></td>
 						<td><input type="checkbox" name="checkAlias"
 							value="<%=a.getCountryAlias()%>"></td>
 					</tr>
