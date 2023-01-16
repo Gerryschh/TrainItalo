@@ -41,15 +41,14 @@ public class SearchTrainServlet extends HttpServlet{
 		Strategy s = new StrategyDB(); // per la checkChain
 		Map<String, List<String>> map= s.dataMap();
 		HttpSession session = request.getSession(true);
-		
+
 		String factoryName = request.getParameter("train");
-		
-		
+
+
 		String departure = toCauntryCase(request.getParameter("departure"));
 		String arrival = toCauntryCase(request.getParameter("arrival"));
-		
-		
-		
+
+
 		AliasManager am = new AliasManager();
 		List<Alias> listAlias = (List<Alias>) am.getAllAliases(); //take all aliases
 		for (Alias a : listAlias) {
@@ -70,9 +69,9 @@ public class SearchTrainServlet extends HttpServlet{
 				newArrival = arrival;
 				continue;
 			}
-			
+
 		}
-		
+
 		CheckChain chain = CheckChainBuilder.getChain(s);
 		if (newDeparture == null) { // the alias was not found, so execute the checkstring
 			session.setAttribute("statusDeparture", "invalidate");
@@ -83,33 +82,33 @@ public class SearchTrainServlet extends HttpServlet{
 		}
 		session.setAttribute("departure", departure);
 		session.setAttribute("arrival", arrival);
-		
+
 
 		TrainManager tm = new TrainManager();
 		Collection<Train> collectionTrains = tm.getTrainsWithParameter(factoryName, departure, arrival);
 		session.setAttribute("trainList", collectionTrains);
-		
-		
-		
+
+
+
 		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/searchingTrain.jsp");
 		dispatcher.forward(request, response);
-		
+
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+
 	}
-	
+
 	//increase the initial letters of the word also composed
 	public String toCauntryCase(String country) {
-	    String[] arr = country.split(" ");
-	    StringBuffer sb = new StringBuffer();
+		String[] arr = country.split(" ");
+		StringBuffer sb = new StringBuffer();
 
-	    for (int i = 0; i < arr.length; i++) {
-	        sb.append(Character.toUpperCase(arr[i].charAt(0)))
-	            .append(arr[i].substring(1)).append(" ");
-	    }          
-	    return sb.toString().trim();
+		for (int i = 0; i < arr.length; i++) {
+			sb.append(Character.toUpperCase(arr[i].charAt(0)))
+			.append(arr[i].substring(1)).append(" ");
+		}          
+		return sb.toString().trim();
 	}  
 
 

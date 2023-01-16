@@ -15,7 +15,6 @@ List<TrainFactory> factory = (List<TrainFactory>) fm.getAllFactories();%>
 	rel="stylesheet"
 	integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65"
 	crossorigin="anonymous">
-<script src="handlerLogin.js"></script>
 <!-- CSS only -->
 <link rel="stylesheet" href="css/style.css">
 <title>TrainViewer</title>
@@ -26,10 +25,11 @@ List<TrainFactory> factory = (List<TrainFactory>) fm.getAllFactories();%>
 <h1 class="py-4 text-center">Cerca i treni disponibili</h1>
 	<section class="ms-container">
 		<div class="row justify-content-around">
-			<div class="card">
-				<form id="login-form" action="SearchTrainServlet" method="GET">
+			<div class="card searchCard">
+				<form id="search-form" action="SearchTrainServlet" method="GET">
 					<label for="train">Treno: </label>
 					<select id="idFactory" name="train">
+					<option value= "none"> Nessun treno</option>
 			         <%
 			          for(int i = 0; i < factory.size(); i++){  
 			        	  String factoryName = factory.get(i).getFactoryName();
@@ -47,8 +47,9 @@ List<TrainFactory> factory = (List<TrainFactory>) fm.getAllFactories();%>
 					<label for="arrival">Destinazione: </label> 
 					<input type="text" id="arrival" name="arrival" required><br />
 					<br>
-					<input class="btn-user" type="submit" value="Cerca">
+					<input class="btn" type="submit" value="Cerca">
 				</form>
+					</div>
 					<%
 					String sd = (String) session.getAttribute("statusDeparture");
 					String sa = (String) session.getAttribute("statusArrival");
@@ -60,80 +61,79 @@ List<TrainFactory> factory = (List<TrainFactory>) fm.getAllFactories();%>
 							if (trains != null && trains.size() != 0){
 								List<Train> listTrain = new ArrayList(trains);
 						%>
-								<br>
-								<br>
-								<br>
-								<div class="container">
-									<table class="table table-striped">
-										<thead>
-											<tr>
-											<th scope="col">Codice treno</th>
-											<th scope="col">Partenza</th>
-											<th scope="col">Ora Partenza</th>
-											<th scope="col">Arrivo</th>
-											<th scope="col">Ora Arrivo</th>
-											</tr>
-											<%
-											int i = 0;
-											while(i < listTrain.size()) {
-												Train t = (Train) listTrain.get(i);
-											%>
-												
-												<tr>
-												<%
-												int id = t.getIdTrain(); 
-												%>
-												<td scope="<%= id %>"> <%= t.getMatTrain() %></td>
-												<td scope="<%= id %>"> <%= t.getDeparture() %></td>
-											    <td scope="<%= id %>"> <%= t.getDepartureDatetime() %> </td>
-											    <td scope="<%= id %>"> <%= t.getArrival() %></td>
-											    <td scope="<%= id %>"> <%= t.getArrivalDatetime() %></td>
-											    <% i ++; %>
-											    </tr>
+					<div class="trainsContainer">
+						<table class="table table-striped">
+							<thead>
+								<tr>
+								<th scope="col">Codice treno</th>
+								<th scope="col">Partenza</th>
+								<th scope="col">Ora Partenza</th>
+								<th scope="col">Arrivo</th>
+								<th scope="col">Ora Arrivo</th>
+								<th scope="col"></th>
+								</tr>
+								<%
+								int i = 0;
+								while(i < listTrain.size()) {
+									Train t = (Train) listTrain.get(i);
+								%>
+									
+									<tr>
+									<%
+									int id = t.getIdTrain(); 
+									%>
+									<td scope="<%= id %>"> <%= t.getMatTrain() %></td>
+									<td scope="<%= id %>"> <%= t.getDeparture() %></td>
+								    <td scope="<%= id %>"> <%= t.getDepartureDatetime() %> </td>
+								    <td scope="<%= id %>"> <%= t.getArrival() %></td>
+								    <td scope="<%= id %>"> <%= t.getArrivalDatetime() %></td>
+								    <td scope="<%= id %>"> <input class="btn" type="button" value="Prenota"> </td>
+								    <% i ++; %>
+								    </tr>
 
-												
-											<% 	
-											}
-											%>
-											
-						  
-											</thead>
-										
-										</table>
+									
+								<% 	
+								}
+								%>
 								
-									</div>
+			  
+								</thead>
 							
-							
-							
-							<% } else { %>
-								<br>
-								<br>
-								<h3><label> NESSUN TRENO DISPONIBILE </label></h3>
-							<% }%>
-							
-					<%} else { //se non sono approvati allora chiedo
-							if (sd.equals("false")) { %>
-								<br>
-								<label> Forse cercavi per il paese di partenza, <%= dep %> ? </label>
-						<% } else if(sa.equals("false")) { %>
-								<br>
-							    <label> Forse cercavi per il paese di arrivo, <%= arr %> ? </label>
-						
-						<% } else if (sd.equals("invalidate") || sa.equals("invaidate")) { // se sono invalidati (che non esistono negli alias) %>
-								<br>
-								<br>
-								<h3> <label> NESSUN TRENO DISPONIBILE </label></h3>
-						<% } %>
-						
-				<%} %>
-						
-		
-						
-		<%}%>
+							</table>
 					
+						</div>
+				
+				
+				
+				<% } else { %>
+					<br>
+					<br>
+					<h3><label> NESSUN TRENO DISPONIBILE </label></h3>
+				<% }%>
+				
+		<%} else { //se non sono approvati allora chiedo
+				if (sd.equals("false")) { %>
+					<br>
+					<label> Forse cercavi per il paese di partenza, <%= dep %> ? </label>
+			<% } else if(sa.equals("false")) { %>
+					<br>
+				    <label> Forse cercavi per il paese di arrivo, <%= arr %> ? </label>
+			
+			<% } else if (sd.equals("invalidate") || sa.equals("invaidate")) { // se sono invalidati (che non esistono negli alias) %>
+					<br>
+					<br>
+					<h3> <label> NESSUN TRENO DISPONIBILE </label></h3>
+			<% } %>
+			
+	<%} %>
+			
+
+			
+<%}%>
+		
 				
 			<br>
-			</div>
+		
 		</div>
 
 		<br>

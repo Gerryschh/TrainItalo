@@ -9,6 +9,17 @@
 	width: 90%;
 }
 
+.btn{
+	color: var(--white);
+	background-color: var(--red);
+	border: 1px solid var(--red);
+}
+
+.btn:hover {
+	color: var(--red);
+	border: 1px solid var(--red);
+}
+
 /*LANDING PAGE*/
 
 :root {
@@ -230,14 +241,16 @@ audio {
     display: none;
 }
 
+/*SEARCH TRAIN*/
+.searchCard {
+    padding: 2%;
+}
 
-
-
-
-
-
-
-
+.trainsContainer {
+    margin: 2% auto;
+    width: 60%;
+    text-align: center;
+}
 
 /* LOGIN */
 .card-login {
