@@ -48,7 +48,6 @@ public class SearchTrainServlet extends HttpServlet{
 		String departure = toCauntryCase(request.getParameter("departure"));
 		String arrival = toCauntryCase(request.getParameter("arrival"));
 
-
 		AliasManager am = new AliasManager();
 		List<Alias> listAlias = (List<Alias>) am.getAllAliases(); //take all aliases
 		for (Alias a : listAlias) {
