@@ -3,7 +3,13 @@ package com.creatingTrain.builder;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.creatingTrain.exceptions.ExceedException;
+import com.creatingTrain.exceptions.TooShortStringException;
+import com.creatingTrain.exceptions.WrongCombinationException;
+import com.creatingTrain.exceptions.exceed.TooManyLocomotiveException;
 import com.creatingTrain.exceptions.exceed.TooManyPeopleException;
+import com.creatingTrain.exceptions.exceed.TooManyRestaurantsException;
+import com.creatingTrain.exceptions.wrongLocomotive.MissingHeadLocomotiveException;
 import com.creatingTrain.treno.Cargo;
 import com.creatingTrain.treno.Carrozza;
 import com.creatingTrain.treno.Locomotiva;
@@ -25,28 +31,32 @@ public abstract class TrenoBuilder {
 		7- ristorante e cargo mai insieme (vagoni incompatibili)
 		8- vagone inesistente o carattere non idoneo
 		9- il treno deve poter partire pesoTrainabile > peso del treno
+	 * @throws TooShortStringException 
+	 * @throws MissingHeadLocomotiveException 
+	 * @throws ExceedException 
+	 * @throws WrongCombinationException 
 	 * @throws NumeroPostiInEccesso 
 		
 	 */
 
-	public final Treno buildTreno(String sigla) throws TooManyPeopleException {
+	public final Treno buildTreno(String sigla) throws TooShortStringException, MissingHeadLocomotiveException, ExceedException, WrongCombinationException {
 		int ristoranti=0;
 		int passeggeri=0;
 		int cargo=0;
 		int teste=1;
-		int maxPersone=getMassimoPosti();;
+		int maxPersone=getMassimoPosti();
 			
 		if (sigla==null)
 			throw new NullPointerException("Stringa nulla!");
 		if (sigla.length()<2)
-			throw new IllegalArgumentException("Troppi pochi componenti!");
+			throw new TooShortStringException("Troppi pochi componenti!");
 		if (!sigla.startsWith("H"))
-			throw new IllegalArgumentException("Manca la locomotiva all'inizio!");
+			throw new MissingHeadLocomotiveException("Manca la locomotiva all'inizio!");
 		for(int i=1;i<sigla.length();i++) {
 			switch(sigla.charAt(i)){
 				case 'H':
 					if(i!=sigla.length()-1)
-						throw new IllegalArgumentException("Troppe locomotive!");
+						throw new ExceedException("Troppe locomotive!");
 					teste++;
 					break;
 				case 'R':
@@ -64,13 +74,13 @@ public abstract class TrenoBuilder {
 			}
 		}
 		if(ristoranti>1)
-			throw new IllegalArgumentException("Troppi ristoranti!");
+			throw new ExceedException("Troppi ristoranti!");
 		int postiTreno=0;
 		
 		if(postiTreno>maxPersone)
-			throw new IllegalArgumentException("Troppi passeggeri!");
+			throw new ExceedException("Troppi passeggeri!");
 		if((cargo>0&&passeggeri>0)||(cargo>0&&ristoranti>0))
-			throw new IllegalArgumentException("Non puo' esserci il cargo con altri componenti che non siano locomotive!");
+			throw new WrongCombinationException("Non puo' esserci il cargo con altri componenti che non siano locomotive!");
 		
 		
 		//Creazione treno
@@ -104,7 +114,7 @@ public abstract class TrenoBuilder {
 		}
 		pesoTotale+=locomotivaTesta.getPeso();
 		if(pesoTotale>locomotivaTesta.getPesoTrainabile())
-			throw new IllegalArgumentException("Peso eccessivo!");
+			throw new ExceedException("Peso eccessivo!");
 		Treno t = new Treno(sigla, lista, locomotivaTesta);
 		return t;
 	}
