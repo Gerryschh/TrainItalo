@@ -1,7 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"	pageEncoding="ISO-8859-1"	
-import="java.util.*,com.beans.*,com.strategy.*, com.manager.*"%>
+import="java.util.*,com.beans.*,com.strategy.*, com.manager.*, java.text.*"%>
 
 <%
+DateFormat dh = new SimpleDateFormat("HH:mm:ss");
+DateFormat dd = new SimpleDateFormat("dd/MM/YYY");
 TrainFactoryManager fm = new TrainFactoryManager();
 List<TrainFactory> factory = (List<TrainFactory>) fm.getAllFactories();%>
 
@@ -77,6 +79,8 @@ List<TrainFactory> factory = (List<TrainFactory>) fm.getAllFactories();%>
 											int i = 0;
 											while(i < listTrain.size()) {
 												Train t = (Train) listTrain.get(i);
+												String hourDeparture = dh.format(t.getDepartureDatetime()) + " del " + dd.format(t.getDepartureDatetime());
+												String hourArrival = dh.format(t.getArrivalDatetime()) + " del " + dd.format(t.getArrivalDatetime());
 											%>
 												
 												<tr>
@@ -85,9 +89,9 @@ List<TrainFactory> factory = (List<TrainFactory>) fm.getAllFactories();%>
 												%>
 												<td scope="<%= id %>"> <%= t.getMatTrain() %></td>
 												<td scope="<%= id %>"> <%= t.getDeparture() %></td>
-											    <td scope="<%= id %>"> <%= t.getDepartureDatetime() %> </td>
+											    <td scope="<%= id %>"> <%= hourDeparture %> </td>
 											    <td scope="<%= id %>"> <%= t.getArrival() %></td>
-											    <td scope="<%= id %>"> <%= t.getArrivalDatetime() %></td>
+											    <td scope="<%= id %>"> <%= hourArrival %> </td>
 											    <% i ++; %>
 											    </tr>
 
@@ -122,7 +126,7 @@ List<TrainFactory> factory = (List<TrainFactory>) fm.getAllFactories();%>
 						<% } else if (sd.equals("invalidate") || sa.equals("invaidate")) { // se sono invalidati (che non esistono negli alias) %>
 								<br>
 								<br>
-								<h3> <label> NESSUN TRENO DISPONIBILE </label></h3>
+								<h3><label> NESSUN TRENO DISPONIBILE </label></h3>
 						<% } %>
 						
 				<%} %>
