@@ -243,14 +243,23 @@ audio {
 
 /*SEARCH TRAIN*/
 .searchCard {
-    padding: 2%;
+    padding: 1%;
+    margin: 1%;
 }
 
 .trainsContainer {
-    margin: 2% auto;
-    width: 60%;
     text-align: center;
 }
+
+.trainsContainer table{
+	margin: 3%;
+}
+
+.search-item {
+    padding: 2%;
+    width: 90%;
+}
+
 
 /* LOGIN */
 .card-login {

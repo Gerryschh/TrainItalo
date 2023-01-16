@@ -28,26 +28,34 @@ List<TrainFactory> factory = (List<TrainFactory>) fm.getAllFactories();%>
 	<h1 class="py-4 text-center">Cerca i treni disponibili</h1>
 	<section class="ms-container">
 		<div class="row justify-content-around">
-			<div class="card searchCard">
+			<div class="card searchCard col-lg-3">
 				<form id="search-form" action="SearchTrainServlet" method="GET">
-					<label for="train">Treno: </label> 
-					<select id="idFactory" name="train">
-						<option value="none">Nessun treno</option>
-						<%
-						for(int i = 0; i < factory.size(); i++){  
-			 				String factoryName = factory.get(i).getFactoryName();
-						%>
-			
-						<option value="<%=factoryName%>"><%= factoryName %></option>
-			
-						<% } %>
-			
-					</select> 
-					<label for="departure">Partenza: </label> 
-					<input type="text" id="departure" name="departure" required> 
-					<label for="arrival">Destinazione: </label> 
-					<input type="text" id="arrival" name="arrival" required>
-					<input class="btn" type="submit" value="Cerca">
+					<div class="search-item"> 
+						<label class="col-lg-5" for="train">Treno: </label> 
+						<select class="col-lg-6" id="idFactory" name="train">
+							<option value="none">Nessun treno</option>
+							<%
+							for(int i = 0; i < factory.size(); i++){  
+				 				String factoryName = factory.get(i).getFactoryName();
+							%>
+				
+							<option value="<%=factoryName%>"><%= factoryName %></option>
+				
+							<% } %>
+				
+						</select> 
+					</div>
+					<div class="search-item"> 
+						<label class="col-lg-5" for="departure">Partenza: </label> 
+						<input class="col-lg-6" type="text" id="departure" name="departure" required> 
+					</div>
+					<div class="search-item"> 
+						<label class="col-lg-5" for="arrival">Destinazione: </label> 
+						<input class="col-lg-5" type="text" id="arrival" name="arrival" required>
+					</div>
+					<div class="search-item"> 
+						<input class="btn" type="submit" value="Cerca">
+					</div>
 				</form>
 
 			</div>
@@ -62,7 +70,7 @@ List<TrainFactory> factory = (List<TrainFactory>) fm.getAllFactories();%>
 					if (trains != null && trains.size() != 0){
 						List<Train> listTrain = new ArrayList(trains);
 			%>
-			<div class="trainsContainer">
+			<div class="trainsContainer col-lg-8">
 				<table class="table table-striped">
 					<thead>
 						<tr>
