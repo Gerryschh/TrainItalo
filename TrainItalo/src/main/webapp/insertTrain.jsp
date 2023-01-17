@@ -1,5 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+	pageEncoding="ISO-8859-1" 
+	import="com.manager.*, com.beans.*, java.util.*, java.text.SimpleDateFormat"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+	
+<%
+User currentUser = (User) session.getAttribute("user");
+if(currentUser != null && currentUser.isAdmin())
+{
+	TrainFactoryManager tfm = new TrainFactoryManager();
+	Collection<?> factories = (Collection<?>) tfm.getAllFactories();
+	CountryManager cm = new CountryManager();
+	Collection<?> countries = (Collection<?>) cm.getAllCountries();
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -21,45 +33,99 @@
 <title>InsertTrain Admin</title>
 </head>
 <body class="bg-white">
-	<jsp:include page="/menu.jsp"></jsp:include>
+	<jsp:include page="/menuLogged.jsp"></jsp:include>
 	<div class="ms-container d-flex justify-content-center">
-		<form action="InsertTrainServlet" method="POST" class="row">
+		<form action="insertTrain" method="POST" class="row">
 	  <div class="col-12">
-	    <label for="inputMatricolaTreno" class="col-sm-2 col-form-label" placeholder="HCCCPR">Matricola Treno</label>
-	    <div class="col-sm-10">
-	      <input type="text" class="form-control" id="inputMatricolaTreno">
+	    <label for="inputMatricolaTreno" class="col-sm-2 col-form-label">Matricola Treno</label>
+	    <div class="col-md-12">
+	      <input type="text" class="form-control" id="inputMatricolaTreno" name="inputMatricolaTreno" placeholder="HCCCPR" required>
 	    </div>
-	    <label for="inputDeparture" class="col-sm-2 col-form-label" placeholder="Italia">Partenza</label>
-	    <div class="col-sm-10">
-	      <input type="text" class="form-control" id="inputDeparture">
+	    <label for="trainFactoryName" class="col-sm-2 col-form-label">TrainBrand</label>
+	    <div class="col-md-12">
+	    <select name="trainFactoryName" id="trainFactoryName">
+	    <%
+						if (factories != null && factories.size() != 0) {
+							Iterator<?> it = factories.iterator();
+							while (it.hasNext()) {
+								TrainFactory tf = (TrainFactory) it.next();
+						%>
+	     <option><%=tf.getFactoryName()%></option>
+	     <%
+		 }
+	     } 
+	     %>
+	   	</select>
+	   	</div>
+	   	<label for="inputDeparture" class="col-sm-2 col-form-label">Partenza</label>
+	    <div class="col-md-12">
+	    <select name="inputDeparture" id="inputDeparture">
+	    <%
+						if (countries != null && countries.size() != 0) {
+							Iterator<?> it = countries.iterator();
+							while (it.hasNext()) {
+								Country c = (Country) it.next();
+						%>
+	     <option><%=c.getCountryName()%></option>
+	     <%
+		 }
+	     } 
+	     %>
+	   	</select>
+	   	</div>
+	   	<label for="inputArrival" class="col-sm-2 col-form-label">Arrivo</label>
+	    <div class="col-md-12">
+	    <select name="inputArrival" id="inputArrival">
+	    <%
+						if (countries != null && countries.size() != 0) {
+							Iterator<?> it = countries.iterator();
+							while (it.hasNext()) {
+								Country c = (Country) it.next();
+						%>
+	     <option><%=c.getCountryName()%></option>
+	     <%
+		 }
+	     } 
+	     %>
+	   	</select>
+	   	</div>
+	   	<%
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm");
+        Date today = new Date();
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(today);
+        calendar.add(Calendar.MINUTE, 30);
+        Date later = calendar.getTime();
+        %>
+	    <label for="inputDepartureHour" class="col-sm-2 col-form-label">Data e ora partenza</label>
+	    <div class="col-md-12">
+	      <input type="datetime-local" class="form-control" id="inputDepartureHour" name="inputDepartureHour" min="2023-01-01T00:00" value="<%=sdf.format(today) %>" required>
 	    </div>
-	    <label for="inputArrival" class="col-sm-2 col-form-label" placeholder="Spagna">Arrivo</label>
-	    <div class="col-sm-10">
-	      <input type="text" class="form-control" id="inputArrival">
+	    <label for="inputArrivalHour" class="col-sm-2 col-form-label">Data e ora Arrivo</label>
+	    <div class="col-md-12">
+	      <input type="datetime-local" class="form-control" id="inputArrivalHour" name="inputArrivalHour" min="2023-01-01T00:00" value="<%=sdf.format(later) %>" required>
 	    </div>
 	  </div>
-	  <fieldset class="row mb-3">
-	    <legend class="col-form-label col-sm-2 pt-0">Train Brand</legend>
-	    <div class="col-sm-10">
-	      <div class="form-check">
-	        <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="option1" checked>
-	        <label class="form-check-label" for="gridRadios1">
-	          TreNord
-	        </label>
-	      </div>
-	      <div class="form-check">
-	        <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios2" value="option2">
-	        <label class="form-check-label" for="gridRadios2">
-	          FrecciaRossa
-	        </label>
-	      </div>
-	    </div>
-	  </fieldset>
-	  <div class="col-12">
+	  <div class="col-12 text-center">
+	  <br>
 	  <button type="submit" class="btn btn-primary">Add Train</button>
+	  <button type="reset" class="btn btn-primary">Reset Parameters</button>
 	  </div>
 	</form>
 </div>
+	<br>
 	<jsp:include page="/fragments/footer.jsp"></jsp:include>
+<%
+	}
+	else {
+%>
+<h2>Error 404 - Utente non abilitato, risorsa non disponibile!</h2>
+<%} %>
+<c:set var="msg" value="${requestScope.msg}"/>
+<script>
+if("${msg}"!="")
+	alert("${msg}");
+</script>
+
 </body>
 </html>

@@ -1,8 +1,10 @@
 package com.DAO.impl;
 
+import com.beans.Country;
 import com.beans.Train;
 import com.beans.TrainFactory;
 
+import java.sql.Timestamp;
 import java.util.Collection;
 import java.util.Date;
 import java.util.HashSet;
@@ -38,10 +40,14 @@ public class TrainDAOImpl extends BaseDAO implements TrainDAO {
 			TrainFactory tf = new TrainFactory();
 			tf.setFactoryName((String) o[2]);
 			t.setFactory(tf);
-			t.setDeparture((String) o[3]);
-			t.setArrival((String) o[4]);
-			t.setDepartureDatetime((Date) o[5]);
-			t.setArrivalDatetime((Date) o[6]);
+			Country departure = new Country();
+			departure.setCountryName((String) o[3]);
+			t.setDeparture(departure);
+			Country arrival = new Country();
+			arrival.setCountryName((String) o[4]);
+			t.setArrival(arrival);
+			t.setDepartureDatetime((Timestamp) o[5]);
+			t.setArrivalDatetime((Timestamp) o[6]);
 			ct.add(t);
 		}
 		return ct;
@@ -59,10 +65,17 @@ public class TrainDAOImpl extends BaseDAO implements TrainDAO {
 			TrainFactory tf = new TrainFactory();
 			tf.setFactoryName((String) o[2]);
 			t.setFactory(tf);
-			t.setDeparture((String) o[3]);
-			t.setArrival((String) o[4]);
-			t.setDepartureDatetime((Date) o[5]);
-			t.setArrivalDatetime((Date) o[6]);
+			
+			Country departureCountry = new Country();
+			departureCountry.setCountryName((String) o[3]);
+			
+			Country arrivalCountry = new Country();
+			arrivalCountry.setCountryName((String) o[4]);
+			
+			t.setDeparture(departureCountry);
+			t.setArrival(arrivalCountry);
+			t.setDepartureDatetime((Timestamp) o[5]);
+			t.setArrivalDatetime((Timestamp) o[6]);
 			ct.add(t);
 		}
 		return ct;

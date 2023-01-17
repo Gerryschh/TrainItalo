@@ -12,8 +12,6 @@ import javax.servlet.http.HttpSession;
 
 import com.beans.User;
 import com.manager.UserManager;
-import com.strategy.StrategyDB;
-
 @WebServlet("/LoginServlet")
 public class LoginServlet extends HttpServlet{
 
@@ -32,12 +30,11 @@ public class LoginServlet extends HttpServlet{
 		String password = request.getParameter("password");
 		User u = um.getUserByMailAndPsw(email,password);
 		HttpSession session = request.getSession(true);
-		session.setAttribute("email", email);
 		
 		if(u != null) {
-			session.setAttribute("username", u.getUserName());
+			session.setAttribute("user", u);
 			session.setAttribute("isAdmin", u.isAdmin());
-
+			session.setAttribute("userName", u.getUserName());
 			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/index.jsp");
 			dispatcher.forward(request, response);
 		} else {

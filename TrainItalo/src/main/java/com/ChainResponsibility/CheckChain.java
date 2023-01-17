@@ -1,9 +1,5 @@
 package com.ChainResponsibility;
 
-import com.DAO.impl.AliasDAOImpl;
-import com.DAO.impl.CountryDAOImpl;
-import com.DAO.AliasDAO;
-import com.DAO.CountryDAO;
 import com.beans.Alias;
 import com.manager.AliasManager;
 import com.manager.CountryManager;

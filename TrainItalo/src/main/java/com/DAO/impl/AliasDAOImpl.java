@@ -1,6 +1,5 @@
 package com.DAO.impl;
 
-
 import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
@@ -12,7 +11,7 @@ import com.beans.Alias;
 import com.beans.Country;
 
 public class AliasDAOImpl extends BaseDAO implements AliasDAO {
-	
+
 	public void create(Alias a) {
 		super.create(a);
 	}
@@ -42,20 +41,20 @@ public class AliasDAOImpl extends BaseDAO implements AliasDAO {
 		}
 		return ca;
 	}
-	
-	
+
+
 
 	@Override
 	public void approveAlias(String[] aliases) {
-			super.getSession().beginTransaction();
-			for (String s : aliases)
-			{
-				Alias a = this.getSession().get(Alias.class, s);
-				a.setApproved(true);
-				super.getSession().update(a);
-			}
-			super.getSession().getTransaction().commit();
-			super.getSession().close();
+		super.getSession().beginTransaction();
+		for (String s : aliases)
+		{
+			Alias a = this.getSession().get(Alias.class, s);
+			a.setApproved(true);
+			super.getSession().update(a);
+		}
+		super.getSession().getTransaction().commit();
+		super.getSession().close();
 	}
 
 	@Override

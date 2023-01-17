@@ -12,7 +12,6 @@ import javax.servlet.http.HttpSession;
 
 import com.beans.User;
 import com.manager.UserManager;
-import com.strategy.StrategyDB;
 
 @WebServlet("/RegisterServlet")
 public class RegisterServlet extends HttpServlet{

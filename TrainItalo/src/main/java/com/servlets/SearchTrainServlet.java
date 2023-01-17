@@ -39,15 +39,13 @@ public class SearchTrainServlet extends HttpServlet{
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/html");
 		Strategy s = new StrategyDB(); // per la checkChain
-		Map<String, List<String>> map= s.dataMap();
 		HttpSession session = request.getSession(true);
 
 		String factoryName = request.getParameter("train");
-
-
 		String departure = toCauntryCase(request.getParameter("departure"));
 		String arrival = toCauntryCase(request.getParameter("arrival"));
 
+		/*setta partenza e arrivo per il check string*/
 		AliasManager am = new AliasManager();
 		List<Alias> listAlias = (List<Alias>) am.getAllAliases(); //take all aliases
 		for (Alias a : listAlias) {
@@ -68,7 +66,6 @@ public class SearchTrainServlet extends HttpServlet{
 				newArrival = arrival;
 				continue;
 			}
-
 		}
 
 		CheckChain chain = CheckChainBuilder.getChain(s);
@@ -82,16 +79,12 @@ public class SearchTrainServlet extends HttpServlet{
 		session.setAttribute("departure", departure);
 		session.setAttribute("arrival", arrival);
 
-
 		TrainManager tm = new TrainManager();
 		Collection<Train> collectionTrains = tm.getTrainsWithParameter(factoryName, departure, arrival);
 		session.setAttribute("trainList", collectionTrains);
 
-
-
 		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/searchingTrain.jsp");
 		dispatcher.forward(request, response);
-
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
