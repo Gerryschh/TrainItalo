@@ -45,6 +45,8 @@ public class SearchTrainServlet extends HttpServlet{
 		String factoryName = request.getParameter("train");
 		String departure = toCauntryCase(request.getParameter("departure"));
 		String arrival = toCauntryCase(request.getParameter("arrival"));
+		
+		session.setAttribute("train", factoryName);
 
 		CountryManager cm = new CountryManager();
 		Country countryDeparture =  cm.getCountry(departure);

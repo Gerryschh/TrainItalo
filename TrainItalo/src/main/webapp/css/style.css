@@ -245,19 +245,46 @@ audio {
 .searchCard {
     padding: 1%;
     margin: 1%;
+  	box-shadow: 3px 3px 3px var(--red);
+  	border-color: var(--red);
+  	margin-right: auto;
+
+    
 }
 
 .trainsContainer {
-    text-align: center;
+    text-align: left;
+}
+
+h5 {
+	text-align: center;
+	top: 5px;
+	
 }
 
 .trainsContainer table{
 	margin: 3%;
+	
 }
 
 .search-item {
-    padding: 2%;
+    padding: 3%;
     width: 90%;
+    border-radius: 7px;
+    
+}
+
+.inputText {
+	height: 20%;
+	padding: 6px;
+	border-radius: 7px;
+	border: 1px solid;
+
+
+}
+
+input:hover { 
+  background-color: var(--red); 
 }
 
 

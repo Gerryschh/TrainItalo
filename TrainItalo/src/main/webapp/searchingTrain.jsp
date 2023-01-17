@@ -35,7 +35,7 @@ List<TrainFactory> factory = (List<TrainFactory>) fm.getAllFactories();%>
 				<form id="search-form" action="SearchTrainServlet" method="GET">
 					<div class="search-item"> 
 						<label class="col-lg-5" for="train">Treno: </label> 
-						<select class="col-lg-6" id="idFactory" name="train">
+						<select class="inputText col-lg-6" id="idFactory" name="train">
 							<option value="none">Nessun treno</option>
 							<%
 							for(int i = 0; i < factory.size(); i++){  
@@ -50,11 +50,11 @@ List<TrainFactory> factory = (List<TrainFactory>) fm.getAllFactories();%>
 					</div>
 					<div class="search-item"> 
 						<label class="col-lg-5" for="departure">Partenza: </label> 
-						<input class="col-lg-6" type="text" id="departure" name="departure" required> 
+						<input class="inputText col-lg-6" type="text" id="departure" name="departure" required> 
 					</div>
 					<div class="search-item"> 
 						<label class="col-lg-5" for="arrival">Destinazione: </label> 
-						<input class="col-lg-5" type="text" id="arrival" name="arrival" required>
+						<input class="inputText col-lg-6" type="text" id="arrival" name="arrival" required>
 					</div>
 					<div class="search-item"> 
 						<input class="btn" type="submit" value="Cerca">
@@ -78,11 +78,15 @@ List<TrainFactory> factory = (List<TrainFactory>) fm.getAllFactories();%>
 					<thead>
 						<tr>
 							<th scope="col">Codice treno</th>
+							<% String factoryName = (String) session.getAttribute("train");
+							if (factoryName.equals("none")){ %>
+								<th scope="col">Casa </th>
+							<% } %>
 							<th scope="col">Partenza</th>
 							<th scope="col">Ora/Data Partenza</th>
 							<th scope="col">Arrivo</th>
 							<th scope="col">Ora/Data Arrivo</th>
-							<th scope="col"></th>
+							
 						</tr>
 					</thead>
 					<tbody>
@@ -99,6 +103,16 @@ List<TrainFactory> factory = (List<TrainFactory>) fm.getAllFactories();%>
 						int id = t.getIdTrain(); 
 						%>
 							<td scope="<%= id %>"><%= t.getMatTrain() %></td>
+							<% if (factoryName.equals("none")) { 
+								if (t.getFactory().getFactoryName().equals("FrecciaRossa")){ %>
+									<td><img src="./img/frecciarossa_Logo.png" width="105" height="105" alt=""></td>
+								 <% } else if (t.getFactory().getFactoryName().equals("TreNord")) {%>
+								 		<td><img src="./img/Trenord_Logo.svg.png" width="100" height="100" alt=""></td>
+								 <%} else { %>
+								 <td><img src="./img/italo logo_2.png" width="80" height="100" alt=""></td>
+								 <%} %>
+							
+							<%} %>
 							<td scope="<%= id %>"><%= t.getDeparture().getCountryName() %></td>
 							<td scope="<%= id %>"><%= hourDeparture %></td>
 							<td scope="<%= id %>"><%= t.getArrival().getCountryName() %></td>
@@ -116,25 +130,25 @@ List<TrainFactory> factory = (List<TrainFactory>) fm.getAllFactories();%>
 				<% } else { %>
 			<br>
 			<br>
-			<h3> <label> NESSUN TRENO DISPONIBILE </label> </h3>
+			<div class="trainsContainer col-lg-8, textNoTrain">
+				<h3> <label> NESSUN TRENO DISPONIBILE </label> </h3>
+			</div>
 			<% 		}
 			} else { //se non sono approvati allora chiedo
 				if (sd.equals("false")) { %>
-			<br>
-			<p> Forse cercavi come paese di partenza, <strong> <i> <%= departure %> </i> </strong> ? </p>
-			<% } else if(sa.equals("false")) { %>
-			<br>
-			<p> Forse cercavi come paese di arrivo, <strong> <i><%= arrival %> </i> </strong> ? </p>
-			
-			<% //} else if (sd.equals("invalidate") || sa.equals("invaidate")) { // se sono invalidati (che non esistono negli alias) %>
-			<br>
-			<br>
-			<h3>
-				<label> NESSUN TRENO DISPONIBILE </label>
-			</h3>
+			<div class="trainsContainer col-lg-8 textNoTrain">
+				<h5><p> Forse cercavi come paese di partenza, <strong> <i> <%= departure %> </i> </strong> ? </p></h5>
+			</div>
 			<% } 
-			}
-		}%>
+				if(sa.equals("false")) { %>
+			<div class="trainsContainer col-lg-8">
+				<h5><p> Forse cercavi come paese di arrivo, <strong> <i><%= arrival %> </i> </strong> ? </p> </h5>
+			</div>
+			
+			<% }%>
+		<% }%>
+		
+		<% } %>
 			
 			<br>
 			</div>
