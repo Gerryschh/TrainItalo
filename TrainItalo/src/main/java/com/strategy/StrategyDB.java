@@ -18,18 +18,19 @@ public class StrategyDB implements Strategy{
     public Map<String,List<String>> dataMap() {
         HashMap<String, List<String>> map = new HashMap<String, List<String>>();
         NativeQuery<String> q = session.createSQLQuery("Select country_name from country");
-
         for (String s: q.getResultList()) {
-            map.put(s.toLowerCase(), new ArrayList<String>());
+            map.put(s, new ArrayList<String>());
         }
+        System.out.print("MAPPAAAAA PRIMA QUERY MQ " + map.size());
         NativeQuery<Object []> mq = session.createSQLQuery("Select country_alias, country_name from alias");
-        List<Object[]>  l =mq.list();
+        List<Object[]>  l = mq.list();
         System.out.println(l.size());
         for(Object[] o: l) { 
-            List<String> temp = map.get(((String)o[1]).toLowerCase());
+            List<String> temp = map.get(((String)o[1]));
             temp.add((String) o[0]);
             map.put((String) o[1], temp);
         }
+        System.out.print("MAPPAAAAA DOPO " + map.size());
         return map;
     }
     

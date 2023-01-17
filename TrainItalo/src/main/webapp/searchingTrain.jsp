@@ -126,7 +126,7 @@ List<TrainFactory> factory = (List<TrainFactory>) fm.getAllFactories();%>
 			<br>
 			<p> Forse cercavi come paese di arrivo, <strong> <i><%= arrival %> </i> </strong> ? </p>
 			
-			<% } else if (sd.equals("invalidate") || sa.equals("invaidate")) { // se sono invalidati (che non esistono negli alias) %>
+			<% //} else if (sd.equals("invalidate") || sa.equals("invaidate")) { // se sono invalidati (che non esistono negli alias) %>
 			<br>
 			<br>
 			<h3>

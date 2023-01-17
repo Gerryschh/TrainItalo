@@ -15,8 +15,10 @@ import javax.servlet.http.HttpSession;
 import com.ChainResponsibility.CheckChain;
 import com.ChainResponsibility.CheckChainBuilder;
 import com.beans.Alias;
+import com.beans.Country;
 import com.beans.Train;
 import com.manager.AliasManager;
+import com.manager.CountryManager;
 import com.manager.TrainManager;
 import com.strategy.Strategy;
 import com.strategy.StrategyDB;
@@ -44,39 +46,71 @@ public class SearchTrainServlet extends HttpServlet{
 		String departure = toCauntryCase(request.getParameter("departure"));
 		String arrival = toCauntryCase(request.getParameter("arrival"));
 
-		/*setta partenza e arrivo per il check string*/
-		AliasManager am = new AliasManager();
-		List<Alias> listAlias = (List<Alias>) am.getAllAliases(); //take all aliases
-		for (Alias a : listAlias) {
-			if (a.getCountryAlias().equals(departure) && a.isApproved()) { // find it and it is approved
-				session.setAttribute("statusDeparture", "true");
-				newDeparture = departure;
-				continue;
-			} else if (a.getCountryAlias().equals(departure) && !a.isApproved()) { //find it but not approved
-				session.setAttribute("statusDeparture", "false");
-				newDeparture = departure;
-				continue;
-			} else if (a.getCountryAlias().equals(arrival) && a.isApproved()) {
-				session.setAttribute("statusArrival", "true");
-				newArrival = arrival;
-				continue;
-			} else if (a.getCountryAlias().equals(arrival) && !a.isApproved()) {
-				session.setAttribute("statusArrival", "false");
-				newArrival = arrival;
-				continue;
+		CountryManager cm = new CountryManager();
+		Country countryDeparture =  cm.getCountry(departure);
+		Country countryArrival = cm.getCountry(arrival);
+		System.out.println("COUNTRY " + countryDeparture);
+		
+		if (countryDeparture != null) {
+			newDeparture = countryDeparture.getCountryName();
+			session.setAttribute("statusDeparture", "true");
+		} else {
+			AliasManager am = new AliasManager();
+			List<Alias> listAlias = (List<Alias>) am.getAllAliases(); //take all aliases
+			for (Alias a : listAlias) {
+				if (a.getCountryAlias().equals(departure) && a.isApproved()) { // find it and it is approved
+					session.setAttribute("statusDeparture", "true");
+					newDeparture = a.getCountryName().getCountryName();;
+					continue;
+				} else if (a.getCountryAlias().equals(departure) && !a.isApproved()) { //find it but not approved
+					session.setAttribute("statusDeparture", "false");
+					newDeparture = a.getCountryName().getCountryName();;
+					continue;
+				}
 			}
+
 		}
 
+		if (countryArrival != null) { 
+			newArrival = countryArrival.getCountryName();
+			session.setAttribute("statusArrival", "true");
+		} else {
+			/*setta partenza e arrivo per il check string*/
+			AliasManager am = new AliasManager();
+			List<Alias> listAlias = (List<Alias>) am.getAllAliases(); //take all aliases
+			for (Alias a : listAlias) {
+				if (a.getCountryAlias().equals(arrival) && a.isApproved()) {
+					session.setAttribute("statusArrival", "true");
+					newArrival = a.getCountryName().getCountryName();
+					continue;
+				} else if (a.getCountryAlias().equals(arrival) && !a.isApproved()) {
+					session.setAttribute("statusArrival", "false");
+					newArrival = a.getCountryName().getCountryName();
+					continue;
+				}
+			}
+
+		}
+
+
+		
 		CheckChain chain = CheckChainBuilder.getChain(s);
 		if (newDeparture == null) { // the alias was not found, so execute the checkstring
 			session.setAttribute("statusDeparture", "invalidate");
 			departure = chain.check(departure);
-		} else if (newArrival == null)  {
+			session.setAttribute("departure", departure);
+		} else {
+			session.setAttribute("departure", newDeparture);
+		}
+		
+		if (newArrival == null)  {
 			session.setAttribute("statusArrival", "invalidate");
 			arrival = chain.check(arrival);
+			session.setAttribute("arrival", arrival);
+		} else {
+			session.setAttribute("arrival", newArrival);
 		}
-		session.setAttribute("departure", departure);
-		session.setAttribute("arrival", arrival);
+	
 
 		TrainManager tm = new TrainManager();
 		if(factoryName.equals("none")) {
@@ -86,7 +120,7 @@ public class SearchTrainServlet extends HttpServlet{
 			Collection<Train> collectionTrains = tm.getTrainsWithParameter(factoryName, departure, arrival);
 			session.setAttribute("trainList", collectionTrains);
 		}
-		
+
 
 		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/searchingTrain.jsp");
 		dispatcher.forward(request, response);
