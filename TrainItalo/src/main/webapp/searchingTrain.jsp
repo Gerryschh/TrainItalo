@@ -24,7 +24,10 @@ List<TrainFactory> factory = (List<TrainFactory>) fm.getAllFactories();%>
 </head>
 <body class="bg-white">
 
-	<%@include file="/menuLogged.jsp"%>
+
+
+	<%@include file="./menuLogged.jsp"%>
+
 	<h1 class="py-4 text-center">Cerca i treni disponibili</h1>
 	<section class="ms-container">
 		<div class="row justify-content-around">

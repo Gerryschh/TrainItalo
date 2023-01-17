@@ -8,7 +8,6 @@
 		</button>
 		<div class="collapse navbar-collapse" id="navbarNavDropdown">
 
-				
 			<ul class="navbar-nav">
 				<li class="nav-item"><a class="nav-link" aria-current="page"
 						href="/TrainItalo/login.jsp"><span>Cerca un Treno</span></a></li>
@@ -22,6 +21,9 @@
 					href="/TrainItalo/login.jsp"><span>Accedi/Registrati</span></a>
 				</li>
 			</ul>
+
 		</div>		
-	</div>
+
+		</div>
+	
 </nav>
