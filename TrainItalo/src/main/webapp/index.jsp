@@ -26,6 +26,7 @@
 	
 <!-- CSS only -->
 <link rel="stylesheet" href="./css/style.css">
+<link rel="stylesheet" href="./general.css">
 
 <title>TrainViewer</title>
 </head>
@@ -77,7 +78,7 @@ else
 		<div class="text-center">
 			<h2>Offerte</h2>
 		
-			<p>Scopri le offerte biglietti treno di Italo, risparmia con i codici promo e iscriviti per accedere alle offerte dedicate ai soli clienti Italo Più.</p>
+			<p>Scopri le offerte biglietti treno di Italo, risparmia con i codici promo e iscriviti per accedere alle offerte dedicate ai soli clienti Italo Pi&ugrave;.</p>
 		</div>
 		
 		<div class="row row-cols-4 justify-content-around">
@@ -85,9 +86,9 @@ else
 			<div class="card col-4" style="width: 18rem;">
 			  <img src="img/gift_card_583x390.jpg" class="card-img-top" alt="...">
 			  <div class="card-body">
-			    <h5 class="card-title">Iscriviti a Italo Più e scopri le Gift Card, -10% di sconto per te</h5>
+			    <h5 class="card-title">Iscriviti a Italo Pi&ugrave; e scopri le Gift Card, -10% di sconto per te</h5>
 			    <p class="card-text">Fino al 9.01.2023 approfitta dello sconto del -10% e regala le Gift Card Italo</p>
-			    <a href="#" class="btn ms-btn">Scopri di più</a>
+			    <a href="#" class="btn ms-btn">Scopri di pi&ugrave;</a>
 			  </div>
 			</div>
 			
@@ -95,7 +96,7 @@ else
 			  <img src="img/tratta_milano_siena_586x390.jpg" class="card-img-top" alt="...">
 			  <div class="card-body">
 			    <h5 class="card-title">Collegamenti Milano - Siena da 22,70&#8364;</h5>
-			    <p class="card-text">Da Milano a Firenze con Treno Italo Alta Velocità a partire da 12,90&#8364; + treno regionale di Trenitalia da Firenze a Siena a 9,80&#8364;</p>
+			    <p class="card-text">Da Milano a Firenze con Treno Italo Alta Velocit&agrave;� a partire da 12,90&#8364; + treno regionale di Trenitalia da Firenze a Siena a 9,80&#8364;</p>
 			    <a href="#" class="btn ms-btn">Acquista subito</a>
 			  </div>
 			</div>
@@ -104,7 +105,7 @@ else
 			  <img src="img/carnet_impresa_586x390.jpg" class="card-img-top" alt="...">
 			  <div class="card-body">
 			    <h5 class="card-title">Carnet Italo Impresa, risparmia sui viaggi di lavoro</h5>
-			    <p class="card-text">Massima flessibilità con cambi biglietto gratuiti e illimitati e risparmi fino al 60% sui viaggi di lavoro.</p>
+			    <p class="card-text">Massima flessibilit&agrave;� con cambi biglietto gratuiti e illimitati e risparmi fino al 60% sui viaggi di lavoro.</p>
 			    <a href="#" class="btn ms-btn">Acquista subito</a>
 			  </div>
 			</div>
@@ -126,7 +127,7 @@ else
 	<section class="ms-container">
 	
 	<div class="text-center">
-		<h2>Novità e informazioni</h2>
+		<h2>Novit&agrave;� e informazioni</h2>
 	</div>
 	
 	<div class="ms-news">
@@ -141,7 +142,7 @@ else
 	            </div>
 	            <div class="face face2">
 	                <div class="content">
-	                    <p>Soggiorna con sconti fino al -50% e guadagna punti Italo Più</p>
+	                    <p>Soggiorna con sconti fino al -50% e guadagna punti Italo Pi&ugrave;</p>
 	                        <a href="#">Read More</a>
 	                </div>
 	            </div>

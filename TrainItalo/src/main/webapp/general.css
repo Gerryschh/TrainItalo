@@ -7,6 +7,14 @@
 	--otherRed: #c8160a;
 }
 
+.navbar{
+	height: 60px;
+}
+
+.ms-container {
+	min-height: calc(100vh - 360px);
+}
+
 .main{
   margin-top: 5%;
 }
@@ -132,4 +140,10 @@
     50% { transform: translateX(-2px); }
     75% { transform: translateX(3px); }
   100% { transform: translateX(-2px); }
+}
+
+/*FOOTER*/
+
+.footer {
+	height:300px;
 }

@@ -7,6 +7,7 @@
 .ms-container {
 	margin: 0 auto;
 	width: 90%;
+	min-height: 100%
 }
 
 /*LANDING PAGE*/
@@ -184,6 +185,10 @@ img {
     background: #333;
     color: var(--white);
 }
+
+/*INSERT TRAIN*/
+
+
 
 
 
@@ -383,6 +388,13 @@ audio {
 }
 
 /*FOOTER*/
+
+.footer {
+	position:absolute;
+	bottom:0;
+	left:0;
+	width:100%;
+}
 
 .ms-footer-container{
   width: 90%;
