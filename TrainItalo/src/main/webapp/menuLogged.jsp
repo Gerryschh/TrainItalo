@@ -39,7 +39,7 @@
 								<input class="ms-logout dropdown-item" type="submit" value="Logout"></form></li>
 						  </ul>
 						</div>
-					</li>
+					
 				</ul>
 		</div>
 	</div>
