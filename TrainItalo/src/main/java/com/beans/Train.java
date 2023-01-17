@@ -1,15 +1,15 @@
 package com.beans;
 
-import java.util.Date;
+import java.sql.Timestamp;
 
 public class Train implements Bean {
 	private int idTrain;
 	private String matTrain;
 	private TrainFactory factory;
-	private String departure;
-	private String arrival;
-	private Date departureDatetime;
-	private Date arrivalDatetime;
+	private Country departure;
+	private Country arrival;
+	private Timestamp departureDatetime;
+	private Timestamp arrivalDatetime;
 	
 	public int getIdTrain() {
 		return idTrain;
@@ -29,28 +29,35 @@ public class Train implements Bean {
 	public void setFactory(TrainFactory factory) {
 		this.factory = factory;
 	}
-	public String getDeparture() {
+	public Country getDeparture() {
 		return departure;
 	}
-	public void setDeparture(String departure) {
+	public void setDeparture(Country departure) {
 		this.departure = departure;
 	}
-	public String getArrival() {
+	public Country getArrival() {
 		return arrival;
 	}
-	public void setArrival(String arrival) {
+	public void setArrival(Country arrival) {
 		this.arrival = arrival;
 	}
-	public Date getDepartureDatetime() {
+	public Timestamp getDepartureDatetime() {
 		return departureDatetime;
 	}
-	public void setDepartureDatetime(Date departureDatetime) {
+	public void setDepartureDatetime(Timestamp departureDatetime) {
 		this.departureDatetime = departureDatetime;
 	}
-	public Date getArrivalDatetime() {
+	public Timestamp getArrivalDatetime() {
 		return arrivalDatetime;
 	}
-	public void setArrivalDatetime(Date arrivalDatetime) {
+	public void setArrivalDatetime(Timestamp arrivalDatetime) {
 		this.arrivalDatetime = arrivalDatetime;
+	}
+	
+	@Override
+	public String toString() {
+		return "Train [idTrain=" + idTrain + ", matTrain=" + matTrain + ", factory=" + factory + ", departure="
+				+ departure + ", arrival=" + arrival + ", departureDatetime=" + departureDatetime + ", arrivalDatetime="
+				+ arrivalDatetime + "]";
 	}
 }

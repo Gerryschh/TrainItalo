@@ -20,6 +20,7 @@
 	crossorigin="anonymous">
 <!-- CSS only -->
 <link rel="stylesheet" href="./css/style.css">
+<link rel="stylesheet" href="./general.css">
 
 <!-- SCRIPT -->
 	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
@@ -28,11 +29,11 @@
 </head>
 <body class="bg-white">
 	<jsp:include page="/menuLogged.jsp"></jsp:include>
-	<div>
+	<div class="ms-container">
 	<h2>Admin Page Actions</h2>
 	<ul>
 	<li><a href="checkAliases">Alias Approval</a></li>
-	<li><a href="insertTrain">Insert a Train</a></li>
+	<li><a href="preInsertTrain">Insert a Train</a></li>
 	<li><a href="countryList">Country List</a></li>
 	<li><a href="trainList">Train List</a></li>
 	</ul>
@@ -42,7 +43,7 @@
 	}
 	else {
 %>
-<h2>Error 404 - Utente non abilitato, risorsa non disponibile!</h2>
+<jsp:include page="/error404.jsp"></jsp:include>
 <%
 } 
 %>

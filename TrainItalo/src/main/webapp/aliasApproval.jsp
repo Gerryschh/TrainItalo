@@ -3,11 +3,13 @@
 	import="java.util.*,com.beans.*,com.manager.*"%>
 
 <%
-AliasManager am = new AliasManager();
-Collection<?> aliases = (Collection<?>) am.getAllUnapprovedAliases();
 User currentUser = (User) session.getAttribute("user");
 if(currentUser != null && currentUser.isAdmin())
 {
+	AliasManager am = new AliasManager();
+	Collection<?> aliases = (Collection<?>) am.getAllUnapprovedAliases();
+	CountryManager cm = new CountryManager();
+	Collection<?> countries = (Collection<?>) cm.getAllCountries();
 %>
 <!DOCTYPE html>
 <html>
@@ -25,6 +27,7 @@ if(currentUser != null && currentUser.isAdmin())
 	crossorigin="anonymous">
 <!-- CSS only -->
 <link rel="stylesheet" href="./css/style.css">
+<link rel="stylesheet" href="./general.css">
 	
 	<!-- SCRIPT -->
 	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
@@ -34,15 +37,16 @@ if(currentUser != null && currentUser.isAdmin())
 
 	<jsp:include page="/menuLogged.jsp"></jsp:include>
 
-	<div class="container">
-		<h1 class="py-4 text-center text-white bg-dark">Alias Table</h1>
+	<div class="ms-container">
+		<h1 class="py-4 text-center">Alias Table</h1>
 		<form action="checkAliases" method="GET">
-			<table class="table table-dark table-striped">
+			<table class="table table-striped">
 				<thead>
 					<tr>
 						<th scope="col">Alias</th>
 						<th scope="col">Country</th>
-						<th scope="col">Algorithm</th>
+						<th scope="col">Algoritmo</th>
+						<th scope="col">Soglia</th>
 						<th scope="col">Approved</th>
 					</tr>
 				</thead>
@@ -57,6 +61,7 @@ if(currentUser != null && currentUser.isAdmin())
 						<td><%=a.getCountryAlias()%></td>
 						<td><%=a.getCountryName().getCountryName()%></td>
 						<td><%=a.getAlgorithm()%></td>
+						<td><%=a.getThresholdValue()%></td>
 						<td><input type="checkbox" name="checkAlias"
 							value="<%=a.getCountryAlias()%>"></td>
 					</tr>
@@ -67,7 +72,7 @@ if(currentUser != null && currentUser.isAdmin())
 				</tbody>
 			</table>
 			<p class="text-center">
-				<input class="btn btn-outline-dark" type="submit" value="Approve">
+				<input class="btn ms-btn" type="submit" value="Approve">
 			</p>
 		</form>
 
@@ -78,7 +83,7 @@ if(currentUser != null && currentUser.isAdmin())
 	}
 	else {
 %>
-<h2>Error 404 - Utente non abilitato, risorsa non disponibile!</h2>
+<jsp:include page="/error404.jsp"></jsp:include>
 <%} %>
 </body>
 </html>

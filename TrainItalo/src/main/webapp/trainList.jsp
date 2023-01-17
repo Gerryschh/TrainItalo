@@ -1,10 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1" import="com.beans.*"%>
+	pageEncoding="ISO-8859-1" import="java.util.*,com.beans.*,com.manager.*"%>
 	
 <%
 User currentUser = (User) session.getAttribute("user");
 if(currentUser != null && currentUser.isAdmin())
 {
+	TrainManager tm = new TrainManager();
+	Collection<?> trains = (Collection<?>) tm.getAllTrains();
 %>
 <!DOCTYPE html>
 <html>
@@ -20,6 +22,7 @@ if(currentUser != null && currentUser.isAdmin())
 	crossorigin="anonymous">
 <!-- CSS only -->
 <link rel="stylesheet" href="./css/style.css">
+<link rel="stylesheet" href="./general.css">
 
 <!-- SCRIPT -->
 	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
@@ -28,12 +31,51 @@ if(currentUser != null && currentUser.isAdmin())
 </head>
 <body class="bg-white">
 	<jsp:include page="/menuLogged.jsp"></jsp:include>
+	
+	<div class="ms-container">
+		<h1 class="py-4 text-center">TrainList</h1>
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th scope="col">ID</th>
+						<th scope="col">Matricola</th>
+						<th scope="col">Factory</th>
+						<th scope="col">Partenza</th>
+						<th scope="col">Arrivo</th>
+						<th scope="col">Data e ora Partenza</th>
+						<th scope="col">Data e ora Arrivo</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<%
+						if (trains != null && trains.size() != 0) {
+							Iterator<?> it = trains.iterator();
+							while (it.hasNext()) {
+								Train t = (Train) it.next();
+						%>
+						<td><%=t.getIdTrain()%></td>
+						<td><%=t.getMatTrain()%></td>
+						<td><%=t.getFactory().getFactoryName()%></td>
+						<td><%=t.getDeparture().getCountryName()%></td>
+						<td><%=t.getArrival().getCountryName()%></td>
+						<td><%=t.getDepartureDatetime()%></td>
+						<td><%=t.getArrivalDatetime()%></td>
+					</tr>
+					<%
+					}
+					}
+					%>
+				</tbody>
+			</table>
+	</div>
+	
 	<jsp:include page="/fragments/footer.jsp"></jsp:include>
 <%
 	}
 	else {
 %>
-<h2>Error 404 - Utente non abilitato, risorsa non disponibile!</h2>
+<jsp:include page="/error404.jsp"></jsp:include>
 <%} %>
 </body>
 </html>
