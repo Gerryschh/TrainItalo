@@ -22,6 +22,7 @@ if(currentUser != null && currentUser.isAdmin())
 	crossorigin="anonymous">
 <!-- CSS only -->
 <link rel="stylesheet" href="./css/style.css">
+<link rel="stylesheet" href="./general.css">
 
 <!-- SCRIPT -->
 	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
@@ -31,9 +32,9 @@ if(currentUser != null && currentUser.isAdmin())
 <body class="bg-white">
 	<jsp:include page="/menuLogged.jsp"></jsp:include>
 	
-	<div class="container">
-		<h1 class="py-4 text-center text-white bg-dark">TrainList</h1>
-			<table class="table table-dark table-striped">
+	<div class="ms-container">
+		<h1 class="py-4 text-center">TrainList</h1>
+			<table class="table table-striped">
 				<thead>
 					<tr>
 						<th scope="col">ID</th>
@@ -74,7 +75,7 @@ if(currentUser != null && currentUser.isAdmin())
 	}
 	else {
 %>
-<h2>Error 404 - Utente non abilitato, risorsa non disponibile!</h2>
+<jsp:include page="/error404.jsp"></jsp:include>
 <%} %>
 </body>
 </html>
