@@ -10,14 +10,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.creatingTrain.exceptions.ExceedException;
 import com.creatingTrain.exceptions.FactoryException;
 import com.creatingTrain.exceptions.TooShortStringException;
 import com.creatingTrain.exceptions.WrongCombinationException;
-import com.creatingTrain.exceptions.exceed.TooManyPeopleException;
 import com.creatingTrain.exceptions.wrongLocomotive.MissingHeadLocomotiveException;
 import com.manager.AliasManager;
 import com.manager.TrainFactoryManager;

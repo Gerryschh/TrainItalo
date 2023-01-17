@@ -1,7 +1,5 @@
 package com.DAO.impl;
 
-import com.beans.User;
-
 import java.util.Collection;
 import java.util.Date;
 import java.util.LinkedList;
@@ -10,6 +8,7 @@ import java.util.List;
 import org.hibernate.query.NativeQuery;
 
 import com.DAO.UserDAO;
+import com.beans.User;
 
 public class UserDAOImpl extends BaseDAO implements UserDAO {
 

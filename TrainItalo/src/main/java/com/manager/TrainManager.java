@@ -42,6 +42,10 @@ public class TrainManager {
 	public Collection<Train> getTrainsWithParameter(String factoryName, String departure, String arrival){
 		return trainDAO.getTrainsWithParameter(factoryName, departure, arrival);
 	}
+	
+	public Collection<Train> getTrainsWithoutFactory(String departure, String arrival){
+		return trainDAO.getTrainsWithoutFactory(departure, arrival);
+	}
 
 	public void checkAndAddTrain (String inputMatricolaTreno,String trainFactoryName, 
 			String inputDeparture, String inputArrival, String inputDepartureHour,

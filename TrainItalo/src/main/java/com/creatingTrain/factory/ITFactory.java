@@ -8,10 +8,6 @@ import com.creatingTrain.vagone.IT.CargoIT;
 import com.creatingTrain.vagone.IT.LocomotivaIT;
 import com.creatingTrain.vagone.IT.PasseggeriIT;
 import com.creatingTrain.vagone.IT.RistoranteIT;
-import com.creatingTrain.vagone.TN.CargoTN;
-import com.creatingTrain.vagone.TN.LocomotivaTN;
-import com.creatingTrain.vagone.TN.PasseggeriTN;
-import com.creatingTrain.vagone.TN.RistoranteTN;
 
 public class ITFactory implements VagoneFactory {
 	

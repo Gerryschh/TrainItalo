@@ -3,7 +3,6 @@ package com.servlets;
 import java.io.IOException;
 import java.util.Collection;
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -80,8 +79,14 @@ public class SearchTrainServlet extends HttpServlet{
 		session.setAttribute("arrival", arrival);
 
 		TrainManager tm = new TrainManager();
-		Collection<Train> collectionTrains = tm.getTrainsWithParameter(factoryName, departure, arrival);
-		session.setAttribute("trainList", collectionTrains);
+		if(factoryName.equals("none")) {
+			Collection<Train> collectionTrains = tm.getTrainsWithoutFactory(departure, arrival);
+			session.setAttribute("trainList", collectionTrains);
+		} else {
+			Collection<Train> collectionTrains = tm.getTrainsWithParameter(factoryName, departure, arrival);
+			session.setAttribute("trainList", collectionTrains);
+		}
+		
 
 		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/searchingTrain.jsp");
 		dispatcher.forward(request, response);

@@ -1,12 +1,7 @@
 package com.DAO.impl;
 
-import com.beans.Country;
-import com.beans.Train;
-import com.beans.TrainFactory;
-
 import java.sql.Timestamp;
 import java.util.Collection;
-import java.util.Date;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
@@ -14,6 +9,9 @@ import java.util.List;
 import org.hibernate.query.NativeQuery;
 
 import com.DAO.TrainDAO;
+import com.beans.Country;
+import com.beans.Train;
+import com.beans.TrainFactory;
 
 public class TrainDAOImpl extends BaseDAO implements TrainDAO {
 
@@ -57,6 +55,35 @@ public class TrainDAOImpl extends BaseDAO implements TrainDAO {
 		Collection<Train> ct = new HashSet <Train>();
 		NativeQuery<Object []> mq = super.getSession().createSQLQuery("Select * from train where factory ='" + factoryName 
 				+ "' AND departure = '" + departure + "' AND arrival = '"+ arrival + "'");
+		List<Object[]> trains = mq.list();
+		for (Object[] o: trains) {
+			Train t = new Train();
+			t.setIdTrain((Integer) o[0]);
+			t.setMatTrain((String) o[1]);
+			TrainFactory tf = new TrainFactory();
+			tf.setFactoryName((String) o[2]);
+			t.setFactory(tf);
+			
+			Country departureCountry = new Country();
+			departureCountry.setCountryName((String) o[3]);
+			
+			Country arrivalCountry = new Country();
+			arrivalCountry.setCountryName((String) o[4]);
+			
+			t.setDeparture(departureCountry);
+			t.setArrival(arrivalCountry);
+			t.setDepartureDatetime((Timestamp) o[5]);
+			t.setArrivalDatetime((Timestamp) o[6]);
+			ct.add(t);
+		}
+		return ct;
+	}
+
+	@Override
+	public Collection<Train> getTrainsWithoutFactory(String departure, String arrival) {
+		Collection<Train> ct = new HashSet <Train>();
+		NativeQuery<Object []> mq = super.getSession().createSQLQuery("Select * from train where departure = '" + departure + "' "
+				+ "AND arrival = '"+ arrival + "'");
 		List<Object[]> trains = mq.list();
 		for (Object[] o: trains) {
 			Train t = new Train();

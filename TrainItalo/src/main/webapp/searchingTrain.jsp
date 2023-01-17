@@ -76,9 +76,9 @@ List<TrainFactory> factory = (List<TrainFactory>) fm.getAllFactories();%>
 						<tr>
 							<th scope="col">Codice treno</th>
 							<th scope="col">Partenza</th>
-							<th scope="col">Ora Partenza</th>
+							<th scope="col">Ora/Data Partenza</th>
 							<th scope="col">Arrivo</th>
-							<th scope="col">Ora Arrivo</th>
+							<th scope="col">Ora/Data Arrivo</th>
 							<th scope="col"></th>
 						</tr>
 					</thead>
@@ -96,9 +96,9 @@ List<TrainFactory> factory = (List<TrainFactory>) fm.getAllFactories();%>
 						int id = t.getIdTrain(); 
 						%>
 							<td scope="<%= id %>"><%= t.getMatTrain() %></td>
-							<td scope="<%= id %>"><%= t.getDeparture() %></td>
+							<td scope="<%= id %>"><%= t.getDeparture().getCountryName() %></td>
 							<td scope="<%= id %>"><%= hourDeparture %></td>
-							<td scope="<%= id %>"><%= t.getArrival() %></td>
+							<td scope="<%= id %>"><%= t.getArrival().getCountryName() %></td>
 							<td scope="<%= id %>"><%= hourArrival %></td>
 							<td scope="<%= id %>"><input class="btn" type="button"
 							value="Prenota"></td>
