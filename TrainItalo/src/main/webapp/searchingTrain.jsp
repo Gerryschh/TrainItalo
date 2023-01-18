@@ -29,37 +29,40 @@ List<TrainFactory> factory = (List<TrainFactory>) fm.getAllFactories();%>
 	<h1 class="py-4 text-center">Cerca i treni disponibili</h1>
 	<section class="ms-container">
 		<div class="row justify-content-around">
-			<div class="card searchCard col-lg-3">
-				<form id="search-form" action="SearchTrainServlet" method="GET">
-					<div class="search-item"> 
-						<label class="col-lg-5" for="train">Treno: </label> 
-						<select class="inputText col-lg-6" id="idFactory" name="train">
-							<option value="none">Nessun treno</option>
-							<%
-							for(int i = 0; i < factory.size(); i++){  
-				 				String factoryName = factory.get(i).getFactoryName();
-							%>
-				
-							<option value="<%=factoryName%>"><%= factoryName %></option>
-				
-							<% } %>
-				
-						</select> 
-					</div>
-					<div class="search-item"> 
-						<label class="col-lg-5" for="departure">Partenza: </label> 
-						<input class="inputText col-lg-6" type="text" id="departure" name="departure" required> 
-					</div>
-					<div class="search-item"> 
-						<label class="col-lg-5" for="arrival">Destinazione: </label> 
-						<input class="inputText col-lg-6" type="text" id="arrival" name="arrival" required>
-					</div>
-					<div class="search-item"> 
-						<input class="btn" type="submit" value="Cerca">
-					</div>
-				</form>
-
+			<div class="searchCard col-lg-3">
+				<div class="card">
+					<form id="search-form" action="SearchTrainServlet" method="GET">
+						<div class="search-item"> 
+							<label class="col-lg-5" for="train">Treno: </label> 
+							<select class="inputText col-lg-6" id="idFactory" name="train">
+								<option value="none">Nessun treno</option>
+								<%
+								for(int i = 0; i < factory.size(); i++){  
+					 				String factoryName = factory.get(i).getFactoryName();
+								%>
+					
+								<option value="<%=factoryName%>"><%= factoryName %></option>
+					
+								<% } %>
+					
+							</select> 
+						</div>
+						<div class="search-item"> 
+							<label class="col-lg-5" for="departure">Partenza: </label> 
+							<input class="inputText col-lg-6" type="text" id="departure" name="departure" required> 
+						</div>
+						<div class="search-item"> 
+							<label class="col-lg-5" for="arrival">Destinazione: </label> 
+							<input class="inputText col-lg-6" type="text" id="arrival" name="arrival" required>
+						</div>
+						<div class="search-item"> 
+							<input class="btn" type="submit" value="Cerca">
+						</div>
+					</form>
+	
+				</div>
 			</div>
+			<div class="trainsContainer col-lg-9">
 			<%
 			String sd = (String) session.getAttribute("statusDeparture");
 			String sa = (String) session.getAttribute("statusArrival");
@@ -73,7 +76,7 @@ List<TrainFactory> factory = (List<TrainFactory>) fm.getAllFactories();%>
 					if (trains != null && trains.size() != 0){
 						List<Train> listTrain = new ArrayList(trains);
 			%>
-			<div class="trainsContainer col-lg-8">
+			
 				<table class="table table-striped">
 					<thead>
 						<tr>
@@ -124,32 +127,36 @@ List<TrainFactory> factory = (List<TrainFactory>) fm.getAllFactories();%>
 					<% } %>
 					</tbody>
 				</table>
-			</div>
+		
 				<% } else { %>
-			<div class="trainsContainer col-lg-7">
-				<h3> <label> NESSUN TRENO DISPONIBILE </label> </h3>
-			</div>
+			
+				<div class="noTrainMsg">
+					<h3> <label> NESSUN TRENO DISPONIBILE </label> </h3>
+				</div>
+		
 			<% 		}
 			} else { //se non sono approvati allora chiedo
 				if (sd.equals("false")) { %>
-			<div class="trainsContainer col-lg-7 countryInfo">
-				<h5><p> Forse cercavi come paese di partenza, <strong> <i> <%= departure %> </i> </strong> ? </p></h5>
-			</div>
+			
+				<div class="countryInfo">
+					<h5><p> Forse cercavi come paese di partenza, <strong> <i> <%= departure %> </i> </strong> ? </p></h5>
+				</div>
+			
 			<% } 
 				if(sa.equals("false")) { %>
-			<div class="trainsContainer col-lg-7 countryInfo">
-				<h5><p> Forse cercavi come paese di arrivo, <strong> <i><%= arrival %> </i> </strong> ? </p> </h5>
-			</div>
+			
+				<div class="countryInfo">
+					<h5><p> Forse cercavi come paese di arrivo, <strong> <i><%= arrival %> </i> </strong> ? </p> </h5>
+				</div>
 			<% }%>
 			<% if(sa.equals("invalidate") || sd.equals("invalidate")) { %>
-			<div class="trainsContainer col-lg-8">
 				<h3> <label> NESSUN TRENO DISPONIBILE </label> </h3>
-			</div>
+			
 			<%} %>
 		<% }%>
 		
 		<% } %>
-			
+			</div>
 		</div>
 	
 	<jsp:include page="/fragments/footer.jsp"></jsp:include>

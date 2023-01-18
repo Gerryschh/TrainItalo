@@ -244,24 +244,27 @@ audio {
 /*SEARCH TRAIN*/
 .searchCard {
     padding: 1%;
-    margin: 1%;
-  	box-shadow: 3px 3px 3px var(--red);
+}
+
+.searchCard > .card{
+	padding: 1%;
+	box-shadow: 3px 3px 3px var(--red);
   	border-color: var(--red);
   	margin-right: auto;
 }
 
 .trainsContainer {
     text-align: left;
+    padding: 1%;
 }
 
 h5 {
-	text-align: center;
+	text-align: left;
 	top: 5px;
-	
 }
 
 .trainsContainer table{
-	margin: 3%;
+	margin: 2%;
 }
 
 .search-item {
@@ -281,11 +284,11 @@ input:hover {
   background-color: var(--red); 
 }
 
-.searchInfoMsg{
-	position: relative;
-	float: right;	
+.countryInfo{
+	border-style: solid;
+	border-color: var(--red);
+	background: var(--redTenue);
 }
-
 
 /* LOGIN */
 .card-login {
