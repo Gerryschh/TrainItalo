@@ -80,7 +80,7 @@ List<TrainFactory> factory = (List<TrainFactory>) fm.getAllFactories();%>
 							<th scope="col">Codice treno</th>
 							<% String factoryName = (String) session.getAttribute("train");
 							if (factoryName.equals("none")){ %>
-								<th scope="col">Casa </th>
+								<th scope="col">    </th>
 							<% } %>
 							<th scope="col">Partenza</th>
 							<th scope="col">Ora/Data Partenza</th>
@@ -144,8 +144,12 @@ List<TrainFactory> factory = (List<TrainFactory>) fm.getAllFactories();%>
 			<div class="trainsContainer col-lg-8">
 				<h5><p> Forse cercavi come paese di arrivo, <strong> <i><%= arrival %> </i> </strong> ? </p> </h5>
 			</div>
-			
 			<% }%>
+			<% if(sa.equals("invalidate") || sd.equals("invalidate")) { %>
+			<div class="trainsContainer col-lg-8">
+				<h3> <label> NESSUN TRENO DISPONIBILE </label> </h3>
+			</div>
+			<%} %>
 		<% }%>
 		
 		<% } %>

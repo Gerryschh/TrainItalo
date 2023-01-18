@@ -95,11 +95,12 @@ public class SearchTrainServlet extends HttpServlet{
 		}
 
 
-		
+		System.out.println("NEW DEP" + newDeparture + "NEW ARR "+ newArrival);
 		CheckChain chain = CheckChainBuilder.getChain(s);
 		if (newDeparture == null) { // the alias was not found, so execute the checkstring
 			session.setAttribute("statusDeparture", "invalidate");
 			departure = chain.check(departure);
+			System.out.println("DEP DOPO CHECKSTRIN " + departure);
 			session.setAttribute("departure", departure);
 		} else {
 			session.setAttribute("departure", newDeparture);
@@ -108,6 +109,7 @@ public class SearchTrainServlet extends HttpServlet{
 		if (newArrival == null)  {
 			session.setAttribute("statusArrival", "invalidate");
 			arrival = chain.check(arrival);
+			System.out.println("ARR DOPO CHECKSTRING" + arrival);
 			session.setAttribute("arrival", arrival);
 		} else {
 			session.setAttribute("arrival", newArrival);
