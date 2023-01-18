@@ -1,9 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"
-	import="java.util.*,com.beans.*"%>
+	import="java.util.*,com.beans.*,com.strategy.*,com.manager.*"%>
 <%
-			User currentUser = (User) session.getAttribute("user");
-			if(currentUser != null) {
+	UserManager um = new UserManager();
+	Collection<?> users = (Collection<?>) um.getAllUsers();
+	User currentUser = (User) session.getAttribute("user");
+	if(currentUser != null) {
+		
+				
 %>
 
 <!DOCTYPE html>
@@ -50,25 +54,26 @@
 		</div>
 	</div>
 	
-	<div id="ms-score-section" class="d-none">
+	<div id="ms-score-section">
 	
 		<!-- FORM PER L'INVIO DEL PUNTEGGIO AL DB -->
-		<form id="score-form" onsubmit="return handleSubmit()" action="TrainGameScoreServlet" method="POST">
-			<label for="username">Username:</label><br/>
-			<label for="username"><%=currentUser.getUserName() %></label><br/>
-			<label for="score">Score:</label><br/>
-			
-			<!-- SCORE COME VARIABILE DI JAVSCRIPT -->
-			<!-- <label for="score">        </label><br/> -->
-			
-			<!-- <input class="btn-user" type="submit" value="Registra punteggio">  -->
+		<form id="score-form" onsubmit="return handleSubmit()" action="../TrainGameScoreServlet" method="POST">
+			<label for="usernameGame">Username: </label><br/>
+			<input id="usernameGame" name="usernameGame" value="<%=currentUser.getUserName() %>" ></input><br/>
+			<label for="emailUser">Email:</label><br/>
+			<input id="emailUser" name="emailUser" value="<%=currentUser.getUserMail() %>"></input><br/>
+			<label for="scoreGame">Score:</label><br/>
+			<input id="scoreGame" name="scoreGame" value="${scoreGame}"></input><br/>
+			<input class="btn-user" type="submit" value="Registra punteggio">
 		</form>
 		<input type="button" onclick="play()" value="Riprova" class="btnPlay"></input>
+		
+		
+		
 		<div class="container">
 			<h1 class="py-4 text-center">LEADERBOARD</h1>
 			<!-- FORM PER LA VISUALIZZAZIONE DELLA LEADERBOARD. INIZIALMENTE LO SCORE DELL'UTENTE NON è VISIBILE.
 			 SE L'UTENTE REGISTRA IL PUNTEGGIO BISOGNA RIAGGIORNARE LA LEADERBOARD -->
-			<form action="TrainGameLeaderboardServlet" method="POST">
 				<table class="table table-white table-striped">
 					<thead>
 						<tr>
@@ -78,17 +83,23 @@
 					</thead>
 					<tbody>
 						<tr>
-							<td></td>
-							<td></td>
-							
+							<% 
+								if(users != null && users.size() != 0) {
+									Iterator<?> it = users.iterator();
+									while(it.hasNext()) {
+										User u = (User) it.next();
+							%>
+							<td><%=u.getUserName()%></td>
+							<td><%=u.getTrainGameScore()%></td>
 						</tr>
+							<%
+									}
+	
+								}
+							%>
+							
 					</tbody>
 				</table>
-				<p class="text-center">
-					<input class="btn btn-outline-light" type="submit" value="Approve">
-				</p>
-			</form>
-	
 		</div>
 	
 	</div>

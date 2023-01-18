@@ -1,5 +1,6 @@
 package com.DAO.impl;
 
+import com.beans.Country;
 import com.beans.User;
 
 import java.util.Collection;
@@ -8,6 +9,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import org.hibernate.query.NativeQuery;
+import org.hibernate.query.Query;
 
 import com.DAO.UserDAO;
 
@@ -43,8 +45,23 @@ public class UserDAOImpl extends BaseDAO implements UserDAO {
 
 	@Override
 	public Collection<User> getAll() {
-		// TODO Auto-generated method stub
-		return null;
+		Collection<User> uu = new LinkedList <User>();
+		NativeQuery<Object []> mq = super.getSession().createSQLQuery("Select * from userr");
+		List<Object[]> users = mq.list();
+
+		for (Object[] o: users) {
+			User u = new User();
+			u.setUserMail((String) o[0]);
+			u.setUserPassword((String) o[1]);
+			u.setUserName((String) o[2]);
+			u.setUserSurname((String) o[3]);
+			u.setUserBirthdate((Date) o[4]);
+			u.setAdmin((boolean) o[5]);
+			u.setTrainGameScore((int) o[6]);
+			
+			uu.add(u);
+		}
+		return uu;
 	}
 
 	@Override
@@ -72,5 +89,36 @@ public class UserDAOImpl extends BaseDAO implements UserDAO {
 			}
 		}
 		return null;
+	}
+	
+	@Override
+	public User getUsernameAndScoreByMail(String userMail) {
+		NativeQuery<Object []> mq = super.getSession().createSQLQuery("Select user_mail, user_name, train_game_score from userr where user_mail ='" + userMail + "'");
+
+		List<Object[]> users = mq.list();
+		if(users.size() > 0) {
+			for (Object[] o: users) {
+				User u = new User();
+				u.setUserMail((String) o[0]);
+				u.setUserName((String) o[1]);
+				u.setTrainGameScore((Integer) o[2]);
+				return u;
+			}
+		}
+		return null;
+	}
+	
+	@Override
+	public void updateScoreWhenHigher(String userMail, int trainGameScore) {
+		super.getSession().beginTransaction();
+		User u = this.getSession().get(User.class, userMail);
+		int oldScore = u.getTrainGameScore();
+		
+		if(trainGameScore > oldScore) {
+			u.setTrainGameScore(trainGameScore);
+			super.getSession().update(u);
+			super.getSession().getTransaction().commit();
+			super.getSession().close();
+		}
 	}
 }

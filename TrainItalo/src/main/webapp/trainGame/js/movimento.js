@@ -70,14 +70,17 @@ function controllaCella(x, y) {
 function gameOver(){
 	document.getElementById("punteggio").innerHTML = "Ecco il tuo punteggio:" + energiaWidth;
 	document.getElementById("pianoGioco").innerHTML = "hai perso!"; 
+	document.getElementById("scoreGame").value = energiaWidth;
 	// musichetta di gameOver
 	piano = null;
 	document.getElementById("ms-gioco-section").setAttribute("d-none");
 	document.getElementById("ms-score-section").removeAttribute("d-none");
 	clearInterval(timer1); 
 	clearInterval(timer2); 
-	clearInterval(timerTempo); 
+	clearInterval(timerTempo);
+	//metodo per httprequest 
 } 
+
 
 
 function sposta(daX, daY, aX, aY) {

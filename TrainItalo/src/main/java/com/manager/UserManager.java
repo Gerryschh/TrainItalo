@@ -24,4 +24,12 @@ public class UserManager {
 	public User getUserByMailAndPsw(String userEmail, String userPassword) {
 		return userDAO.getByMailAndPsw(userEmail, userPassword);
 	}
+	
+	public User getUsernameAndScoreByMail(String userMail) {
+		return userDAO.getUsernameAndScoreByMail(userMail);
+	}
+	
+	public void updateScoreWhenHigher(String userMail, int trainGameScore) {
+		userDAO.updateScoreWhenHigher(userMail, trainGameScore);
+	}
 }

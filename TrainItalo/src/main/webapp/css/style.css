@@ -7,7 +7,6 @@
 .ms-container {
 	margin: 0 auto;
 	width: 90%;
-	min-height: 100%
 }
 
 /*LANDING PAGE*/
@@ -390,7 +389,6 @@ audio {
 /*FOOTER*/
 
 .footer {
-	position:absolute;
 	bottom:0;
 	left:0;
 	width:100%;

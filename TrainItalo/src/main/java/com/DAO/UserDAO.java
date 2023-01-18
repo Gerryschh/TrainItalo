@@ -12,5 +12,7 @@ public interface UserDAO {
 	public Collection<User> getAllNormal(); //Get users that haven't got admin powers
 	public Collection<User> getAllAdmin(); //Get users that have got admin powers
 	public User getByMailAndPsw(String userMail, String userPassword); //Get user by mail and password
+	public User getUsernameAndScoreByMail(String userMail);
+	public void updateScoreWhenHigher(String userMail, int trainGameScore);
 	
 }
