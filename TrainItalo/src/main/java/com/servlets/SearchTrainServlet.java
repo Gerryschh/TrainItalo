@@ -59,15 +59,16 @@ public class SearchTrainServlet extends HttpServlet{
 		} else {
 			AliasManager am = new AliasManager();
 			List<Alias> listAlias = (List<Alias>) am.getAllAliases(); //take all aliases
+			session.setAttribute("statusDeparture", "false");
 			for (Alias a : listAlias) {
 				if (a.getCountryAlias().equals(departure) && a.isApproved()) { // find it and it is approved
 					session.setAttribute("statusDeparture", "true");
 					newDeparture = a.getCountryName().getCountryName();;
-					continue;
+					break;
 				} else if (a.getCountryAlias().equals(departure) && !a.isApproved()) { //find it but not approved
 					session.setAttribute("statusDeparture", "false");
 					newDeparture = a.getCountryName().getCountryName();;
-					continue;
+					break;
 				}
 			}
 
@@ -82,21 +83,18 @@ public class SearchTrainServlet extends HttpServlet{
 			/*setta arrivo per il check string*/
 			AliasManager am = new AliasManager();
 			List<Alias> listAlias = (List<Alias>) am.getAllAliases(); //take all aliases
+			session.setAttribute("statusArrival", "false");
 			for (Alias a : listAlias) {
 				if (a.getCountryAlias().equals(arrival) && a.isApproved()) {
-					System.out.println("alias true ");
 					session.setAttribute("statusArrival", "true");
 					newArrival = a.getCountryName().getCountryName();
-					continue;
+					break;
 				} else if (a.getCountryAlias().equals(arrival) && !a.isApproved()) {
-					System.out.println("alias false ");
 					session.setAttribute("statusArrival", "false");
 					newArrival = a.getCountryName().getCountryName();
-					continue;
+					break;
 				}
-				System.out.println("NEW ARRIVAL! -----------> " + newArrival);
 			}
-			System.out.println("Gli alias totali sono: " + listAlias.size());
 		}
 
 

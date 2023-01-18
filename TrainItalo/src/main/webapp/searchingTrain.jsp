@@ -143,21 +143,17 @@ List<TrainFactory> factory = (List<TrainFactory>) fm.getAllFactories();%>
 		
 			<% 		}
 			} else { //se non sono approvati allora chiedo
-				if (sd.equals("false")) { %>
+				if (sd.equals("false") || sd.equals("invalidate")) { %>
 				<div class="countryInfo col-lg-6">
 					<h5> Forse cercavi come paese di partenza, <strong> <i> <%= departure %> </i> </strong> ? </h5>
 				</div>
 			
 			<% } 
-				if(sa.equals("false")) { %>
+				if(sa.equals("false") || sa.equals("invalidate")) { %>
 				<div class="countryInfo col-lg-6">
 					<h5> Forse cercavi come paese di arrivo, <strong> <i><%= arrival %> </i> </strong> ? </h5>
 				</div>
 			<% }%>
-			<% if(sa.equals("invalidate") || sd.equals("invalidate")) { %>
-				<h3> <label> NESSUN TRENO DISPONIBILE </label> </h3>
-			
-			<%} %>
 		<% }%>
 		
 		<% } %>
