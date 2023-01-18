@@ -24,8 +24,6 @@ List<TrainFactory> factory = (List<TrainFactory>) fm.getAllFactories();%>
 </head>
 <body class="bg-white">
 
-
-
 	<%@include file="./menuLogged.jsp"%>
 
 	<h1 class="py-4 text-center">Cerca i treni disponibili</h1>
@@ -67,6 +65,8 @@ List<TrainFactory> factory = (List<TrainFactory>) fm.getAllFactories();%>
 			String sa = (String) session.getAttribute("statusArrival");
 			String departure = (String) session.getAttribute("departure");
 			String arrival = (String) session.getAttribute("arrival");
+			System.out.println(sd);
+			System.out.println(sa);
 			if (sd != null && sa != null) {
 				if (sd.equals("true") && sa.equals("true")) { // se le parole son state approvate allora faccio vedere i paesi 
 					Collection<Train> trains = (Collection<Train>) session.getAttribute("trainList");
@@ -86,7 +86,6 @@ List<TrainFactory> factory = (List<TrainFactory>) fm.getAllFactories();%>
 							<th scope="col">Ora/Data Partenza</th>
 							<th scope="col">Arrivo</th>
 							<th scope="col">Ora/Data Arrivo</th>
-							
 						</tr>
 					</thead>
 					<tbody>
@@ -125,23 +124,20 @@ List<TrainFactory> factory = (List<TrainFactory>) fm.getAllFactories();%>
 					<% } %>
 					</tbody>
 				</table>
-		
-		
+			</div>
 				<% } else { %>
-			<br>
-			<br>
-			<div class="trainsContainer col-lg-8, textNoTrain">
+			<div class="trainsContainer col-lg-7">
 				<h3> <label> NESSUN TRENO DISPONIBILE </label> </h3>
 			</div>
 			<% 		}
 			} else { //se non sono approvati allora chiedo
 				if (sd.equals("false")) { %>
-			<div class="trainsContainer col-lg-8 textNoTrain">
+			<div class="trainsContainer col-lg-7 countryInfo">
 				<h5><p> Forse cercavi come paese di partenza, <strong> <i> <%= departure %> </i> </strong> ? </p></h5>
 			</div>
 			<% } 
 				if(sa.equals("false")) { %>
-			<div class="trainsContainer col-lg-8">
+			<div class="trainsContainer col-lg-7 countryInfo">
 				<h5><p> Forse cercavi come paese di arrivo, <strong> <i><%= arrival %> </i> </strong> ? </p> </h5>
 			</div>
 			<% }%>
@@ -154,8 +150,6 @@ List<TrainFactory> factory = (List<TrainFactory>) fm.getAllFactories();%>
 		
 		<% } %>
 			
-			<br>
-			</div>
 		</div>
 	
 	<jsp:include page="/fragments/footer.jsp"></jsp:include>

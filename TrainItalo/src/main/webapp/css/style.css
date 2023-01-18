@@ -248,8 +248,6 @@ audio {
   	box-shadow: 3px 3px 3px var(--red);
   	border-color: var(--red);
   	margin-right: auto;
-
-    
 }
 
 .trainsContainer {
@@ -264,14 +262,12 @@ h5 {
 
 .trainsContainer table{
 	margin: 3%;
-	
 }
 
 .search-item {
     padding: 3%;
     width: 90%;
     border-radius: 7px;
-    
 }
 
 .inputText {
@@ -279,12 +275,15 @@ h5 {
 	padding: 6px;
 	border-radius: 7px;
 	border: 1px solid;
-
-
 }
 
 input:hover { 
   background-color: var(--red); 
+}
+
+.searchInfoMsg{
+	position: relative;
+	float: right;	
 }
 
 

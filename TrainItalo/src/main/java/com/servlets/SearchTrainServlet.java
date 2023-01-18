@@ -72,26 +72,31 @@ public class SearchTrainServlet extends HttpServlet{
 			}
 
 		}
+		
+		System.out.println("countryArrival = " + countryArrival);
 
 		if (countryArrival != null) { 
 			newArrival = countryArrival.getCountryName();
 			session.setAttribute("statusArrival", "true");
 		} else {
-			/*setta partenza e arrivo per il check string*/
+			/*setta arrivo per il check string*/
 			AliasManager am = new AliasManager();
 			List<Alias> listAlias = (List<Alias>) am.getAllAliases(); //take all aliases
 			for (Alias a : listAlias) {
 				if (a.getCountryAlias().equals(arrival) && a.isApproved()) {
+					System.out.println("alias true ");
 					session.setAttribute("statusArrival", "true");
 					newArrival = a.getCountryName().getCountryName();
 					continue;
 				} else if (a.getCountryAlias().equals(arrival) && !a.isApproved()) {
+					System.out.println("alias false ");
 					session.setAttribute("statusArrival", "false");
 					newArrival = a.getCountryName().getCountryName();
 					continue;
 				}
+				System.out.println("NEW ARRIVAL! -----------> " + newArrival);
 			}
-
+			System.out.println("Gli alias totali sono: " + listAlias.size());
 		}
 
 
@@ -115,7 +120,6 @@ public class SearchTrainServlet extends HttpServlet{
 			session.setAttribute("arrival", newArrival);
 		}
 	
-
 		TrainManager tm = new TrainManager();
 		if(factoryName.equals("none")) {
 			Collection<Train> collectionTrains = tm.getTrainsWithoutFactory(departure, arrival);
@@ -124,7 +128,6 @@ public class SearchTrainServlet extends HttpServlet{
 			Collection<Train> collectionTrains = tm.getTrainsWithParameter(factoryName, departure, arrival);
 			session.setAttribute("trainList", collectionTrains);
 		}
-
 
 		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/searchingTrain.jsp");
 		dispatcher.forward(request, response);
