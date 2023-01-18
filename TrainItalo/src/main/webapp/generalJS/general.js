@@ -19,3 +19,15 @@ function checkArrivalDate(e){
 }
 document.getElementById("inputDepartureHour").addEventListener("check", checkArrivalDate)
 document.getElementById("inputArrivalHour").addEventListener("check", checkArrivalDate)
+
+
+function hoverFunction(index){
+	const textArray = [
+		"Clicca se vuoi andare sulla pagina di approvazione degli alias.", 
+		"Clicca se vuoi andare sulla pagina di inserimento di un treno.", 
+		"Clicca se vuoi andare sulla pagina di visualizzazione dei paesi presenti.", 
+		"Clicca se vuoi andare sulla pagina di visualizzazione della lista dei treni presenti."
+		];
+	document.getElementById("adminText").innerHTML = textArray[index];
+
+}
