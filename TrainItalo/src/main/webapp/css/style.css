@@ -285,6 +285,7 @@ input:hover {
 }
 
 .countryInfo{
+	padding: 0.5em;
 	border-style: solid;
 	border-color: var(--red);
 	background: var(--redTenue);
