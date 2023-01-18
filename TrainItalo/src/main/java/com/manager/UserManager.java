@@ -24,4 +24,8 @@ public class UserManager {
 	public User getUserByMailAndPsw(String userEmail, String userPassword) {
 		return userDAO.getByMailAndPsw(userEmail, userPassword);
 	}
+	
+	public void updateUser(User u) {
+		userDAO.update(u);
+	}
 }
