@@ -21,7 +21,7 @@ public class CountryDAOImpl extends BaseDAO implements CountryDAO {
 
 	@Override
 	public String getNameByAlias(String alias) {
-		String query = "select nome_paese from alias where alias_paese = " + alias;
+		String query = "select nome_paese from alias where alias_paese = " + alias + "'";
 		NativeQuery<String> q = super.getSession().createSQLQuery(query);
 		return q.getSingleResult();
 	}
@@ -40,4 +40,6 @@ public class CountryDAOImpl extends BaseDAO implements CountryDAO {
 		}
 		return cc;
 	}
+	
+	
 }

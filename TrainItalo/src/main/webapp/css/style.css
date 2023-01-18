@@ -9,6 +9,17 @@
 	width: 90%;
 }
 
+.btn{
+	color: var(--white);
+	background-color: var(--red);
+	border: 1px solid var(--red);
+}
+
+.btn:hover {
+	color: var(--red);
+	border: 1px solid var(--red);
+}
+
 /*LANDING PAGE*/
 
 :root {
@@ -234,6 +245,55 @@ audio {
     display: none;
 }
 
+/*SEARCH TRAIN*/
+.searchCard {
+    padding: 1%;
+}
+
+.searchCard > .card{
+	padding: 1%;
+	box-shadow: 3px 3px 3px var(--red);
+  	border-color: var(--red);
+  	margin-right: auto;
+}
+
+.trainsContainer {
+    text-align: left;
+    padding: 1%;
+}
+
+h5 {
+	text-align: left;
+	top: 5px;
+}
+
+.trainsContainer table{
+	margin: 2%;
+}
+
+.search-item {
+    padding: 3%;
+    width: 90%;
+    border-radius: 7px;
+}
+
+.inputText {
+	height: 20%;
+	padding: 6px;
+	border-radius: 7px;
+	border: 1px solid;
+}
+
+input:hover { 
+  background-color: var(--red); 
+}
+
+.countryInfo{
+	padding: 0.5em;
+	border-style: solid;
+	border-color: var(--red);
+	background: var(--redTenue);
+}
 
 /* LOGIN */
 .card-login {
