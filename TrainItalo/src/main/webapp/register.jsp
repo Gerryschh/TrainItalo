@@ -11,7 +11,7 @@
 	rel="stylesheet"
 	integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65"
 	crossorigin="anonymous">
-<script src="handlerRegistrazione.js"></script>
+<script src="/generalJS/handlerRegistrazione.js"></script>
 <!-- CSS only -->
 <link rel="stylesheet" href="../css/style.css">
 <link rel="stylesheet" href="./general.css">

@@ -24,5 +24,11 @@ public class TicketManager {
 	public Collection<Ticket> getAllTicketsByMail(String userMail) {
 		return ticketDAO.getAllByUserMail(userMail);
 	}
+	
+	public Ticket getTicketByEmailIdTrain(String userEmail, int idTrain) {
+	return ticketDAO.getTicketByEmailIdTrain(userEmail, idTrain);
+	
+	}
+	
 
 }
