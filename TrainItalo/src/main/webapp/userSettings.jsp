@@ -29,10 +29,84 @@
 </head>
 <body class="bg-white">
 	<jsp:include page="/menuLogged.jsp"></jsp:include>
-	<div class="ms-loader">
-		<div class="track"></div>
-		<div class="train"></div>
-	</div>
+	
+	<h2 class="text-center p-4">USER SETTINGS</h2>
+	
+	<section class="ms-settings ms-container d-flex row my-4">
+		
+		<div class="row">
+		  <div class="col-4">
+		    <div class="list-group ms-setting-list" id="list-tab" role="tablist">
+		      <a class="list-group-item list-group-item-action active" id="list-home-list" data-bs-toggle="list" href="#list-home" role="tab" aria-controls="list-home">
+			    <div class="d-flex w-100 justify-content-between align-items-center">
+			    	<div class="">
+				      <h5 class="mb-1">Modifica Profilo</h5>
+				      <p class="mb-1">Pagina per la modifica delle infromazioni utente.</p>
+				    	<small>Clicca per visualizzare il form</small>
+				    </div>
+				    <small><i class="fas fa-user"></i></small>
+			    </div>
+		      </a>
+		      <a class="list-group-item list-group-item-action" id="list-profile-list" data-bs-toggle="list" href="#list-profile" role="tab" aria-controls="list-profile">
+			    
+			    <div class="d-flex w-100 justify-content-between align-items-center">
+			    	<div class="">
+				      <h5 class="mb-1">Visualizza Biglietti</h5>
+				      <p class="mb-1">Pagina per la visualizzazione dei biglietti dello user.</p>
+				    	<small>Clicca per visualizzare le lista</small>
+				    </div>
+				    <small><i class="fas fa-ticket-alt"></i></small>
+			    </div>
+		      </a>
+		      <a class="list-group-item list-group-item-action" id="list-messages-list" data-bs-toggle="list" href="#list-messages" role="tab" aria-controls="list-messages">
+			    <div class="d-flex w-100 justify-content-between align-items-center">
+			    	<div class="">
+				      <h5 class="mb-1">Logout</h5>
+				    	<small>Clicca per effettuare il logout</small>
+				    </div>
+				     <small><i class="fas fa-sign-out-alt"></i></small>
+			    </div>
+		      </a>
+		    </div>
+		  </div>
+		  <div class="col-8">
+		    <div class="tab-content" id="nav-tabContent">
+		      <div class="tab-pane fade show active" id="list-home" role="tabpanel" aria-labelledby="list-home-list">
+		      	<form action="ModifyProfileServlet" method="POST" class="row g-3">
+		      	<div class="col-6">
+				    <label for="modifiedUserName" class="form-label">Nome</label>
+				    <input type="text" class="form-control" name="modifiedUserName" id="modifiedUserName" value="<%=currentUser.getUserName()%>">
+				  </div>
+				  <div class="col-6">
+				    <label for="modifiedUserSurname" class="form-label">Cognome</label>
+				    <input type="text" class="form-control" name="modifiedUserSurname" id="modifiedUserSurname" value="<%=currentUser.getUserSurname()%>">
+				  </div>
+				  <div class="col-md-6">
+				    <label for="inputEmail4" class="form-label">Email</label>
+				    <input type="email" class="form-control" id="inputEmail4" value="<%=currentUser.getUserMail()%>" disabled>
+				  </div>
+				  <div class="col-md-6">
+				    <label for="inputPassword4" class="form-label">Password</label>
+				    <input type="password" class="form-control" id="inputPassword4" value="*********" disabled>
+				  </div>
+				  <div class="col-md-12">
+				    <label for="modifiedUserBirthDate" class="form-label">Data di nascita</label>
+				    <input type="date" class="form-control" name="modifiedUserBirthDate" id="modifiedUserBirthDate" value="<%=currentUser.getUserBirthdate()%>">
+				  </div>
+				  <div class="col-12 text-center">
+				    <button type="submit" class="btn ms-btn">Applica Modifica</button>
+				  </div>
+				</form>
+		      </div>
+		      <div class="tab-pane fade" id="list-profile" role="tabpanel" aria-labelledby="list-profile-list">Visualizza Biglietti</div>
+		      <div class="tab-pane fade" id="list-messages" role="tabpanel" aria-labelledby="list-messages-list">Logout</div>
+		    </div>
+		  </div>
+		</div>
+		
+		
+	</section>
+	
 	<jsp:include page="/fragments/footer.jsp"></jsp:include>
 <%
 	}

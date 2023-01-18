@@ -3,6 +3,7 @@ package com.servlets;
 import java.io.IOException;
 import java.sql.Timestamp;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -37,5 +38,8 @@ public class ModifyProfileServlet extends HttpServlet {
 			u.setUserBirthdate(birthdate);
 			um.updateUser(u);
 		}
+		
+		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/userSettings.jsp");
+		dispatcher.forward(request, response);
 	}
 }
