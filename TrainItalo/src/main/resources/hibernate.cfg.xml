@@ -7,7 +7,7 @@
         <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
         <property name="hibernate.connection.url">jdbc:mysql://localhost:3307/trainItalo</property>
         <property name="hibernate.connection.username">root</property>
-        <property name="hibernate.connection.password">GerryDecHit?</property>
+        <property name="hibernate.connection.password"></property>
         <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
        	<property name="show_sql">true</property>
        	<property name="format_sql">true</property>
@@ -17,7 +17,8 @@
        <mapping resource="alias.hbm.xml"/> 
        <mapping resource="userr.hbm.xml"/> 
        <mapping resource="train.hbm.xml"/> 
-       <mapping resource="trainFactory.hbm.xml"/> 
+       <mapping resource="trainFactory.hbm.xml"/>
+       <mapping resource="ticket.hbm.xml"/>
     </session-factory>
       
 </hibernate-configuration>

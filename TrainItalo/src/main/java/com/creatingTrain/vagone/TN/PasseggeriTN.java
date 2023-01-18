@@ -4,7 +4,7 @@ import com.creatingTrain.treno.Passeggeri;
 
 public class PasseggeriTN implements Passeggeri{
 	
-	private final int numeroPostiTN = 100, postiDisabiliTN = 10, pesoTN = 250;
+	private final int numeroPostiTN = 100, postiDisabiliTN = 10, pesoTN = 200;
 
 	@Override
 	public int getNumeroPosti() {

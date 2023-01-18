@@ -7,7 +7,7 @@ import com.creatingTrain.treno.Cargo;
 
 public class CargoFR implements Cargo {
 	
-	private final int caricoFR = 300, pesoFR = 50;
+	private final int caricoFR = 300, pesoFR = 400;
 	private final List<String> elementiCaricatiFR = Arrays.asList("Caffe", "Stelle", "Armi");
 	
 
