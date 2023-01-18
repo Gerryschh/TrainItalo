@@ -3,6 +3,10 @@
 	import="java.util.*,com.beans.*,com.strategy.*, com.manager.*, java.text.*"%>
 
 <%
+User currentUser = (User) session.getAttribute("user");
+if(currentUser != null)
+{
+
 DateFormat dh = new SimpleDateFormat("HH:mm:ss");
 DateFormat dd = new SimpleDateFormat("dd/MM/YYY");
 TrainFactoryManager fm = new TrainFactoryManager();
@@ -160,8 +164,15 @@ List<TrainFactory> factory = (List<TrainFactory>) fm.getAllFactories();%>
 			</div>
 		</div>
 	
-	<jsp:include page="/fragments/footer.jsp"></jsp:include>
 	</section>
+	<jsp:include page="/fragments/footer.jsp"></jsp:include>
+	<%
+	} else {
+		%>
+		<jsp:include page="/error404.jsp"></jsp:include>
+		<%
+	}
+%>
 </body>
 </html>
 
