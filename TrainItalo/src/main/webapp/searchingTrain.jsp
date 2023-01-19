@@ -91,28 +91,20 @@ List<TrainFactory> factory = (List<TrainFactory>) fm.getAllFactories();%>
 			String departure = (String) session.getAttribute("departure");
 			String arrival = (String) session.getAttribute("arrival");
 
-				
-				
 				if (sd != null && sa != null) {
 					String booking = (String) session.getAttribute("statusBooking");
 					System.out.println("BOOKING " + booking);
 					if (booking != null) {
 						if (booking.equals("true")) { %>
-							<div class="countryInfo col-lg-6">
-					
-					<h4><label> BIGLIETTO PRENOTATO </label></h4>	
-						
-					
+				<div class="countryInfo col-lg-6">
+					<h4><label> BIGLIETTO PRENOTATO </label></h4>		
 				</div>
 					<% 
 						} else { %>
-						<div class="countryInfo col-lg-6">
-				
-						<h4><label> NON PUOI PRENOTARE, HAI GIA PRENOTATO QUESTO BIGLIETTO </label></h4>	
-				
+				<div class="countryInfo col-lg-6">
+					<h4><label> NON PUOI PRENOTARE, HAI GIA PRENOTATO QUESTO BIGLIETTO </label></h4>	
 				</div>
-						
-					 <% 
+					<% 
 						}
 						session.setAttribute("statusBooking", null);
 					}

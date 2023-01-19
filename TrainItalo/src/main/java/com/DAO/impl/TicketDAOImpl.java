@@ -5,6 +5,8 @@ import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
 
+import javax.persistence.NoResultException;
+
 import org.hibernate.query.NativeQuery;
 
 import com.DAO.TicketDAO;
@@ -71,9 +73,8 @@ public class TicketDAOImpl extends BaseDAO implements TicketDAO {
 	
 	public Ticket getTicketByEmailIdTrain(String userEmail, int idTrain) {
 		NativeQuery<Object []> mq = super.getSession().createSQLQuery("Select * from ticket WHERE user_mail='"+ userEmail + "' AND id_train='" + idTrain + "'" );
-		Object[] ticket = mq.getSingleResult();
-		System.out.print("TICKETTTT " + ticket);
-		if (ticket.length > 0) {
+		try {
+			Object [] ticket = mq.getSingleResult();
 			Ticket t = new Ticket();
 			t.setIdTicket((Integer) ticket[0]);
 			
@@ -85,12 +86,11 @@ public class TicketDAOImpl extends BaseDAO implements TicketDAO {
 			train.setIdTrain((Integer) ticket[2]);
 			t.setIdTrain(train);
 			t.setPurchaseDate((Timestamp) ticket[3]);
+			System.out.println(train.toString());
 			return t;
-		} else {
+		} catch (NoResultException e) {
 			return null;
 		}
-		
-
 	}
 	
 	
