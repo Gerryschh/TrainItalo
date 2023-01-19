@@ -2,6 +2,7 @@ package com.servlets;
 
 import java.io.IOException;
 import java.util.Collection;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -45,14 +46,10 @@ public class SearchTrainServlet extends HttpServlet{
 		String factoryName = request.getParameter("train");
 		String departure = toCauntryCase(request.getParameter("departure"));
 		String arrival = toCauntryCase(request.getParameter("arrival"));
-		
+
 		session.setAttribute("train", factoryName);
 
-		CountryManager cm = new CountryManager();
-		Country countryDeparture =  cm.getCountry(departure);
-		Country countryArrival = cm.getCountry(arrival);
-		System.out.println("COUNTRY " + countryDeparture);
-		
+		/*		
 		if (countryDeparture != null) {
 			newDeparture = countryDeparture.getCountryName();
 			session.setAttribute("statusDeparture", "true");
@@ -73,60 +70,68 @@ public class SearchTrainServlet extends HttpServlet{
 			}
 
 		}
+		 */
+		CheckChain chain = CheckChainBuilder.getChain(s);
+		AliasManager am = new AliasManager();
+		CountryManager cm = new CountryManager();
+		Collection<Country> countryList = cm.getAllCountries();
+		boolean trovatoDep = false;
+		boolean trovatoArr = false;
 		
-		System.out.println("countryArrival = " + countryArrival);
-
-		if (countryArrival != null) { 
-			newArrival = countryArrival.getCountryName();
-			session.setAttribute("statusArrival", "true");
-		} else {
-			/*setta arrivo per il check string*/
-			AliasManager am = new AliasManager();
-			List<Alias> listAlias = (List<Alias>) am.getAllAliases(); //take all aliases
-			session.setAttribute("statusArrival", "false");
-			for (Alias a : listAlias) {
-				if (a.getCountryAlias().equals(arrival) && a.isApproved()) {
-					session.setAttribute("statusArrival", "true");
-					newArrival = a.getCountryName().getCountryName();
-					break;
-				} else if (a.getCountryAlias().equals(arrival) && !a.isApproved()) {
-					session.setAttribute("statusArrival", "false");
-					newArrival = a.getCountryName().getCountryName();
-					break;
+		String departureRes = chain.check(departure);
+		String arrivalRes = chain.check(arrival);
+		
+		if (countryList != null && countryList.size() != 0) {
+			Iterator<?> it = countryList.iterator();
+			while (it.hasNext()) {
+				Country c = (Country) it.next();
+				if(c.getCountryName().equals(departureRes)) {
+					trovatoDep = true;
+				}
+				if(c.getCountryName().equals(arrivalRes)) {
+					trovatoArr = true;
 				}
 			}
 		}
-
-
-		System.out.println("NEW DEP" + newDeparture + "NEW ARR "+ newArrival);
-		CheckChain chain = CheckChainBuilder.getChain(s);
-		if (newDeparture == null) { // the alias was not found, so execute the checkstring
-			session.setAttribute("statusDeparture", "invalidate");
-			departure = chain.check(departure);
-			System.out.println("DEP DOPO CHECKSTRIN " + departure);
-			session.setAttribute("departure", departure);
+		
+		if(departureRes != null && !trovatoDep) {
+			Alias departureBean = am.getAlias(departureRes);
+			if(departureBean != null && departureBean.isApproved()) {
+				session.setAttribute("statusDeparture", "true");
+			} else {
+				session.setAttribute("statusDeparture", "false");
+			}
+		} else if(trovatoDep) {
+			session.setAttribute("statusDeparture", "true");
 		} else {
-			session.setAttribute("departure", newDeparture);
+			session.setAttribute("statusDeparture", "invalidate");
+		}
+
+		
+		if(arrivalRes != null && !trovatoArr) {
+			Alias arrivalBean = am.getAlias(arrivalRes);
+			if(arrivalBean != null && arrivalBean.isApproved()) {
+				session.setAttribute("statusArrival", "true");
+			} else {
+				session.setAttribute("statusArrival", "false");
+			}
+		} else if(trovatoArr) {
+			session.setAttribute("statusArrival", "true");
+		} else {
+			session.setAttribute("statusArrival", "invalidate");
+		}
+
+		TrainManager tm = new TrainManager();
+		if(departureRes != null && arrivalRes != null) {
+			if(factoryName.equals("none")) {
+				Collection<Train> collectionTrains = tm.getTrainsWithoutFactory(departure, arrival);
+				session.setAttribute("trainList", collectionTrains);
+			} else {
+				Collection<Train> collectionTrains = tm.getTrainsWithParameter(factoryName, departure, arrival);
+				session.setAttribute("trainList", collectionTrains);
+			}
 		}
 		
-		if (newArrival == null)  {
-			session.setAttribute("statusArrival", "invalidate");
-			arrival = chain.check(arrival);
-			System.out.println("ARR DOPO CHECKSTRING" + arrival);
-			session.setAttribute("arrival", arrival);
-		} else {
-			session.setAttribute("arrival", newArrival);
-		}
-	
-		TrainManager tm = new TrainManager();
-		if(factoryName.equals("none")) {
-			Collection<Train> collectionTrains = tm.getTrainsWithoutFactory(departure, arrival);
-			session.setAttribute("trainList", collectionTrains);
-		} else {
-			Collection<Train> collectionTrains = tm.getTrainsWithParameter(factoryName, departure, arrival);
-			session.setAttribute("trainList", collectionTrains);
-		}
-
 		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/searchingTrain.jsp");
 		dispatcher.forward(request, response);
 	}

@@ -37,12 +37,12 @@ List<TrainFactory> factory = (List<TrainFactory>) fm.getAllFactories();%>
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"
 	integrity="sha384-mQ93GR66B00ZXjt0YO5KlohRA5SY2XofN4zfuZxLkoj1gXtW8ANNCe9d5Y3eG5eD"
 	crossorigin="anonymous"></script>
-<script src="/generalJS/bookingTicket.js"></script>
+<script src="./generalJS/searchFlag.js"></script>
 <!-- CSS only -->
 <link rel="stylesheet" href="css/style.css">
 <title>TrainViewer</title>
 </head>
-<body class="bg-white">
+<body class="bg-white" onload="loadFlag()">
 
 	<jsp:include page="/menuLogged.jsp"></jsp:include>
 
@@ -115,6 +115,10 @@ List<TrainFactory> factory = (List<TrainFactory>) fm.getAllFactories();%>
 							List<Train> listTrain = new ArrayList(trains);
 				%>
 
+				<div class="d-none">
+					<input id="dep" type="hidden" value="<%=session.getAttribute("departureAlphaCode") %>">
+					<input id="arr" type="hidden" value="<%=session.getAttribute("arrivalAlphaCode") %>">
+				</div>
 				<table class="table table-striped" >
 				
 					<thead>
@@ -124,9 +128,9 @@ List<TrainFactory> factory = (List<TrainFactory>) fm.getAllFactories();%>
 							if (factoryName.equals("none")){ %>
 							<th scope="col"></th>
 							<% } %>
-							<th scope="col">Partenza</th>
+							<th scope="col">Partenza <img id ="depImg" src= "" width="30" height="30" alt=""></th>
 							<th scope="col">Ora/Data Partenza</th>
-							<th scope="col">Arrivo</th>
+							<th scope="col">Arrivo <img id ="arrImg" src= "" width="30" height="30" alt=""></th>
 							<th scope="col">Ora/Data Arrivo</th>
 						</tr>
 					</thead>
@@ -187,7 +191,7 @@ List<TrainFactory> factory = (List<TrainFactory>) fm.getAllFactories();%>
 
 				<% 		}
 			} else { //se non sono approvati allora chiedo
-				if (sd.equals("false") || sd.equals("invalidate")) { %>
+				if (sd.equals("false")) { %>
 				<div class="warningInfo col-lg-6">
 					<h5>
 						Forse cercavi come paese di partenza, <strong> <i> <%= departure %>
@@ -197,7 +201,7 @@ List<TrainFactory> factory = (List<TrainFactory>) fm.getAllFactories();%>
 				</div>
 
 				<% } 
-				if(sa.equals("false") || sa.equals("invalidate")) { %>
+				if(sa.equals("false")) { %>
 				<div class="warningInfo col-lg-6">
 					<h5>
 						Forse cercavi come paese di arrivo, <strong> <i><%= arrival %>
