@@ -211,10 +211,33 @@ img {
 }
 
 .btnPlay:hover {
-    background-color: #00cccc;
+	color: var(--red);
+	font-weight: bold;
+    background-color: var(--white);
 }
 
 .btnPlay:focus {
+    outline: 0;
+}
+
+.btnRegScore {
+    width: 160px;
+    height: 40px;
+    background-color: var(--red);
+    color: var(--white);
+    border: 1px solid black;
+    border-radius: 5px;
+    box-shadow: 4px 6px 12px #888888;
+    transition: 0.5s ease;
+}
+
+.btnRegScore:hover {
+	color: var(--red);
+	font-weight: bold;
+    background-color: var(--white);
+}
+
+.btnRegScore:focus {
     outline: 0;
 }
 

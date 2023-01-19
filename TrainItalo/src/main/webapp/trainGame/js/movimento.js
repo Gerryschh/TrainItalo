@@ -23,8 +23,9 @@ function checkKeyPress(event) {
 	//alert ("The Unicode character code is (key press): " + chCode);   
 }
 
-var biglietto = new Audio("audio1/ka-ching.mp3");
-var nemico = new Audio("audio1/kids.mp3");
+var pathAudio = "/TrainItalo/audio/";
+var biglietto = new Audio(pathAudio+"ka-ching.mp3");
+var nemico = new Audio(pathAudio+"kids.mp3");
 Audio.prototype.rewindAndPlay = function () {
 	this.currentTime = 0.0;
 	this.play();
@@ -68,16 +69,19 @@ function controllaCella(x, y) {
 }
 
 function gameOver(){
-	document.getElementById("punteggio").innerHTML = "Ecco il tuo punteggio:" + energiaWidth;
-	document.getElementById("pianoGioco").innerHTML = "hai perso!"; 
+	//document.getElementById("punteggio").innerHTML = "Ecco il tuo punteggio:" + energiaWidth;
+	document.getElementById("pianoGioco").innerHTML = "GAME OVER!"; 
 	document.getElementById("scoreGame").value = energiaWidth;
 	// musichetta di gameOver
 	piano = null;
-	document.getElementById("ms-gioco-section").setAttribute("d-none");
-	document.getElementById("ms-score-section").removeAttribute("d-none");
-	clearInterval(timer1); 
-	clearInterval(timer2); 
-	clearInterval(timerTempo);
+	//timer1 = setInterval("om1.muovi()", 0);
+	//timer2 = setInterval("om2.muovi()", 0);
+	//timerTempo = setInterval("timer()", 0);
+	document.getElementById("ms-score-section").classList.remove("d-none");
+	document.getElementById("btnPlay").classList.add("d-none");
+	clearInterval(timer1, 0);
+	clearInterval(timer2, 0);
+	clearInterval(timerTempo, 0);
 	//metodo per httprequest 
 } 
 

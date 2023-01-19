@@ -5,7 +5,7 @@ var ominoY = 0;
 // valore iniziale dell'energia
 var energia = 0;
 
-// costanti e parametri per la configurazioen del gioco
+// costanti e parametri per la configurazione del gioco
 var PILLOLA = -10;
 var NEMICO = -15;
 var SFONDO = 0;
@@ -15,7 +15,7 @@ var omino = "testa";
 var testa = 1;
 var direzione = "E";
 
-var pathImg = "img1/";
+var pathImg = "/TrainItalo/img/";
 
 // dichiarazione variabili di lavoro
 var i = 0;

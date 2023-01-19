@@ -24,8 +24,8 @@
 	integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65"
 	crossorigin="anonymous">
 <!-- CSS only -->
-<link rel="stylesheet" href="../css/style.css">
-<link rel="stylesheet" href="./general.css">
+<link rel="stylesheet" href="/TrainItalo/css/style.css">
+<link rel="stylesheet" href="/TrainItalo/general.css">
 	
 	<!-- SCRIPT -->
 	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
@@ -40,37 +40,46 @@
 		<br><br>
 		<span id="punteggio"></span>
 		<div>
+			<span>Punteggio:</span>
 			<div class="rounded-pill" id="energia" style="width:1px; background-color:rgb(0,0,255)">
 				<span>0</span>
 			</div>
 			<br>
 
-			<div class="rounded-pill" id="tempo" style="width:1000px; background-color:rgb(0,255,0)">
-				<span>1000</span>
+			<div class="rounded-pill" id="tempo" style="width:650px; background-color:rgb(0,255,0)">
+				<span id="valTempo">1000</span>
 			</div>
+			<br>
 		</div>
-		<div id="pianoGioco">
+		<div id="pianoGioco" style="width: 650px;">
 			
 		</div>
 	</div>
+	<br><br>
 	
-	<div id="ms-score-section">
+	<div id="ms-score-section" class="d-none">
+		<div class="row justify-content-around">
+		
+			<div class="card card-login text-center" style="width: 20rem;">
 	
 		<!-- FORM PER L'INVIO DEL PUNTEGGIO AL DB -->
-		<form id="score-form" onsubmit="return handleSubmit()" action="../TrainGameScoreServlet" method="POST">
-			<label for="usernameGame">Username: </label><br/>
-			<input id="usernameGame" name="usernameGame" value="<%=currentUser.getUserName() %>" ></input><br/>
-			<label for="emailUser">Email:</label><br/>
-			<input id="emailUser" name="emailUser" value="<%=currentUser.getUserMail() %>"></input><br/>
-			<label for="scoreGame">Score:</label><br/>
-			<input id="scoreGame" name="scoreGame" value="${scoreGame}"></input><br/>
-			<input class="btn-user" type="submit" value="Registra punteggio">
-		</form>
-		<input type="button" onclick="play()" value="Riprova" class="btnPlay"></input>
+		<div id="scoreDiv">
+			<form id="scoreForm" action="/TrainItalo/TrainGameScoreServlet" method="POST">
+				<label for="usernameGame">Username: </label><br/>
+				<input id="usernameGame" name="usernameGame" value="<%=currentUser.getUserName() %>" ></input><br/>
+				<label for="emailUser">Email:</label><br/>
+				<input id="emailUser" name="emailUser" value="<%=currentUser.getUserMail() %>"></input><br/>
+				<label for="scoreGame">Score:</label><br/>
+				<input id="scoreGame" name="scoreGame" value="${scoreGame}"></input><br/><br/>
+				<input class="btnRegScore" type="submit" value="Registra punteggio">
+			</form>
+			<br/>
+			<input type="button" onclick="play()" value="Riprova" class="btnPlay"></input>
+		</div>
+		</div>
+		</div>
 		
-		
-		
-		<div class="container">
+		<div class="container" id="leaderboard">
 			<h1 class="py-4 text-center">LEADERBOARD</h1>
 			<!-- FORM PER LA VISUALIZZAZIONE DELLA LEADERBOARD. INIZIALMENTE LO SCORE DELL'UTENTE NON è VISIBILE.
 			 SE L'UTENTE REGISTRA IL PUNTEGGIO BISOGNA RIAGGIORNARE LA LEADERBOARD -->
@@ -101,14 +110,15 @@
 					</tbody>
 				</table>
 		</div>
+		
 	
 	</div>
 
 
 	<jsp:include page="../fragments/footer.jsp"></jsp:include>
 
-	<script type="text/javascript" src="js/mappa.js"></script>
-	<script type="text/javascript" src="js/movimento.js"></script>
+	<script type="text/javascript" src="/TrainItalo/trainGame/js/mappa.js"></script>
+	<script type="text/javascript" src="/TrainItalo/trainGame/js/movimento.js"></script>
 	
 </body>
 </html>
