@@ -324,6 +324,26 @@ img {
 	font-style: italic;
 }
 
+/*USER SETTINGS*/
+
+.ms-setting-list a {
+	background-color: var(--white);
+	color: var(--red);
+	border: 1px solid var(--red);
+}
+
+.ms-setting-list a.active {
+	background-color: var(--red);
+	color: var(--white);
+	border: 1px solid var(--red);
+}
+
+.ms-setting-list a:hover {
+	background-color: var(--red);
+	color: var(--white);
+	border: 1px solid var(--red);
+}
+
 
 /*TRAIN GAME*/
 
