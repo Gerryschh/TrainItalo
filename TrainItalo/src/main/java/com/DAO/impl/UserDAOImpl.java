@@ -74,14 +74,13 @@ public class UserDAOImpl extends BaseDAO implements UserDAO {
 	}
 
 	@Override
-	public void update(User newUser) {
+	public void update(String userMail, String userName, String userSurname, Date userBirthdate) {
 		super.getSession().beginTransaction();
-		User u = this.getSession().get(User.class, newUser.getUserMail());
-		u.setUserName(newUser.getUserName());
-		u.setUserSurname(newUser.getUserSurname());
-		u.setUserBirthdate(newUser.getUserBirthdate());
+		User u = this.getSession().get(User.class, userMail);
+		u.setUserName(userName);
+		u.setUserSurname(userSurname);
+		u.setUserBirthdate(userBirthdate);
 		super.getSession().update(u);
 		super.getSession().getTransaction().commit();
-		super.getSession().close();
 	}
 }

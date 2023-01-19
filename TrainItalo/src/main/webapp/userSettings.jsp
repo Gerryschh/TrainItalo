@@ -1,10 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1" import="com.beans.*"%>
+	pageEncoding="ISO-8859-1" import="com.beans.*, com.manager.*, java.util.*, java.text.SimpleDateFormat"%>
 	
 <%
 	User currentUser = (User) session.getAttribute("user");
 	if(currentUser != null)
 	{
+		TicketManager tm = new TicketManager();
+		Collection<?> tickets = (Collection<?>) tm.getAllTicketsByMail(currentUser.getUserMail());
+		Date birthdate = currentUser.getUserBirthdate();
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+		String birthdateString = format.format(birthdate);
 %>
 <!DOCTYPE html>
 <html>
@@ -82,8 +87,8 @@
 				    <input type="text" class="form-control" name="modifiedUserSurname" id="modifiedUserSurname" value="<%=currentUser.getUserSurname()%>">
 				  </div>
 				  <div class="col-md-6">
-				    <label for="inputEmail4" class="form-label">Email</label>
-				    <input type="email" class="form-control" id="inputEmail4" value="<%=currentUser.getUserMail()%>" disabled>
+				    <label for="email" class="form-label">Email</label>
+				    <input type="email" class="form-control" id="email" name="email" value="<%=currentUser.getUserMail()%>" disabled>
 				  </div>
 				  <div class="col-md-6">
 				    <label for="inputPassword4" class="form-label">Password</label>
@@ -91,7 +96,7 @@
 				  </div>
 				  <div class="col-md-12">
 				    <label for="modifiedUserBirthDate" class="form-label">Data di nascita</label>
-				    <input type="date" class="form-control" name="modifiedUserBirthDate" id="modifiedUserBirthDate" value="<%=currentUser.getUserBirthdate()%>">
+				    <input type="date" class="form-control" name="modifiedUserBirthDate" id="modifiedUserBirthDate" value="<%=birthdateString%>">
 				  </div>
 				  <div class="col-12 text-center">
 				    <button type="submit" class="btn ms-btn">Applica Modifica</button>
