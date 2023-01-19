@@ -27,7 +27,7 @@ import com.creatingTrain.factory.TNFactory;
 import com.creatingTrain.factory.VagoneFactory;
 import com.creatingTrain.treno.Treno;
 
-public class TrainManager {
+public class TrainManager { 
 	TrainDAO trainDAO = new TrainDAOImpl();
 	TrainFactoryManager tfm = new TrainFactoryManager();
 	DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd'T'hh:mm");

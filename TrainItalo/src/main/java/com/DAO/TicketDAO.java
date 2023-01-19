@@ -10,5 +10,6 @@ public interface TicketDAO {
 	public Ticket get(int idTicket);
 	public Collection<Ticket> getAll(); //Get all tickets
 	public Collection<Ticket> getAllByUserMail(String userMail);
+	public Ticket getTicketByEmailIdTrain(String userEmail, int idTrain);
 
 }

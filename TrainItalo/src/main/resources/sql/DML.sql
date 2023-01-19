@@ -261,6 +261,22 @@ INSERT INTO train_factory (factory_name, passenger_seats, disabled_passenger_sea
 ('FrecciaRossa', 100, 10, 3000, 70, 250, 400, 200);
 
 INSERT INTO train (mat_train, factory, departure, arrival, departure_datetime, arrival_datetime) VALUES 
-('HCCCCC', 'Italo', 'Burundi', 'Austria', '9999-12-31 23:59:59', '9999-12-31 23:59:59'),
-('HPPRPP', 'Italo', 'Burundi', 'Venezuela', '9999-12-31 23:59:59', '9999-12-31 23:59:59'),
-('HCCCCC', 'FrecciaRossa', 'San Marino', 'Italia', '9999-12-31 23:59:59', '9999-12-31 23:59:59');
+('HCCCCC', 'Italo', 'Burundi', 'Austria', '2023-01-20 05:15:00', '2023-01-21 15:30:00'),
+('HPPRPP', 'Italo', 'Burundi', 'Austria', '2023-01-21 10:20:30', '2023-01-22 21:20:00'),
+('HPPRPP', 'FrecciaRossa', 'Burundi', 'Austria', '2023-01-21 05:20:00', '2023-01-22 15:25:00'),
+('HCCCCC', 'FrecciaRossa', 'San Marino', 'Italia', '2023-01-12 10:20:30', '2023-01-12 12:10:15'),
+('HPPRPP', 'TreNord', 'San Marino', 'Italia', '2023-01-12 08:30:00', '2023-01-12 10:30:00'),
+('HPPRPP', 'Italo', 'San Marino', 'Italia', '2023-01-12 07:30:00', '2023-01-12 09:30:00');
+
+INSERT INTO alias (country_alias, country_name, approved, algorithm, threshold_value, is_found) VALUES
+('Itaia','Italia',0,'JaroDistance',0.0,0),
+('Germ','Germania',0,'JaroDistance',0.0,0),
+('Buridi','Burundi',1,'JaroDistance',0.0,0),
+('Austra','Austria',0,'JaroDistance',0.0,0),
+('Itaglia','Italia',1,'JaroDistance',0.0,0),
+('Bur','Burundi',0,'JaroDistance',0.0,0),
+('Aus','Austria',0,'JaroDistance',0.0,0);
+
+
+
+
