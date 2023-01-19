@@ -21,7 +21,7 @@ public class StrategyDB implements Strategy{
         for (String s: q.getResultList()) {
             map.put(s, new ArrayList<String>());
         }
-        NativeQuery<Object []> mq = session.createSQLQuery("Select country_alias, country_name from alias");
+        NativeQuery<Object []> mq = session.createSQLQuery("Select country_alias, country_name from alias where approved=1");
         List<Object[]>  l = mq.list();
         for(Object[] o: l) { 
             List<String> temp = map.get(((String)o[1]));
@@ -29,6 +29,5 @@ public class StrategyDB implements Strategy{
             map.put((String) o[1], temp);
         }
         return map;
-    }
-    
+    } 
 }

@@ -1,5 +1,7 @@
 package com.ChainResponsibility;
 
+import com.ChainResponsibility.algorithm.EqualsInputCS;
+import com.ChainResponsibility.algorithm.EqualsStandardCS;
 import com.beans.Alias;
 import com.manager.AliasManager;
 import com.manager.CountryManager;
@@ -17,16 +19,19 @@ public abstract class CheckChain {
 	}
 	public final String check(String input) {
 		String result = checkInternal(input);
+		System.out.println(this.getClass().getSimpleName());
 		if(result != null) {
-			Alias a = new Alias();
-			a.setCountryAlias(input);
-			a.setCountryName(countryManager.getCountry(result));
-			a.setApproved(false);
-			a.setAlgorithm(this.getClass().getSimpleName());
-			a.setThresholdValue(getSoglia());
-			a.setFound(true);
-			aliasManager.addAlias(a);
-			System.out.println("Il risultato è "+result);
+			if(!this.getClass().getSimpleName().equals(EqualsStandardCS.class.getSimpleName())) {
+				Alias a = new Alias();
+				a.setCountryAlias(input);
+				a.setCountryName(countryManager.getCountry(result));
+				a.setApproved(false);
+				a.setAlgorithm(this.getClass().getSimpleName());
+				a.setThresholdValue(getSoglia());
+				a.setFound(true);
+				aliasManager.addAlias(a);
+			}
+			System.out.println("Il risultato è "+result + " trovato con " + this.getClass().getSimpleName());
 			return result;
 		}
 		//non ho trovato la soluzione, procedo col successivo se è presente
