@@ -108,7 +108,7 @@ public class SearchTrainServlet extends HttpServlet{
 		CheckChain chain = CheckChainBuilder.getChain(s);
 		if (newDeparture == null) { // the alias was not found, so execute the checkstring
 			session.setAttribute("statusDeparture", "invalidate");
-			departure = chain.check(departure);
+			newDeparture = chain.check(departure);
 			System.out.println("DEP DOPO CHECKSTRIN " + departure);
 			session.setAttribute("departure", departure);
 		} else {
@@ -117,7 +117,7 @@ public class SearchTrainServlet extends HttpServlet{
 		
 		if (newArrival == null)  {
 			session.setAttribute("statusArrival", "invalidate");
-			arrival = chain.check(arrival);
+			newArrival = chain.check(arrival);
 			System.out.println("ARR DOPO CHECKSTRING" + arrival);
 			session.setAttribute("arrival", arrival);
 		} else {
@@ -126,10 +126,10 @@ public class SearchTrainServlet extends HttpServlet{
 	
 		TrainManager tm = new TrainManager();
 		if(factoryName.equals("none")) {
-			Collection<Train> collectionTrains = tm.getTrainsWithoutFactory(departure, arrival);
+			Collection<Train> collectionTrains = tm.getTrainsWithoutFactory(newDeparture, newArrival);
 			session.setAttribute("trainList", collectionTrains);
 		} else {
-			Collection<Train> collectionTrains = tm.getTrainsWithParameter(factoryName, departure, arrival);
+			Collection<Train> collectionTrains = tm.getTrainsWithParameter(factoryName, newDeparture, newArrival);
 			session.setAttribute("trainList", collectionTrains);
 		}
 
