@@ -55,6 +55,7 @@ public class SearchTrainServlet extends HttpServlet{
 		
 		if (countryDeparture != null) {
 			newDeparture = countryDeparture.getCountryName();
+			session.setAttribute("departureAlphaCode", countryDeparture.getAlpha2code());
 			session.setAttribute("statusDeparture", "true");
 		} else {
 			AliasManager am = new AliasManager();
@@ -63,7 +64,9 @@ public class SearchTrainServlet extends HttpServlet{
 			for (Alias a : listAlias) {
 				if (a.getCountryAlias().equals(departure) && a.isApproved()) { // find it and it is approved
 					session.setAttribute("statusDeparture", "true");
-					newDeparture = a.getCountryName().getCountryName();;
+					newDeparture = a.getCountryName().getCountryName();
+					Country cDeparture = cm.getCountry(a.getCountryName().getCountryName());
+					session.setAttribute("departureAlphaCode", cDeparture.getAlpha2code());
 					break;
 				} else if (a.getCountryAlias().equals(departure) && !a.isApproved()) { //find it but not approved
 					session.setAttribute("statusDeparture", "false");
@@ -78,6 +81,7 @@ public class SearchTrainServlet extends HttpServlet{
 
 		if (countryArrival != null) { 
 			newArrival = countryArrival.getCountryName();
+			session.setAttribute("arrivalAlphaCode", countryArrival.getAlpha2code());
 			session.setAttribute("statusArrival", "true");
 		} else {
 			/*setta arrivo per il check string*/
@@ -88,6 +92,8 @@ public class SearchTrainServlet extends HttpServlet{
 				if (a.getCountryAlias().equals(arrival) && a.isApproved()) {
 					session.setAttribute("statusArrival", "true");
 					newArrival = a.getCountryName().getCountryName();
+					Country cArrival = cm.getCountry(a.getCountryName().getCountryName());
+					session.setAttribute("arrivalAlphaCode", cArrival.getAlpha2code());
 					break;
 				} else if (a.getCountryAlias().equals(arrival) && !a.isApproved()) {
 					session.setAttribute("statusArrival", "false");

@@ -37,7 +37,7 @@ List<TrainFactory> factory = (List<TrainFactory>) fm.getAllFactories();%>
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"
 	integrity="sha384-mQ93GR66B00ZXjt0YO5KlohRA5SY2XofN4zfuZxLkoj1gXtW8ANNCe9d5Y3eG5eD"
 	crossorigin="anonymous"></script>
-<script src="/generalJS/bookingTicket.js"></script>
+<script src="./generalJS/searchFlag.js"></script>
 <!-- CSS only -->
 <link rel="stylesheet" href="css/style.css">
 <title>TrainViewer</title>
@@ -111,8 +111,10 @@ List<TrainFactory> factory = (List<TrainFactory>) fm.getAllFactories();%>
 					
 					if (sd.equals("true") && sa.equals("true")) { // se le parole son state approvate allora faccio vedere i paesi 
 						Collection<Train> trains = (Collection<Train>) session.getAttribute("trainList");
+						System.out.println("ALPHA CODEEEEEEE = " + session.getAttribute("departureAlphaCode"));
 						if (trains != null && trains.size() != 0){
 							List<Train> listTrain = new ArrayList(trains);
+							
 				%>
 
 				<table class="table table-striped" >
