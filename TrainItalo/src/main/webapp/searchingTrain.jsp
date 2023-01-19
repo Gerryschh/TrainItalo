@@ -126,7 +126,7 @@ List<TrainFactory> factory = (List<TrainFactory>) fm.getAllFactories();%>
 							if (factoryName.equals("none")){ %>
 							<th scope="col"></th>
 							<% } %>
-							<th scope="col">Partenza</th>
+							<th id = "dep" scope="col">Partenza {{onLoad()}}</th>
 							<th scope="col">Ora/Data Partenza</th>
 							<th scope="col">Arrivo</th>
 							<th scope="col">Ora/Data Arrivo</th>

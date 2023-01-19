@@ -14,7 +14,7 @@ function onLoad(){
 	
 		var result = JSON.parse(this.responseText);
 		alert(result.name);
-		document.getElementById("demo").src = result.flags.png;
+		document.getElementById("dep").src = result.flags.png;
 		document.getElementById("name").innerHTML = result.name;
 	}
 	
