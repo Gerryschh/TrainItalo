@@ -37,7 +37,7 @@ List<TrainFactory> factory = (List<TrainFactory>) fm.getAllFactories();%>
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"
 	integrity="sha384-mQ93GR66B00ZXjt0YO5KlohRA5SY2XofN4zfuZxLkoj1gXtW8ANNCe9d5Y3eG5eD"
 	crossorigin="anonymous"></script>
-<script src="./generalJS/searchFlag.js"></script>
+<script type="text/javascript" src="./generalJS/searchFlag.js"></script>
 <!-- CSS only -->
 <link rel="stylesheet" href="css/style.css">
 <title>TrainViewer</title>
@@ -126,9 +126,11 @@ List<TrainFactory> factory = (List<TrainFactory>) fm.getAllFactories();%>
 							if (factoryName.equals("none")){ %>
 							<th scope="col"></th>
 							<% } %>
-							<th id = "dep" scope="col">Partenza {{onLoad()}}</th>
+							<th scope="col">Partenza <img id ="dep" src= "" width="30"
+								height="30" alt="" onLoad="setFlag(<%= session.getAttribute("departureAlphaCode")%>)"> </th>
 							<th scope="col">Ora/Data Partenza</th>
-							<th scope="col">Arrivo</th>
+							<th scope="col">Arrivo <img id ="arr" src= "" width="30"
+								height="30" alt=""></th>
 							<th scope="col">Ora/Data Arrivo</th>
 						</tr>
 					</thead>
