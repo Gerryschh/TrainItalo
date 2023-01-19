@@ -75,7 +75,7 @@
 		    </div>
 		  </div>
 		  <div class="col-8">
-		    <div class="tab-content" id="nav-tabContent">
+		    <div class="ms-container tab-content" id="nav-tabContent">
 		      <div class="tab-pane fade show active" id="list-home" role="tabpanel" aria-labelledby="list-home-list">
 		      	<form action="ModifyProfileServlet" method="POST" class="row g-3">
 		      	<div class="col-6">
@@ -139,7 +139,13 @@
 				  </tbody>
 				</table>
 		      </div>
-		      <div class="tab-pane fade" id="list-messages" role="tabpanel" aria-labelledby="list-messages-list">Logout</div>
+		      <div class="tab-pane fade" id="list-messages" role="tabpanel" aria-labelledby="list-messages-list">
+		      	<h5 class="text-center">Sei sicuro di voler eseguire il logout?</h5>
+		      	<div class="d-flex justify-content-center p-4">
+		      		<form id="logout-form" action="/TrainItalo/LogoutServlet" method="POST">
+					<input class="btn ms-btn p-2 ms-logout dropdown-item" type="submit" value="Logout"></form>
+		      	</div>
+		      </div>
 		    </div>
 		  </div>
 		</div>
