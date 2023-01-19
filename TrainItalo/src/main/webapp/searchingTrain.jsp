@@ -96,12 +96,12 @@ List<TrainFactory> factory = (List<TrainFactory>) fm.getAllFactories();%>
 					System.out.println("BOOKING " + booking);
 					if (booking != null) {
 						if (booking.equals("true")) { %>
-				<div class="countryInfo col-lg-6">
+				<div class="ticketInfo col-lg-3">
 					<h4><label> BIGLIETTO PRENOTATO </label></h4>		
 				</div>
 					<% 
 						} else { %>
-				<div class="countryInfo col-lg-6">
+				<div class="warningInfo col-lg-8">
 					<h4><label> NON PUOI PRENOTARE, HAI GIA PRENOTATO QUESTO BIGLIETTO </label></h4>	
 				</div>
 					<% 
@@ -144,18 +144,17 @@ List<TrainFactory> factory = (List<TrainFactory>) fm.getAllFactories();%>
 						int id = t.getIdTrain();
 						
 						String idString = String.valueOf(id);
-						System.out.println("IDDDDDD " + idString);
 						%>
 							<td scope="<%= id %>"><%= t.getMatTrain() %></td>
 							<% if (factoryName.equals("none")) { 
 								if (t.getFactory().getFactoryName().equals("FrecciaRossa")){ %>
-							<td><img src="./img/frecciarossa_Logo.png" width="105"
+							<td><img src="./img/LogoFactory/frecciarossa.png" width="105"
 								height="105" alt=""></td>
 							<% } else if (t.getFactory().getFactoryName().equals("TreNord")) {%>
-							<td><img src="./img/Trenord_Logo.svg.png" width="100"
+							<td><img src="./img/LogoFactory/trenord.png" width="100"
 								height="100" alt=""></td>
 							<%} else { %>
-							<td><img src="./img/italo logo_2.png" width="80"
+							<td><img src="./img/LogoFactory/italo.png" width="80"
 								height="100" alt=""></td>
 							<%} %>
 
@@ -164,8 +163,13 @@ List<TrainFactory> factory = (List<TrainFactory>) fm.getAllFactories();%>
 							<td scope="<%= id %>"><%= hourDeparture %></td>
 							<td scope="<%= id %>"><%= t.getArrival().getCountryName() %></td>
 							<td scope="<%= id %>"><%= hourArrival %></td>
+							
+							<% if(t.getMatTrain().contains("C")) {%>
+							<td scope="<%= id %>"><input id="<%= id %>" class="btn" type="button" value="Prenota" disabled></td>
+							<% } else { %>
 							<td scope="<%= id %>"><a href="/TrainItalo/BookingTrainServlet?idTrain=<%=idString%>&userEmail=<%=currentUser.getUserMail()%> "><input id="<%= id %>" class="btn"
-								type="button" value="Prenota"></a></td>
+							type="button" value="Prenota"></a></td>
+							<% } %>
 							<% i ++; %>
 						</tr>
 
@@ -184,7 +188,7 @@ List<TrainFactory> factory = (List<TrainFactory>) fm.getAllFactories();%>
 				<% 		}
 			} else { //se non sono approvati allora chiedo
 				if (sd.equals("false") || sd.equals("invalidate")) { %>
-				<div class="countryInfo col-lg-6">
+				<div class="warningInfo col-lg-6">
 					<h5>
 						Forse cercavi come paese di partenza, <strong> <i> <%= departure %>
 						</i>
@@ -194,7 +198,7 @@ List<TrainFactory> factory = (List<TrainFactory>) fm.getAllFactories();%>
 
 				<% } 
 				if(sa.equals("false") || sa.equals("invalidate")) { %>
-				<div class="countryInfo col-lg-6">
+				<div class="warningInfo col-lg-6">
 					<h5>
 						Forse cercavi come paese di arrivo, <strong> <i><%= arrival %>
 						</i>

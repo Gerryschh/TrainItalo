@@ -288,7 +288,14 @@ input:hover {
   background-color: var(--red); 
 }
 
-.countryInfo{
+.ticketInfo{
+	padding: 0.5em;
+	border-style: solid;
+	border-color: rgba(0, 210, 150);
+	background: rgba(127, 255, 212, 0.75);
+}
+
+.warningInfo{
 	padding: 0.5em;
 	border-style: solid;
 	border-color: var(--red);
