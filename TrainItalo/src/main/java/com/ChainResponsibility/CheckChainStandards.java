@@ -14,5 +14,4 @@ public abstract class CheckChainStandards extends CheckChain {
 	};
 	
 	protected abstract boolean compare(String input, String standard);
-	
 }

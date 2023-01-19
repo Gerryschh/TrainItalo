@@ -10,6 +10,7 @@ public abstract class CheckChain {
 	private static Strategy strategy;
 	private AliasManager aliasManager = new AliasManager();
 	private CountryManager countryManager = new CountryManager();
+	private double soglia = 0;
 	
 	public void setNextChain(CheckChain nextChain) {
 		this.nextChain=nextChain;
@@ -22,12 +23,13 @@ public abstract class CheckChain {
 			a.setCountryName(countryManager.getCountry(result));
 			a.setApproved(false);
 			a.setAlgorithm(this.getClass().getSimpleName());
+			a.setThresholdValue(getSoglia());
 			a.setFound(true);
 			aliasManager.addAlias(a);
 			System.out.println("Il risultato è "+result);
 			return result;
 		}
-		//non ho trovato la soluzione, procedo col successivo se c'è
+		//non ho trovato la soluzione, procedo col successivo se è presente
 		if (nextChain!= null)
 			return this.nextChain.check(input);
 		else {
@@ -50,6 +52,14 @@ public abstract class CheckChain {
 	}
 	public void setStrategy(Strategy strategy) {
 		CheckChain.strategy = strategy;
+	}
+	
+	public double getSoglia() {
+		return soglia;
+	}
+
+	public void setSoglia(double soglia) {
+		this.soglia = soglia;
 	}
 	
 }
