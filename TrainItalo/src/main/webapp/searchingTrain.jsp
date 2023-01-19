@@ -4,13 +4,13 @@
 
 <%
 User currentUser = (User) session.getAttribute("user");
-if(currentUser != null)
-{
+if(currentUser != null){
 
 DateFormat dh = new SimpleDateFormat("HH:mm:ss");
 DateFormat dd = new SimpleDateFormat("dd/MM/YYY");
 TrainFactoryManager fm = new TrainFactoryManager();
 List<TrainFactory> factory = (List<TrainFactory>) fm.getAllFactories();%>
+
 
 <!DOCTYPE html>
 <html>
@@ -42,7 +42,7 @@ List<TrainFactory> factory = (List<TrainFactory>) fm.getAllFactories();%>
 <link rel="stylesheet" href="css/style.css">
 <title>TrainViewer</title>
 </head>
-<body class="bg-white">
+<body class="bg-white" >
 
 	<jsp:include page="/menuLogged.jsp"></jsp:include>
 
@@ -116,18 +116,17 @@ List<TrainFactory> factory = (List<TrainFactory>) fm.getAllFactories();%>
 							List<Train> listTrain = new ArrayList(trains);
 							
 				%>
-
-				<table class="table table-striped" >
 				
+				<table class="table table-striped" >
 					<thead>
 						<tr>
 							<th scope="col">Codice treno</th>
 							<% String factoryName = (String) session.getAttribute("train");
-							if (factoryName.equals("none")){ %>
+								if (factoryName.equals("none")){ %>
 							<th scope="col"></th>
 							<% } %>
 							<th scope="col">Partenza <img id ="dep" src= "" width="30"
-								height="30" alt="" onLoad="setFlag(<%= session.getAttribute("departureAlphaCode")%>)"> </th>
+								height="30" alt="" onload="onLoad()"> </th>
 							<th scope="col">Ora/Data Partenza</th>
 							<th scope="col">Arrivo <img id ="arr" src= "" width="30"
 								height="30" alt=""></th>

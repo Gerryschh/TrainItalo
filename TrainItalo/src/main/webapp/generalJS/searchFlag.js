@@ -6,8 +6,11 @@ function getBandiere() {
 	alert("partenza" + searchedDeparture);
 	alert("arrivo" + searchedArrival);
 }
-
-function onLoad(alphaCode){
+/*
+function onLoad(){
+	const dep = document.getElementById("dep").value;
+	const arr = document.getElementById("arr").value;
+	
 	System.out.println("ALPHA CODEE JS= " + alphaCode);
 	const xhttp = new XMLHttpRequest();
 	
@@ -18,15 +21,16 @@ function onLoad(alphaCode){
 		return result.flag.png;
 	}
 	
-	xhttp.open("GET", "https://restcountries.com/v2/alpha/" + alphaCode);
+	xhttp.open("GET", "https://restcountries.com/v2/alpha/" + dep);
+	xhttp.open("GET", "https://restcountries.com/v2/alpha/" + arr);
 	xhttp.send();
 }
 
-function setFlag(alpha){
+function setFlag(){
 	document.getElementById("dep").src = onLoad(alpha);
 }
+*/
 
-/*
 function onLoad(alphaCode){
 	const xhttp = new XMLHttpRequest();
 	
@@ -42,4 +46,3 @@ function onLoad(alphaCode){
 	xhttp.open("GET", "https://restcountries.com/v2/alpha/" + alphaCode);
 	xhttp.send();
 }
-*/
