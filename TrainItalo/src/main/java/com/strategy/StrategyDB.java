@@ -21,16 +21,13 @@ public class StrategyDB implements Strategy{
         for (String s: q.getResultList()) {
             map.put(s, new ArrayList<String>());
         }
-        System.out.print("MAPPAAAAA PRIMA QUERY MQ " + map.size());
         NativeQuery<Object []> mq = session.createSQLQuery("Select country_alias, country_name from alias");
         List<Object[]>  l = mq.list();
-        System.out.println(l.size());
         for(Object[] o: l) { 
             List<String> temp = map.get(((String)o[1]));
             temp.add((String) o[0]);
             map.put((String) o[1], temp);
         }
-        System.out.print("MAPPAAAAA DOPO " + map.size());
         return map;
     }
     

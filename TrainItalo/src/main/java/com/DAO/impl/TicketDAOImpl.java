@@ -8,6 +8,7 @@ import java.util.List;
 import org.hibernate.query.NativeQuery;
 
 import com.DAO.TicketDAO;
+import com.beans.Country;
 import com.beans.Ticket;
 import com.beans.Train;
 import com.beans.User;
@@ -47,9 +48,9 @@ public class TicketDAOImpl extends BaseDAO implements TicketDAO {
 	@Override
 	public Collection<Ticket> getAllByUserMail(String userMail) {
 		Collection<Ticket> ct = new LinkedList <Ticket>();
-		NativeQuery<Object []> mq = super.getSession().createSQLQuery("SELECT t.id_train, t.mat_train, t.departure, t.arrival, t.departure_datetime, t.arrival_datetime"
-				+ "	FROM train t"
-				+ " JOIN ticket tt ON t.id_train = tt.id_train"
+		NativeQuery<Object []> mq = super.getSession().createSQLQuery("SELECT tt.id_ticket, tt.user_mail, t.id_train,  t.departure, t.departure_datetime, t.arrival, t.arrival_datetime, tt.purchase_date"
+				+ " FROM ticket tt"
+				+ " JOIN train t ON tt.id_train = t.id_train"
 				+ " WHERE"
 				+ " tt.user_mail='" + userMail + "'");
 		List<Object[]> tickets = mq.list();
@@ -62,8 +63,16 @@ public class TicketDAOImpl extends BaseDAO implements TicketDAO {
 			t.setUserMail(u);
 			Train train = new Train();
 			train.setIdTrain((Integer) o[2]);
+			Country departure = new Country();
+			departure.setCountryName((String) o[3]);
+			train.setDeparture(departure);
+			train.setDepartureDatetime((Timestamp) o[4]);
+			Country arrival = new Country();
+			arrival.setCountryName((String) o[5]);
+			train.setArrival(arrival);
+			train.setArrivalDatetime((Timestamp) o[6]);
 			t.setIdTrain(train);
-			t.setPurchaseDate((Timestamp) o[3]);
+			t.setPurchaseDate((Timestamp) o[7]);
 			ct.add(t);
 		}
 		return ct;

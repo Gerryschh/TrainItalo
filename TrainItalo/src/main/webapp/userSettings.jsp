@@ -118,14 +118,24 @@
 				  </thead>
 				  <tbody>
 				    <tr>
-				      <th scope="row">1</th>
-				      <td>Mark</td>
-				      <td>Otto</td>
-				      <td>Otto</td>
-				      <td>Otto</td>
-				      <td>Otto</td>
-				      <td>@mdo</td>
+				    <%
+						if (tickets != null && tickets.size() != 0) {
+							Iterator<?> it = tickets.iterator();
+							while (it.hasNext()) {
+								Ticket t = (Ticket) it.next();
+						%>
+				      <th scope="row"><%=t.getIdTicket() %></th>
+				      <td><%=t.getUserMail().getUserMail() %></td>
+				      <td><%=t.getIdTrain().getDeparture().getCountryName() %></td>
+				      <td><%=t.getIdTrain().getDepartureDatetime() %></td>
+				      <td><%=t.getIdTrain().getArrival().getCountryName() %></td>
+				      <td><%=t.getIdTrain().getArrivalDatetime() %></td>
+				      <td><%=t.getPurchaseDate()%></td>
 				    </tr>
+				    <%
+					}
+					}
+					%>
 				  </tbody>
 				</table>
 		      </div>
