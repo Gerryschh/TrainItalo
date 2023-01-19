@@ -103,7 +103,32 @@
 				  </div>
 				</form>
 		      </div>
-		      <div class="tab-pane fade" id="list-profile" role="tabpanel" aria-labelledby="list-profile-list">Visualizza Biglietti</div>
+		      <div class="tab-pane fade" id="list-profile" role="tabpanel" aria-labelledby="list-profile-list">
+		      	<table class="table table-striped">
+				  <thead>
+				    <tr>
+				      <th scope="col">#</th>
+				      <th scope="col">Mail prenotazione</th>
+				      <th scope="col">Paese di partenza</th>
+				      <th scope="col">Paese di arrivo</th>
+				      <th scope="col">Data di partenza</th>
+				      <th scope="col">Data di arrivo</th>
+				      <th scope="col">Data d'acquisto</th>
+				    </tr>
+				  </thead>
+				  <tbody>
+				    <tr>
+				      <th scope="row">1</th>
+				      <td>Mark</td>
+				      <td>Otto</td>
+				      <td>Otto</td>
+				      <td>Otto</td>
+				      <td>Otto</td>
+				      <td>@mdo</td>
+				    </tr>
+				  </tbody>
+				</table>
+		      </div>
 		      <div class="tab-pane fade" id="list-messages" role="tabpanel" aria-labelledby="list-messages-list">Logout</div>
 		    </div>
 		  </div>
