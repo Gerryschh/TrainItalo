@@ -145,24 +145,27 @@ function disegnaCellaSpeciale(i, j, valore) {
 	document.getElementById(id).src = src;
 } 
 
-var barraWidth = 1000; 
+let barraWidth = 1000; 
 
 function timer(){
-
-    barraWidth-=2; 
+	
+	if (barraWidth > 0){
+		
+		barraWidth-=2; 
     
-    document.getElementById("tempo").innerHTML = barraWidth;
-	document.getElementById("tempo").style.width = barraWidth + "px"; 
-
-	if (barraWidth < 300 && barraWidth>100) {
-		var s = document.getElementById("tempo").style; 
-		s.backgroundColor = "#FFA500"; 
+	    document.getElementById("tempo").innerHTML = barraWidth;
+		document.getElementById("tempo").style.width = barraWidth + "px"; 
 	
-	} else if (barraWidth <= 100 && barraWidth>0) {
-		var s = document.getElementById("tempo").style; 
-		s.backgroundColor = "#FF0000"; 
-	
-	} else if (barraWidth<=0){
+		if (barraWidth < 300 && barraWidth>100) {
+			var s = document.getElementById("tempo").style; 
+			s.backgroundColor = "#FFA500"; 
+		
+		} else if (barraWidth <= 100 && barraWidth>0) {
+			var s = document.getElementById("tempo").style; 
+			s.backgroundColor = "#FF0000"; 
+		}
+	}
+	else if (barraWidth<=0) {
 		gameOver(); 
 	}
 	

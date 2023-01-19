@@ -57,7 +57,6 @@ function controllaCella(x, y) {
 			break;
 		default:
 			if (val > 0) { // toccato il serpente
-				alert("Ti sei mangiato le mani, eheheh");
 				gameOver();
 				return false;
 			}
@@ -69,20 +68,12 @@ function controllaCella(x, y) {
 }
 
 function gameOver(){
-	//document.getElementById("punteggio").innerHTML = "Ecco il tuo punteggio:" + energiaWidth;
 	document.getElementById("pianoGioco").innerHTML = "GAME OVER!"; 
 	document.getElementById("scoreGame").value = energiaWidth;
-	// musichetta di gameOver
 	piano = null;
-	//timer1 = setInterval("om1.muovi()", 0);
-	//timer2 = setInterval("om2.muovi()", 0);
-	//timerTempo = setInterval("timer()", 0);
 	document.getElementById("ms-score-section").classList.remove("d-none");
-	document.getElementById("btnPlay").classList.add("d-none");
-	clearInterval(timer1, 0);
-	clearInterval(timer2, 0);
-	clearInterval(timerTempo, 0);
-	//metodo per httprequest 
+	document.getElementById("playButton").classList.add("d-none");
+	document.getElementById("ms-gioco-section").classList.add("d-none");
 } 
 
 

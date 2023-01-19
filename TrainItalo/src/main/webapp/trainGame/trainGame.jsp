@@ -34,84 +34,92 @@
 </head>
 <body id="b01" onkeydown="checkKeyDown(event);" onkeypress="checkKeyPress(event)">
 	<jsp:include page="../menuLogged.jsp"></jsp:include>
-	<div id="ms-gioco-section" class="container">
-		<input type="button" onclick="play()" value="Play" class="btnPlay" id="playButton"></input>
-		<!-- <audio id="myAudio" src="audio1/videoplayback.mp3" loop></audio> -->
-		<br><br>
-		<span id="punteggio"></span>
-		<div>
-			<span>Punteggio:</span>
-			<div class="rounded-pill" id="energia" style="width:1px; background-color:rgb(0,0,255)">
-				<span>0</span>
+	<div id="ms-gioco-section" class="ms-container">
+		<div class="text-center">
+		
+			<input type="button" onclick="play()" value="Play" class="btnPlay" id="playButton"></input>
+			<!-- <audio id="myAudio" src="audio1/videoplayback.mp3" loop></audio> -->
+			<br><br>
+			<span id="punteggio"></span>
+			<div id="counterSection" class="text-center d-flex flex-column align-items-center">
+				<span>Punteggio:</span>
+				<div class="rounded-pill ms-energy" id="energia">
+					<span>0</span>
+				</div>
+	
+				<div class="rounded-pill ms-time" id="tempo">
+					<span id="valTempo">1000</span>
+				</div>
+				<br>
 			</div>
-			<br>
-
-			<div class="rounded-pill" id="tempo" style="width:650px; background-color:rgb(0,255,0)">
-				<span id="valTempo">1000</span>
+			<div id="pianoGioco" style="width: 650px;">
+				
 			</div>
-			<br>
+		
 		</div>
-		<div id="pianoGioco" style="width: 650px;">
-			
-		</div>
+		
 	</div>
-	<br><br>
 	
-	<div id="ms-score-section" class="d-none">
-		<div class="row justify-content-around">
-		
-			<div class="card card-login text-center" style="width: 20rem;">
+	<div id="ms-score-section" class="ms-container d-none">
 	
-		<!-- FORM PER L'INVIO DEL PUNTEGGIO AL DB -->
-		<div id="scoreDiv">
-			<form id="scoreForm" action="/TrainItalo/TrainGameScoreServlet" method="POST">
-				<label for="usernameGame">Username: </label><br/>
-				<input id="usernameGame" name="usernameGame" value="<%=currentUser.getUserName() %>" ></input><br/>
-				<label for="emailUser">Email:</label><br/>
-				<input id="emailUser" name="emailUser" value="<%=currentUser.getUserMail() %>"></input><br/>
-				<label for="scoreGame">Score:</label><br/>
-				<input id="scoreGame" name="scoreGame" value="${scoreGame}"></input><br/><br/>
-				<input class="btnRegScore" type="submit" value="Registra punteggio">
-			</form>
-			<br/>
-			<input type="button" onclick="play()" value="Riprova" class="btnPlay"></input>
-		</div>
-		</div>
+		<div class="ms-loseBanner text-center">
+			<h2>Mi dispiace <i class="far fa-frown"></i></h4>
+			<span>Puoi salvare il tuo punteggio o ricominciare una nuova partita!</span>
 		</div>
 		
-		<div class="container" id="leaderboard">
-			<h1 class="py-4 text-center">LEADERBOARD</h1>
-			<!-- FORM PER LA VISUALIZZAZIONE DELLA LEADERBOARD. INIZIALMENTE LO SCORE DELL'UTENTE NON è VISIBILE.
-			 SE L'UTENTE REGISTRA IL PUNTEGGIO BISOGNA RIAGGIORNARE LA LEADERBOARD -->
-				<table class="table table-white table-striped">
-					<thead>
-						<tr>
-							<th scope="col">Player</th>
-							<th scope="col">Score</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr>
-							<% 
-								if(users != null && users.size() != 0) {
-									Iterator<?> it = users.iterator();
-									while(it.hasNext()) {
-										User u = (User) it.next();
-							%>
-							<td><%=u.getUserName()%></td>
-							<td><%=u.getTrainGameScore()%></td>
-						</tr>
-							<%
+		<div class="d-flex justify-content-around my-5">
+			<div class="col-5 card card-login text-center" style="width: 20rem;">
+		
+				<!-- FORM PER L'INVIO DEL PUNTEGGIO AL DB -->
+				<div id="scoreDiv" class="p-2">
+					<form id="scoreForm" action="/TrainItalo/TrainGameScoreServlet" method="POST">
+						<label for="usernameGame">Username: </label><br/>
+						<input id="usernameGame" name="usernameGame" value="<%=currentUser.getUserName() %>" ></input><br/>
+						<label for="emailUser">Email:</label><br/>
+						<input id="emailUser" name="emailUser" value="<%=currentUser.getUserMail() %>"></input><br/>
+						<label for="scoreGame">Score:</label><br/>
+						<input id="scoreGame" name="scoreGame" value="${scoreGame}"></input><br/><br/>
+						<input class="btnRegScore" type="submit" value="Registra punteggio">
+					</form>
+					<br/>
+					<a type="button" class="btn ms-restartBtn" href="/TrainItalo/trainGame/trainGame.jsp">Riprova</a>
+				</div>
+			</div>
+			
+			<div class="col-7" id="leaderboard">
+				<h1 class="py-4 text-center">LEADERBOARD</h1>
+				<!-- FORM PER LA VISUALIZZAZIONE DELLA LEADERBOARD. INIZIALMENTE LO SCORE DELL'UTENTE NON è VISIBILE.
+				 SE L'UTENTE REGISTRA IL PUNTEGGIO BISOGNA RIAGGIORNARE LA LEADERBOARD -->
+					<table class="table table-white table-striped">
+						<thead>
+							<tr>
+								<th scope="col">Player</th>
+								<th scope="col">Score</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<% 
+									if(users != null && users.size() != 0) {
+										Iterator<?> it = users.iterator();
+										while(it.hasNext()) {
+											User u = (User) it.next();
+								%>
+								<td><%=u.getUserName()%></td>
+								<td><%=u.getTrainGameScore()%></td>
+							</tr>
+								<%
+										}
+		
 									}
-	
-								}
-							%>
-							
-					</tbody>
-				</table>
+								%>
+								
+						</tbody>
+					</table>
+			</div>
 		</div>
 		
-	
+			
 	</div>
 
 

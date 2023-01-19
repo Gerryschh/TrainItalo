@@ -346,10 +346,21 @@ img {
 
 /*TRAIN GAME*/
 
-.container {
-    margin: 0 auto;
-    width: 40%;
-    text-align: center;
+#ms-gioco-section{
+	scroll-behavior: inherit;
+}
+
+.ms-energy{
+	background: blue;
+	color: var(--white);
+	padding: 5px;
+	margin: 10px 0;
+	
+}
+
+.ms-time {
+	width: 650px;
+	background-color: rgb(0,255,0);
 }
 
 .btnPlay {
@@ -408,6 +419,21 @@ img {
 
 audio {
     display: none;
+}
+
+.ms-restartBtn {
+	border: 1px solid black;
+}
+
+.ms-loseBanner{
+	background-color: var(--red);
+	color: var(--white);
+	padding: 1rem;
+	border-radius: 10px;
+}
+
+#counterSection {
+	margin: 0 auto;
 }
 
 /*SEARCH TRAIN*/
