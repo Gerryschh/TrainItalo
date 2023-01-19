@@ -1,48 +1,33 @@
-function getBandiere() {
-	
-	var searchedDeparture = document.getElementById("departure").value;
-	var searchedArrival = document.getElementById("arrival").value;
-	
-	alert("partenza" + searchedDeparture);
-	alert("arrivo" + searchedArrival);
-}
-/*
-function onLoad(){
+
+function loadFlag(){
 	const dep = document.getElementById("dep").value;
 	const arr = document.getElementById("arr").value;
 	
-	System.out.println("ALPHA CODEE JS= " + alphaCode);
+	/*prima*/
+	
 	const xhttp = new XMLHttpRequest();
 	
 	xhttp.onload = function() {
+  
+	    var result = JSON.parse(this.responseText);
+		
+	    document.getElementById("depImg").src = result.flags.png;
+  	}
+  
+  xhttp.open("GET", "https://restcountries.com/v2/alpha/" + dep);
+  xhttp.send();
+  
+  /*seconda*/
+  
+  const xhttp2 = new XMLHttpRequest();
 	
-		var result = JSON.parse(this.responseText);
-		//alert(result.name);
-		return result.flag.png;
-	}
+	xhttp2.onload = function() {
+  
+    var result2 = JSON.parse(this.responseText);
 	
-	xhttp.open("GET", "https://restcountries.com/v2/alpha/" + dep);
-	xhttp.open("GET", "https://restcountries.com/v2/alpha/" + arr);
-	xhttp.send();
-}
-
-function setFlag(){
-	document.getElementById("dep").src = onLoad(alpha);
-}
-*/
-
-function onLoad(alphaCode){
-	const xhttp = new XMLHttpRequest();
-	
-	xhttp.onload = function() {
-	
-		var result = JSON.parse(this.responseText);
-		//alert(result.name);
-		document.getElementById("dep").src = result.flags.png;
-		document.getElementById("arr").src = result.flags.png;
-		//document.getElementById("name").innerHTML = result.name;
-	}
-	
-	xhttp.open("GET", "https://restcountries.com/v2/alpha/" + alphaCode);
-	xhttp.send();
+    document.getElementById("arrImg").src = result2.flags.png;
+  }
+  
+  xhttp2.open("GET", "https://restcountries.com/v2/alpha/" + arr);
+  xhttp2.send();
 }

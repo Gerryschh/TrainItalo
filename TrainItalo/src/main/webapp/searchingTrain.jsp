@@ -42,7 +42,7 @@ List<TrainFactory> factory = (List<TrainFactory>) fm.getAllFactories();%>
 <link rel="stylesheet" href="css/style.css">
 <title>TrainViewer</title>
 </head>
-<body class="bg-white" >
+<body class="bg-white" onload="loadFlag()">
 
 	<jsp:include page="/menuLogged.jsp"></jsp:include>
 
@@ -117,6 +117,13 @@ List<TrainFactory> factory = (List<TrainFactory>) fm.getAllFactories();%>
 							
 				%>
 				
+				<div class="d-none">
+				
+					<input id="dep" type="hidden" value="<%=session.getAttribute("departureAlphaCode") %>">
+					<input id="arr" type="hidden" value="<%=session.getAttribute("arrivalAlphaCode") %>">
+				
+				</div>
+				
 				<table class="table table-striped" >
 					<thead>
 						<tr>
@@ -125,10 +132,10 @@ List<TrainFactory> factory = (List<TrainFactory>) fm.getAllFactories();%>
 								if (factoryName.equals("none")){ %>
 							<th scope="col"></th>
 							<% } %>
-							<th scope="col">Partenza <img id ="dep" src= "" width="30"
-								height="30" alt="" onload="onLoad()"> </th>
+							<th scope="col">Partenza <img id ="depImg" src= "" width="30"
+								height="30" alt=""> </th>
 							<th scope="col">Ora/Data Partenza</th>
-							<th scope="col">Arrivo <img id ="arr" src= "" width="30"
+							<th scope="col">Arrivo <img id ="arrImg" src= "" width="30"
 								height="30" alt=""></th>
 							<th scope="col">Ora/Data Arrivo</th>
 						</tr>
