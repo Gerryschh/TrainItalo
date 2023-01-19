@@ -14,8 +14,8 @@ public class JaroDistance extends CheckChainStandards{
 	@Override
 	protected boolean compare(String input, String standard) {
 		double distance = jaroDistanceAlgorithm(standard, input);
-		//System.out.println(this.getClass().getSimpleName() + " " + distance + " " + standard + "-" + input);
-		if (distance<0.85&& distance>=0.75)
+		super.setSoglia(distance);
+		if (distance<0.85 && distance>=0.70)
 			System.out.println("Forse cercavi "+ standard+"?");
 		return (distance < threshold) ? false : true;
 	}

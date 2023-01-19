@@ -63,3 +63,20 @@ CREATE TABLE userr (
   is_admin BOOLEAN DEFAULT FALSE NOT NULL,
   train_game_score INT DEFAULT 0 NOT NULL
 );
+
+DROP TABLE IF EXISTS ticket;
+CREATE TABLE ticket (
+	id_ticket INT PRIMARY KEY AUTO_INCREMENT,
+	user_mail VARCHAR(50) NOT NULL,
+	id_train INT NOT NULL,
+	purchase_date DATETIME NOT NULL,
+	FOREIGN KEY (user_mail) REFERENCES userr(user_mail)
+		ON UPDATE CASCADE
+  		ON DELETE CASCADE,
+  	FOREIGN KEY (id_train) REFERENCES train(id_train)
+		ON UPDATE CASCADE
+  		ON DELETE CASCADE,
+  CONSTRAINT unique_ticket UNIQUE (user_mail,id_train)
+);
+  		
+	

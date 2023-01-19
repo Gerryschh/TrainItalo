@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+ "-//Hibernate/Hibernate Mapping DTD 5.3//EN"
+ "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.beans.Ticket" table="ticket">
+		<id name="idTicket" column="id_ticket">
+			<generator class="increment"></generator>
+		</id>
+		<properties name="unique_ticket" unique="true">
+			<many-to-one name="idTrain" class="com.beans.Train"
+				column="id_train"></many-to-one>
+			<many-to-one name="userMail" class="com.beans.User"
+				column="user_mail"></many-to-one>
+			<property name="purchaseDate" column="purchase_date"></property>
+		</properties>
+	</class>
+</hibernate-mapping>

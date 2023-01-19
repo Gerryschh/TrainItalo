@@ -32,14 +32,14 @@ public abstract class BaseDAO {
 		this.session.beginTransaction();
 		this.session.save(b);
 		this.session.getTransaction().commit();
-		this.session.close();
+		//this.session.close();
 	}
 
 	protected Bean get(Class<? extends Bean> class1, String id) {
 		this.session.beginTransaction();
 		Bean b = this.session.get(class1, id);
 		this.session.getTransaction().commit();
-		this.session.close();
+		//this.session.close();
 		return b;
 	}
 	
@@ -47,7 +47,7 @@ public abstract class BaseDAO {
 		this.session.beginTransaction();
 		Bean b = this.session.get(class1, id);
 		this.session.getTransaction().commit();
-		this.session.close();
+		//this.session.close();
 		return b;
 	}
 }

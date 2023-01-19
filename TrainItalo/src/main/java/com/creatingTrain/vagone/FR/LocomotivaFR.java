@@ -5,7 +5,7 @@ import com.creatingTrain.treno.Locomotiva;
 public class LocomotivaFR implements Locomotiva {
 
 	private final int potenzaFR=1000;
-	private final int pesoFR=100, pesoTrainabileFR=3000;
+	private final int pesoFR=70, pesoTrainabileFR=3000;
 	
 
 	@Override

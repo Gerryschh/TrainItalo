@@ -7,6 +7,7 @@ public class Alias implements Bean {
 	private String algorithm;
 	private double thresholdValue;
 	private boolean found;
+	
 	public String getCountryAlias() {
 		return countryAlias;
 	}

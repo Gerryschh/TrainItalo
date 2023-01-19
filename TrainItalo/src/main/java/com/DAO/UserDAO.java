@@ -1,6 +1,7 @@
 package com.DAO;
 
 import java.util.Collection;
+import java.util.Date;
 
 import com.beans.User;
 
@@ -14,5 +15,6 @@ public interface UserDAO {
 	public User getByMailAndPsw(String userMail, String userPassword); //Get user by mail and password
 	public User getUsernameAndScoreByMail(String userMail);
 	public void updateScoreWhenHigher(String userMail, int trainGameScore);
+	public void update(String userMail, String userName, String userSurname, Date userBirthdate);
 	
 }

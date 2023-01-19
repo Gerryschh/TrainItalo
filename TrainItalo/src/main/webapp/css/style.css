@@ -9,12 +9,24 @@
 	width: 90%;
 }
 
+.btn{
+	color: var(--white);
+	background-color: var(--red);
+	border: 1px solid var(--red);
+}
+
+.btn:hover {
+	color: var(--red);
+	border: 1px solid var(--red);
+}
+
 /*LANDING PAGE*/
 
 :root {
 	--red: #a6160a;
 	--white: #ffffff;
 	--redTenue: rgba(166, 22, 10, 0.775);
+	--grayList: #3e3f46;
 }
 
 /*NAVBAR*/
@@ -185,11 +197,152 @@ img {
     color: var(--white);
 }
 
-/*INSERT TRAIN*/
+/*ADMIN*/
 
+.ms-admin-page-body{
+	background-image: url("../img/train_italo.jpg");
+	background-repeat: no-repeat;
+	  background-attachment: fixed;
+	  background-position: center;
+	  background-size: cover;
+}
 
+.ms-list-admin {
+	min-height: 70vh;
+}
 
+.ul-list-admin {
+	position: relative;
+	transform: skewY(-15deg);
+}
 
+.ul-list-admin .li-list-admin {
+	position: relative;
+	list-style: none;
+	width: 200px;
+	background: var(--grayList);
+	padding: 15px;
+	transition: 0.5s;
+	z-index: calc(1 * var(--i))
+}
+
+.ul-list-admin .li-list-admin:hover {
+	transform: translateX(-50px);
+	background: var(--red);
+}
+
+.ul-list-admin .li-list-admin::before {
+	content: '';
+	position: absolute;
+	top: 0;
+	left: -40px;
+	width: 40px;
+	height: 100%;
+	filter: brightness(0.7);
+	background: var(--grayList);
+	transform-origin: right;
+	transform: skewY(45deg);
+	
+}
+
+.ul-list-admin .li-list-admin:hover::before {
+	filter: brightness(0.7);
+	background: var(--red);
+}
+
+.ul-list-admin .li-list-admin::after {
+	content: '';
+	position: absolute;
+	top: -40px;
+	left: 0;
+	width: 100%;
+	height: 40px;
+	background: var(--redTenue);
+	filter: brightness(0.9);
+	transform-origin: bottom;
+	transform: skewX(45deg);
+}
+
+.ul-list-admin .li-list-admin:hover::after {
+	filter: brightness(0.9);
+	background: var(--red);
+}
+
+.ul-list-admin .li-list-admin a {
+	text-decoration: none;
+	color: var(--white);
+	display: block;
+	text-transform: uppercase;
+	letter-spacing: 0.05em;
+	transition: 0.5s;
+}
+
+.ul-list-admin .li-list-admin:hover a {
+	color: var(--white);
+}
+
+.ul-list-admin .li-list-admin:last-child::after {
+	box-shadow: -200px 200px 20px rgba(0,0,0,0.25);
+}
+
+.ul-list-admin li span{
+	position: absolute;
+	top: 0;
+	left: -40px;
+	width: 40px;
+	height: 100%;
+	transform-origin: right;
+	transform: skewY(45deg);
+	transition: 0.5s;
+	display:flex;
+	justify-content: center;
+	align-items: center;
+	opacity: 0.5;
+	font-size: 1.25em;
+}
+
+.ul-list-admin li:hover span{
+	opacity: 1;
+}
+
+.ms-arrow{
+	color: var(--white);
+	font-size: 2rem;
+	margin-left: 10px;
+}
+
+#ms-card-admin {
+	background: var(--red);
+	padding: 15px;
+	font-size: 1.1rem;
+	width: 20%;
+}
+
+#ms-card-admin .card-body p {
+	background: var(--red);
+	color: var(--white);
+	font-style: italic;
+}
+
+/*USER SETTINGS*/
+
+.ms-setting-list a {
+	background-color: var(--white);
+	color: var(--red);
+	border: 1px solid var(--red);
+}
+
+.ms-setting-list a.active {
+	background-color: var(--red);
+	color: var(--white);
+	border: 1px solid var(--red);
+}
+
+.ms-setting-list a:hover {
+	background-color: var(--red);
+	color: var(--white);
+	border: 1px solid var(--red);
+}
 
 /*TRAIN GAME*/
 
@@ -257,6 +410,62 @@ audio {
     display: none;
 }
 
+/*SEARCH TRAIN*/
+.searchCard {
+    padding: 1%;
+}
+
+.searchCard > .card{
+	padding: 1%;
+	box-shadow: 3px 3px 3px var(--red);
+  	border-color: var(--red);
+  	margin-right: auto;
+}
+
+.trainsContainer {
+    text-align: left;
+    padding: 1%;
+}
+
+h5 {
+	text-align: left;
+	top: 5px;
+}
+
+.trainsContainer table{
+	margin: 2%;
+}
+
+.search-item {
+    padding: 3%;
+    width: 90%;
+    border-radius: 7px;
+}
+
+.inputText {
+	height: 20%;
+	padding: 6px;
+	border-radius: 7px;
+	border: 1px solid;
+}
+
+input:hover { 
+  background-color: var(--red); 
+}
+
+.ticketInfo{
+	padding: 0.5em;
+	border-style: solid;
+	border-color: rgba(0, 210, 150);
+	background: rgba(127, 255, 212, 0.75);
+}
+
+.warningInfo{
+	padding: 0.5em;
+	border-style: solid;
+	border-color: var(--red);
+	background: var(--redTenue);
+}
 
 /* LOGIN */
 .card-login {

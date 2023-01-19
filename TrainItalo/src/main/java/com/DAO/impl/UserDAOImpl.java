@@ -1,16 +1,11 @@
 package com.DAO.impl;
 
-import com.beans.Country;
 import com.beans.User;
-
 import java.util.Collection;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
-
 import org.hibernate.query.NativeQuery;
-import org.hibernate.query.Query;
-
 import com.DAO.UserDAO;
 
 public class UserDAOImpl extends BaseDAO implements UserDAO {
@@ -120,5 +115,16 @@ public class UserDAOImpl extends BaseDAO implements UserDAO {
 			super.getSession().getTransaction().commit();
 			super.getSession().close();
 		}
+	}
+
+	@Override
+	public void update(String userMail, String userName, String userSurname, Date userBirthdate) {
+		super.getSession().beginTransaction();
+		User u = this.getSession().get(User.class, userMail);
+		u.setUserName(userName);
+		u.setUserSurname(userSurname);
+		u.setUserBirthdate(userBirthdate);
+		super.getSession().update(u);
+		super.getSession().getTransaction().commit();
 	}
 }
