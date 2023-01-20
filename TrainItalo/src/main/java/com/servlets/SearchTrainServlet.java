@@ -73,16 +73,14 @@ public class SearchTrainServlet extends HttpServlet{
 		if(departureRes != null) {
 			Country c = cm.getCountry(departureRes);
 			if(!trovatoDep) {
-				Alias departureBean = am.getAlias(departureRes);
-				if(departureBean != null) {
-					if(departureBean.isApproved()) {
-						session.setAttribute("statusDeparture", "true");
-						session.setAttribute("departure", departureRes);
-						session.setAttribute("departureAlphaCode", c.getAlpha2code());
-					} else {
-						session.setAttribute("statusDeparture", "false");
-						session.setAttribute("departure", departureRes);
-					}
+				Alias departureBean = am.getAlias(departure);
+				if(departureBean == null || !departureBean.isApproved()) {
+					session.setAttribute("statusDeparture", "false");
+					session.setAttribute("departure", departureRes);
+				} else {
+					session.setAttribute("statusDeparture", "true");
+					session.setAttribute("departure", departureRes);
+					session.setAttribute("departureAlphaCode", c.getAlpha2code());
 				}			
 			} else {
 				session.setAttribute("statusDeparture", "true");
@@ -95,18 +93,16 @@ public class SearchTrainServlet extends HttpServlet{
 
 
 		if(arrivalRes != null) {
-			Country c = cm.getCountry(arrival);
+			Country c = cm.getCountry(arrivalRes);
 			if(!trovatoArr) {
-				Alias arrivalBean = am.getAlias(arrivalRes);
-				if(arrivalBean != null) {
-					if(arrivalBean.isApproved()) {
-						session.setAttribute("statusArrival", "true");
-						session.setAttribute("arrival", arrivalRes);
-						session.setAttribute("arrivalAlphaCode", c.getAlpha2code());
-					} else {
-						session.setAttribute("statusArrival", "false");
-						session.setAttribute("arrival", arrivalRes);
-					}
+				Alias arrivalBean = am.getAlias(arrival);
+				if(arrivalBean == null || !arrivalBean.isApproved()) {
+					session.setAttribute("statusArrival", "false");
+					session.setAttribute("arrival", arrivalRes);
+				} else {
+					session.setAttribute("statusArrival", "true");
+					session.setAttribute("arrival", arrivalRes);
+					session.setAttribute("arrivalAlphaCode", c.getAlpha2code());
 				}
 			} else {
 				session.setAttribute("statusArrival", "true");

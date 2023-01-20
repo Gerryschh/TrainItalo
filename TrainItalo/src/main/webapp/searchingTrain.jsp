@@ -214,9 +214,8 @@ List<TrainFactory> factory = (List<TrainFactory>) fm.getAllFactories();%>
 					</h5>
 				</div>
 				<% }%>
-				<% }%>
-				<% 
-				if(sd == null || sd.equals("invalidate")){ %>
+			<% }%>
+			<% if(sd.equals("invalidate")){ %>
 
 					<div class="noTrainMsg warningInfo col-lg-6">
 						<h3> Il paese di partenza inserito non e' stato trovato </h3>
@@ -226,7 +225,7 @@ List<TrainFactory> factory = (List<TrainFactory>) fm.getAllFactories();%>
 					
 				}
 				
-				if(sa == null || sa.equals("invalidate")){%>
+				if(sa.equals("invalidate")){%>
 
 				<div class="noTrainMsg warningInfo col-lg-6">
 					<h3> Il paese di arrivo inserito non e' stato trovato </h3>
@@ -236,8 +235,8 @@ List<TrainFactory> factory = (List<TrainFactory>) fm.getAllFactories();%>
 					
 				}
 				%>
-				<% } %>
-				
+			<% } %>
+			
 			</div>
 		</div>
 
