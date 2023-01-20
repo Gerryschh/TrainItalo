@@ -31,7 +31,7 @@ if(currentUser != null && currentUser.isAdmin())
 <!-- SCRIPT -->
 	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js" integrity="sha384-mQ93GR66B00ZXjt0YO5KlohRA5SY2XofN4zfuZxLkoj1gXtW8ANNCe9d5Y3eG5eD" crossorigin="anonymous"></script>
-<title>TrainViewer</title>
+<title>Trainterland - Lista Paesi</title>
 </head>
 <body class="bg-white">
 
@@ -41,13 +41,13 @@ if(currentUser != null && currentUser.isAdmin())
 
 	<div class="container">
 
-		<h1 class="py-4 text-center">Country Table</h1>
+		<h1 class="py-4 text-center">Tabella Paesi</h1>
 
 		<table class="table table-white table-striped text-center">
 			<thead>
 				<tr>
-					<th scope="col">Country</th>
-					<th scope="col">Alpha Code</th>
+					<th scope="col">Paese</th>
+					<th scope="col">Codice Alpha</th>
 				</tr>
 			</thead>
 			<tbody>

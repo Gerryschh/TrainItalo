@@ -151,5 +151,9 @@
 }
 
 .removeOptionCLass {
-	color: black;
+	color: var(--otherRed);
+}
+
+.removeOptionCLass:hover {
+	color: var(--red);
 }
