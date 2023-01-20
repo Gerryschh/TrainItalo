@@ -7,9 +7,14 @@
 	{
 		TicketManager tm = new TicketManager();
 		Collection<?> tickets = (Collection<?>) tm.getAllTicketsByMail(currentUser.getUserMail());
-		Date birthdate = currentUser.getUserBirthdate();
+		Date birthdate = null;
+		String birthdateString = null;
+		if(currentUser.getUserBirthdate() != null)
+		{
+		birthdate = currentUser.getUserBirthdate();
 		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-		String birthdateString = format.format(birthdate);
+		birthdateString = format.format(birthdate);
+		}
 %>
 <!DOCTYPE html>
 <html>

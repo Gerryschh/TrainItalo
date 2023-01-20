@@ -8,8 +8,6 @@ if(currentUser != null && currentUser.isAdmin())
 {
 	AliasManager am = new AliasManager();
 	Collection<?> aliases = (Collection<?>) am.getAllUnapprovedAliases();
-	CountryManager cm = new CountryManager();
-	Collection<?> countries = (Collection<?>) cm.getAllCountries();
 %>
 <!DOCTYPE html>
 <html>
@@ -40,7 +38,7 @@ if(currentUser != null && currentUser.isAdmin())
 	<div class="ms-container">
 		<h1 class="py-4 text-center">Alias Table</h1>
 		<form action="checkAliases" method="GET">
-			<table class="table table-striped">
+			<table class="table table-striped text-center">
 				<thead>
 					<tr>
 						<th scope="col">Alias</th>
@@ -48,6 +46,7 @@ if(currentUser != null && currentUser.isAdmin())
 						<th scope="col">Algoritmo</th>
 						<th scope="col">Soglia</th>
 						<th scope="col">Approved</th>
+						<th scope="col">Cancella</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -57,6 +56,7 @@ if(currentUser != null && currentUser.isAdmin())
 							Iterator<?> it = aliases.iterator();
 							while (it.hasNext()) {
 								Alias a = (Alias) it.next();
+								if(a.isFound()) {
 						%>
 						<td><%=a.getCountryAlias()%></td>
 						<td><%=a.getCountryName().getCountryName()%></td>
@@ -64,8 +64,10 @@ if(currentUser != null && currentUser.isAdmin())
 						<td><%=a.getThresholdValue()%></td>
 						<td><input type="checkbox" name="checkAlias"
 							value="<%=a.getCountryAlias()%>"></td>
+						<td><a class="removeOptionCLass" href="removeAlias?aliasRemove=<%=a.getCountryAlias()%>"><i class="fas fa-trash-alt"></i></a></td>
 					</tr>
 					<%
+								}
 					}
 					}
 					%>

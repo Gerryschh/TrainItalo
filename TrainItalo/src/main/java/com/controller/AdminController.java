@@ -33,7 +33,7 @@ public class AdminController {
 	}
 
 	@GetMapping("/checkAliases")
-	public String checkAliases(@WebParam String[] checkAlias) {
+	public String checkAliases(@WebParam String[] checkAlias, @WebParam String selectPaesiAlias) {
 		if(checkAlias == null)
 		{
 			return "aliasApproval";
@@ -61,10 +61,24 @@ public class AdminController {
 			msg = "Treno con matricola " + inputMatricolaTreno + " aggiunto con successo";
 		}
 		catch (Exception e) {
-			msg = "Errore nell'aggiunta del treno con matricola " + inputMatricolaTreno;
+			msg = "Errore nell'aggiunta del treno con matricola " + inputMatricolaTreno + "\n" + e.getMessage();;
 			model.addAttribute("msg", msg);
 		}
 		return "insertTrain";
+	}
+	
+	@GetMapping("/removeTrain")
+	public String removeTrain(@WebParam int trainRemove) {
+		
+		tm.removeTrain(trainRemove);
+		return "trainList";
+	}
+	
+	@GetMapping("/removeAlias")
+	public String checkAliases(@WebParam String aliasRemove) {
+		
+		am.removeAlias(aliasRemove);
+		return "aliasApproval";
 	}
 
 	@GetMapping("/trainList")

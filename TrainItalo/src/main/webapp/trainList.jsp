@@ -34,7 +34,7 @@ if(currentUser != null && currentUser.isAdmin())
 	
 	<div class="ms-container">
 		<h1 class="py-4 text-center">TrainList</h1>
-			<table class="table table-striped">
+			<table class="table table-striped text-center">
 				<thead>
 					<tr>
 						<th scope="col">ID</th>
@@ -44,6 +44,7 @@ if(currentUser != null && currentUser.isAdmin())
 						<th scope="col">Arrivo</th>
 						<th scope="col">Data e ora Partenza</th>
 						<th scope="col">Data e ora Arrivo</th>
+						<th scope="col">Rimuovi</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -61,6 +62,7 @@ if(currentUser != null && currentUser.isAdmin())
 						<td><%=t.getArrival().getCountryName()%></td>
 						<td><%=t.getDepartureDatetime()%></td>
 						<td><%=t.getArrivalDatetime()%></td>
+						<td><a class="removeOptionCLass" href="removeTrain?trainRemove=<%=t.getIdTrain()%>"><i class="fas fa-trash-alt"></i></a></td>
 					</tr>
 					<%
 					}

@@ -1,6 +1,5 @@
 package com.ChainResponsibility;
 
-import com.ChainResponsibility.algorithm.EqualsInputCS;
 import com.ChainResponsibility.algorithm.EqualsStandardCS;
 import com.beans.Alias;
 import com.manager.AliasManager;
@@ -41,7 +40,7 @@ public abstract class CheckChain {
 			Alias a = new Alias();
 			a.setCountryAlias(input);
 			a.setCountryName(null);
-			a.setAlgorithm(null);
+			a.setAlgorithm("-");
 			a.setThresholdValue(0);
 			a.setFound(false);
 			aliasManager.addAlias(a);

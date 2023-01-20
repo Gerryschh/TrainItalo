@@ -31,5 +31,9 @@ public class AliasManager {
 	public void approveAlias(String[] aliases) {
 		aliasDAO.approveAlias(aliases);
 	}
+	
+	public void removeAlias(String aliasRemove) {
+		aliasDAO.removeAlias(aliasRemove);
+	}
 		
 }

@@ -43,7 +43,7 @@ if(currentUser != null && currentUser.isAdmin())
 
 		<h1 class="py-4 text-center">Country Table</h1>
 
-		<table class="table table-white table-striped">
+		<table class="table table-white table-striped text-center">
 			<thead>
 				<tr>
 					<th scope="col">Country</th>

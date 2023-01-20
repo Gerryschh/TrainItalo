@@ -9,6 +9,7 @@ import java.util.List;
 import org.hibernate.query.NativeQuery;
 
 import com.DAO.TrainDAO;
+import com.beans.Alias;
 import com.beans.Country;
 import com.beans.Train;
 import com.beans.TrainFactory;
@@ -106,5 +107,13 @@ public class TrainDAOImpl extends BaseDAO implements TrainDAO {
 			ct.add(t);
 		}
 		return ct;
+	}
+	
+	@Override
+	public void removeTrain(int trainRemove) {
+		super.getSession().beginTransaction();
+		Train t = this.getSession().get(Train.class, trainRemove);
+		super.getSession().remove(t);
+		super.getSession().getTransaction().commit();
 	}
 }

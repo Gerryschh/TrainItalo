@@ -54,7 +54,6 @@ public class AliasDAOImpl extends BaseDAO implements AliasDAO {
 			super.getSession().update(a);
 		}
 		super.getSession().getTransaction().commit();
-		super.getSession().close();
 	}
 
 	@Override
@@ -76,5 +75,13 @@ public class AliasDAOImpl extends BaseDAO implements AliasDAO {
 			ca.add(a);
 		}
 		return ca;
+	}
+
+	@Override
+	public void removeAlias(String aliasRemove) {
+		super.getSession().beginTransaction();
+		Alias a = this.getSession().get(Alias.class, aliasRemove);
+		super.getSession().remove(a);
+		super.getSession().getTransaction().commit();
 	}
 }
