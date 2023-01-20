@@ -86,11 +86,13 @@ List<TrainFactory> factory = (List<TrainFactory>) fm.getAllFactories();%>
 			</div>
 			<div class="trainsContainer col-lg-9">
 				<%
-			String sd = (String) session.getAttribute("statusDeparture");
-			String sa = (String) session.getAttribute("statusArrival");
-			String departure = (String) session.getAttribute("departure");
-			String arrival = (String) session.getAttribute("arrival");
-
+				String sd = (String) session.getAttribute("statusDeparture");
+				String sa = (String) session.getAttribute("statusArrival");
+				String departure = (String) session.getAttribute("departure");
+				String arrival = (String) session.getAttribute("arrival");
+				
+				System.out.println("SD -------> " + sd);
+				System.out.println("SA -------> " + sa);
 				if (sd != null && sa != null) {
 					String booking = (String) session.getAttribute("statusBooking");
 					System.out.println("BOOKING " + booking);
@@ -160,7 +162,7 @@ List<TrainFactory> factory = (List<TrainFactory>) fm.getAllFactories();%>
 							<%} else { %>
 							<td><img src="./img/LogoFactory/italo.png" width="80"
 								height="100" alt=""></td>
-							<%} %>
+								<%} %>
 
 							<%} %>
 							<td scope="<%= id %>"><%= t.getDeparture().getCountryName() %></td>
@@ -185,7 +187,7 @@ List<TrainFactory> factory = (List<TrainFactory>) fm.getAllFactories();%>
 
 				<div class="noTrainMsg">
 					<h3>
-						<label> NESSUN TRENO DISPONIBILE </label>
+						<label> Nessun treno disponibile per la tratta <%= departure %> - <%= arrival %></label>
 					</h3>
 				</div>
 
@@ -194,6 +196,7 @@ List<TrainFactory> factory = (List<TrainFactory>) fm.getAllFactories();%>
 				if (sd.equals("false")) { %>
 				<div class="warningInfo col-lg-6">
 					<h5>
+						
 						Forse cercavi come paese di partenza, <strong> <i> <%= departure %>
 						</i>
 						</strong> ?
@@ -204,16 +207,36 @@ List<TrainFactory> factory = (List<TrainFactory>) fm.getAllFactories();%>
 				if(sa.equals("false")) { %>
 				<div class="warningInfo col-lg-6">
 					<h5>
+						
 						Forse cercavi come paese di arrivo, <strong> <i><%= arrival %>
 						</i>
 						</strong> 
 					</h5>
 				</div>
 				<% }%>
-				<% }%>
+			<% }%>
+			<% if(sd.equals("invalidate")){ %>
 
-				<% } %>
+					<div class="noTrainMsg warningInfo col-lg-6">
+						<h3> Il paese di partenza inserito non e' stato trovato </h3>
+					</div>
+
+				<% 	
 					
+				}
+				
+				if(sa.equals("invalidate")){%>
+
+				<div class="noTrainMsg warningInfo col-lg-6">
+					<h3> Il paese di arrivo inserito non e' stato trovato </h3>
+				</div>
+
+				<% 	
+					
+				}
+				%>
+			<% } %>
+			
 			</div>
 		</div>
 
@@ -228,5 +251,3 @@ List<TrainFactory> factory = (List<TrainFactory>) fm.getAllFactories();%>
 %>
 </body>
 </html>
-
-

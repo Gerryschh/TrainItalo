@@ -18,6 +18,7 @@
        <mapping resource="userr.hbm.xml"/> 
        <mapping resource="train.hbm.xml"/> 
        <mapping resource="trainFactory.hbm.xml"/> 
+       <mapping resource="ticket.hbm.xml"/> 
     </session-factory>
       
 </hibernate-configuration>
