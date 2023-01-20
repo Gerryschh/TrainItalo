@@ -55,6 +55,38 @@
 			<div id="pianoGioco" style="width: 650px;">
 				
 			</div>
+			
+			<div class="d-flex flex-column justify-content-center" id="frontLeaderboard">
+				<h1 class="py-4 text-center">LEADERBOARD</h1>
+				<!-- FORM PER LA VISUALIZZAZIONE DELLA LEADERBOARD. INIZIALMENTE LO SCORE DELL'UTENTE NON è VISIBILE.
+				 SE L'UTENTE REGISTRA IL PUNTEGGIO BISOGNA RIAGGIORNARE LA LEADERBOARD -->
+					<table class="table table-white table-striped">
+						<thead>
+							<tr>
+								<th scope="col">Player</th>
+								<th scope="col">Score</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<% 
+									if(users != null && users.size() != 0) {
+										Iterator<?> it = users.iterator();
+										while(it.hasNext()) {
+											User u = (User) it.next();
+								%>
+								<td><%=u.getUserName()%></td>
+								<td><%=u.getTrainGameScore()%></td>
+							</tr>
+								<%
+										}
+		
+									}
+								%>
+								
+						</tbody>
+					</table>
+			</div>
 		
 		</div>
 		
@@ -63,7 +95,7 @@
 	<div id="ms-score-section" class="ms-container d-none">
 	
 		<div class="ms-loseBanner text-center">
-			<h2>Mi dispiace <i class="far fa-frown"></i></h4>
+			<h2>Hai Perso! <i class="far fa-frown"></i></h4>
 			<span>Puoi salvare il tuo punteggio o ricominciare una nuova partita!</span>
 		</div>
 		
@@ -74,11 +106,11 @@
 				<div id="scoreDiv" class="p-2">
 					<form id="scoreForm" action="/TrainItalo/TrainGameScoreServlet" method="POST">
 						<label for="usernameGame">Username: </label><br/>
-						<input id="usernameGame" name="usernameGame" value="<%=currentUser.getUserName() %>" ></input><br/>
+						<input id="usernameGame" name="usernameGame" value="<%=currentUser.getUserName() %>" readonly></input><br/>
 						<label for="emailUser">Email:</label><br/>
-						<input id="emailUser" name="emailUser" value="<%=currentUser.getUserMail() %>"></input><br/>
+						<input id="emailUser" name="emailUser" value="<%=currentUser.getUserMail() %>" readonly></input><br/>
 						<label for="scoreGame">Score:</label><br/>
-						<input id="scoreGame" name="scoreGame" value="${scoreGame}"></input><br/><br/>
+						<input id="scoreGame" name="scoreGame" value="${scoreGame}" readonly></input><br/><br/>
 						<input class="btnRegScore" type="submit" value="Registra punteggio">
 					</form>
 					<br/>

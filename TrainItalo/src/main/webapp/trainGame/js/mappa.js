@@ -52,6 +52,7 @@ function mostraMatriceHTML() {
 function play() {
 	// var audio = document.getElementById("myAudio");
 	// audio.play();
+	document.getElementById("frontLeaderboard").style.visibility = "hidden";
 	document.getElementById("playButton").disabled = true;
 	const pianoDiGioco = document.getElementById("pianoGioco");
 	pianoDiGioco.innerHTML = "";
