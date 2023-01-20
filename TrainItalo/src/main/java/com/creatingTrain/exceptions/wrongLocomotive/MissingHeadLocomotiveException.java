@@ -12,7 +12,7 @@ public class MissingHeadLocomotiveException extends WrongLocomotiveException {
 	}
    
    public String getMessage() {
-	  	 return super.getMessage() + "\n" + this.message;
+	  	 return super.getMessage() + ". " + this.message;
    }
 }
 

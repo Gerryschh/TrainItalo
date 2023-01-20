@@ -10,7 +10,7 @@ public class TooHeavyTrainException extends ExceedException {
 		this.message = "Il peso totale del treno è di " + pesoTreno + " ma il peso massimo che può trainare il treno è di " + pesoTrainabile + ".";
 	}
 	public String getMessage() {
-		return super.getMessage() + "\n" + this.message;
+		return super.getMessage() + ". " + this.message;
 	}
 
 }

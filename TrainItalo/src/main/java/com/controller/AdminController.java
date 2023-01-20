@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import com.creatingTrain.exceptions.ExceedException;
 import com.creatingTrain.exceptions.FactoryException;
 import com.creatingTrain.exceptions.TooShortStringException;
+import com.creatingTrain.exceptions.TrenoException;
 import com.creatingTrain.exceptions.WrongCombinationException;
 import com.creatingTrain.exceptions.wrongLocomotive.MissingHeadLocomotiveException;
 import com.manager.AliasManager;
@@ -53,7 +54,7 @@ public class AdminController {
 	@PostMapping("/insertTrain")
 	public String trainInsert(@WebParam String inputMatricolaTreno, @WebParam String trainFactoryName, 
 			@WebParam String inputDeparture, @WebParam String inputArrival, @WebParam String inputDepartureHour,
-			@WebParam String inputArrivalHour, Model model) throws MissingHeadLocomotiveException, TooShortStringException, ExceedException, WrongCombinationException, FactoryException, ParseException {
+			@WebParam String inputArrivalHour, Model model) {
 
 		String msg = "";
 		try {
@@ -61,9 +62,10 @@ public class AdminController {
 			msg = "Treno con matricola " + inputMatricolaTreno + " aggiunto con successo";
 		}
 		catch (Exception e) {
-			msg = "Errore nell'aggiunta del treno con matricola " + inputMatricolaTreno + "\n" + e.getMessage();;
-			model.addAttribute("msg", msg);
+			msg = e.getMessage();
 		}
+		System.out.println(msg);
+		model.addAttribute("msg", msg);
 		return "insertTrain";
 	}
 	

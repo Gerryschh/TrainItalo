@@ -9,6 +9,6 @@ public class MisplacedSecondLocomotiveException extends WrongLocomotiveException
 	   	 this.message = "Hai inserito la seconda locomotiva in una posizione scorretta: può essere inserita solo in coda!";
 	    }
 	    public String getMessage() {
-	   	 return super.getMessage() + "\n" + this.message;
+	   	 return super.getMessage() + ". " + this.message;
 	    }
 }

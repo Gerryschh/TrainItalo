@@ -11,7 +11,7 @@ public class TooShortStringException extends TrenoException{
 	}
 	
 	public String getMessage() {
- 	      return super.getMessage() + "\n" + this.message;
+ 	      return super.getMessage() + ". " + this.message;
      }
 
 }

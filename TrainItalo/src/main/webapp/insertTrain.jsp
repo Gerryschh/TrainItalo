@@ -120,19 +120,20 @@ if(currentUser != null && currentUser.isAdmin())
 </div>
 	<br>
 	<jsp:include page="/fragments/footer.jsp"></jsp:include>
+	<c:set var="msg" value="${requestScope.msg}"/>
+	<script>
+	if("${msg}"!="")
+		alert("${msg}");
+		
+	</script>
+	<script type="text/javascript" src="./generalJS/general.js"></script>
 <%
 	}
 	else {
 %>
 <jsp:include page="/error404.jsp"></jsp:include>
 <%} %>
-<c:set var="msg" value="${requestScope.msg}"/>
-<script>
-if("${msg}"!="")
-	alert("${msg}");
-	
-</script>
-<script type="text/javascript" src="./generalJS/general.js"></script>
+
 
 </body>
 </html>
