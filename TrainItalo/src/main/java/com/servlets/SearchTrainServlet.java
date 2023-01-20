@@ -3,7 +3,6 @@ package com.servlets;
 import java.io.IOException;
 import java.util.Collection;
 import java.util.Iterator;
-import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -49,28 +48,6 @@ public class SearchTrainServlet extends HttpServlet{
 
 		session.setAttribute("train", factoryName);
 
-		/*		
-		if (countryDeparture != null) {
-			newDeparture = countryDeparture.getCountryName();
-			session.setAttribute("statusDeparture", "true");
-		} else {
-			AliasManager am = new AliasManager();
-			List<Alias> listAlias = (List<Alias>) am.getAllAliases(); //take all aliases
-			session.setAttribute("statusDeparture", "false");
-			for (Alias a : listAlias) {
-				if (a.getCountryAlias().equals(departure) && a.isApproved()) { // find it and it is approved
-					session.setAttribute("statusDeparture", "true");
-					newDeparture = a.getCountryName().getCountryName();;
-					break;
-				} else if (a.getCountryAlias().equals(departure) && !a.isApproved()) { //find it but not approved
-					session.setAttribute("statusDeparture", "false");
-					newDeparture = a.getCountryName().getCountryName();;
-					break;
-				}
-			}
-
-		}
-		 */
 		CheckChain chain = CheckChainBuilder.getChain(s);
 		AliasManager am = new AliasManager();
 		CountryManager cm = new CountryManager();
@@ -98,11 +75,14 @@ public class SearchTrainServlet extends HttpServlet{
 			Alias departureBean = am.getAlias(departureRes);
 			if(departureBean != null && departureBean.isApproved()) {
 				session.setAttribute("statusDeparture", "true");
+				session.setAttribute("departure", departureRes);
 			} else {
 				session.setAttribute("statusDeparture", "false");
+				session.setAttribute("departure", departureRes);
 			}
 		} else if(trovatoDep) {
 			session.setAttribute("statusDeparture", "true");
+			session.setAttribute("departure", departureRes);
 		} else {
 			session.setAttribute("statusDeparture", "invalidate");
 		}
@@ -112,11 +92,14 @@ public class SearchTrainServlet extends HttpServlet{
 			Alias arrivalBean = am.getAlias(arrivalRes);
 			if(arrivalBean != null && arrivalBean.isApproved()) {
 				session.setAttribute("statusArrival", "true");
+				session.setAttribute("arrival", arrivalRes);
 			} else {
 				session.setAttribute("statusArrival", "false");
+				session.setAttribute("arrival", arrivalRes);
 			}
 		} else if(trovatoArr) {
 			session.setAttribute("statusArrival", "true");
+			session.setAttribute("arrival", arrivalRes);
 		} else {
 			session.setAttribute("statusArrival", "invalidate");
 		}
