@@ -40,7 +40,7 @@ List<TrainFactory> factory = (List<TrainFactory>) fm.getAllFactories();%>
 <script src="./generalJS/searchFlag.js"></script>
 <!-- CSS only -->
 <link rel="stylesheet" href="css/style.css">
-<title>TrainViewer</title>
+<title>Trainterland - Ricerca Treno</title>
 </head>
 <body class="bg-white" onload="loadFlag()">
 

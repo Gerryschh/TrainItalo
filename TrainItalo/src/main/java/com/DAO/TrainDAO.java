@@ -11,4 +11,5 @@ public interface TrainDAO {
 	public Collection<Train> getAll(); //Get all trains
 	public Collection<Train> getTrainsWithParameter(String factoryName, String departure, String arrival);
 	public Collection<Train> getTrainsWithoutFactory(String departure, String arrival);
+	public void removeTrain (int trainRemove);
 }

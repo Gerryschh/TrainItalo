@@ -7,9 +7,14 @@
 	{
 		TicketManager tm = new TicketManager();
 		Collection<?> tickets = (Collection<?>) tm.getAllTicketsByMail(currentUser.getUserMail());
-		Date birthdate = currentUser.getUserBirthdate();
+		Date birthdate = null;
+		String birthdateString = null;
+		if(currentUser.getUserBirthdate() != null)
+		{
+		birthdate = currentUser.getUserBirthdate();
 		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-		String birthdateString = format.format(birthdate);
+		birthdateString = format.format(birthdate);
+		}
 %>
 <!DOCTYPE html>
 <html>
@@ -30,12 +35,12 @@
 <!-- SCRIPT -->
 	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js" integrity="sha384-mQ93GR66B00ZXjt0YO5KlohRA5SY2XofN4zfuZxLkoj1gXtW8ANNCe9d5Y3eG5eD" crossorigin="anonymous"></script>
-<title>User Settings</title>
+<title>Trainterland - Area Utente</title>
 </head>
 <body class="bg-white">
 	<jsp:include page="/menuLogged.jsp"></jsp:include>
 	
-	<h2 class="text-center p-4">USER SETTINGS</h2>
+	<h2 class="text-center p-4">Area Utente</h2>
 	
 	<section class="ms-settings ms-container d-flex row my-4">
 		
@@ -57,7 +62,7 @@
 			    <div class="d-flex w-100 justify-content-between align-items-center">
 			    	<div class="">
 				      <h5 class="mb-1">Visualizza Biglietti</h5>
-				      <p class="mb-1">Pagina per la visualizzazione dei biglietti dello user.</p>
+				      <p class="mb-1">Pagina per la visualizzazione dei biglietti prenotati dall'utente.</p>
 				    	<small>Clicca per visualizzare le lista</small>
 				    </div>
 				    <small><i class="fas fa-ticket-alt"></i></small>

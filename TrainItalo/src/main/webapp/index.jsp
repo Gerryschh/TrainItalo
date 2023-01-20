@@ -28,7 +28,7 @@
 <link rel="stylesheet" href="./css/style.css">
 <link rel="stylesheet" href="./general.css">
 
-<title>TrainViewer</title>
+<title>Trainterland - Home</title>
 </head>
 <body class="bg-white">
 <%

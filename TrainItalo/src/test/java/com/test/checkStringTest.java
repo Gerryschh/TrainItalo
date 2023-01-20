@@ -16,7 +16,7 @@ public class checkStringTest {
 		Strategy s= new StrategyDB();		
 		Map<String, List<String>> map= s.dataMap();
 		CheckChain chain= CheckChainBuilder.getChain(s);
-		String input = "cdnjnhdcnhjn";
+		String input = "efweagewwe";
 		chain.check(input);
 
 	}

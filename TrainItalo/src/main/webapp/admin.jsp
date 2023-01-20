@@ -25,12 +25,12 @@
 <!-- SCRIPT -->
 	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js" integrity="sha384-mQ93GR66B00ZXjt0YO5KlohRA5SY2XofN4zfuZxLkoj1gXtW8ANNCe9d5Y3eG5eD" crossorigin="anonymous"></script>
-<title>Admin Page</title>
+<title>Trainterland - Admin</title>
 </head>
 <body class="bg-white ms-admin-page-body">
 	<jsp:include page="/menuLogged.jsp"></jsp:include>
 	<div class="ms-container">
-		<h2 class="text-center text-white mb-4">ADMIN PAGE ACTIONS</h2>
+		<h2 class="text-center text-white mb-4">Area Amministrativa</h2>
 		<section class="d-flex justify-content-around align-items-center">
 			<div id="ms-card-admin" class="card justify-content-around align-items-center">
 			  <div class="card-body ms-card-admin d-flex align-items-center">
@@ -40,10 +40,10 @@
 			</div>
 			<div class="ms-list-admin d-flex justify-content-center align-items-center">
 				<ul class="ul-list-admin">
-					<li class="li-list-admin" onmouseover="hoverFunction(0)" style="--i:4;"><a href="checkAliases"><span><i class="fas fa-check-square"></i></span>Alias Approval</a></li>
-					<li class="li-list-admin" onmouseover="hoverFunction(1)" style="--i:3;"><a href="preInsertTrain"><span><i class="fas fa-train"></i></span>Insert a Train</a></li>
-					<li class="li-list-admin" onmouseover="hoverFunction(2)" style="--i:2;"><a href="countryList"><span><i class="fas fa-globe-europe"></i></span>Country List</a></li>
-					<li class="li-list-admin" onmouseover="hoverFunction(3)" style="--i:1;"><a href="trainList"><span><i class="fas fa-list"></i></span>Train List</a></li>
+					<li class="li-list-admin" onmouseover="hoverFunction(0)" style="--i:4;"><a href="checkAliases"><span><i class="fas fa-check-square"></i></span>Approvazione Alias</a></li>
+					<li class="li-list-admin" onmouseover="hoverFunction(1)" style="--i:3;"><a href="preInsertTrain"><span><i class="fas fa-train"></i></span>Inserimento Treni</a></li>
+					<li class="li-list-admin" onmouseover="hoverFunction(2)" style="--i:2;"><a href="countryList"><span><i class="fas fa-globe-europe"></i></span>Lista Paesi</a></li>
+					<li class="li-list-admin" onmouseover="hoverFunction(3)" style="--i:1;"><a href="trainList"><span><i class="fas fa-list"></i></span>Lista Treni</a></li>
 				</ul>
 			</div>
 		</section>

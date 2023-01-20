@@ -8,14 +8,12 @@ if(currentUser != null && currentUser.isAdmin())
 {
 	AliasManager am = new AliasManager();
 	Collection<?> aliases = (Collection<?>) am.getAllUnapprovedAliases();
-	CountryManager cm = new CountryManager();
-	Collection<?> countries = (Collection<?>) cm.getAllCountries();
 %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Alias Approval</title>
+<title>Trainterland - Approvazione Alias</title>
 <!-- FONTAWESOME -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
@@ -38,16 +36,17 @@ if(currentUser != null && currentUser.isAdmin())
 	<jsp:include page="/menuLogged.jsp"></jsp:include>
 
 	<div class="ms-container">
-		<h1 class="py-4 text-center">Alias Table</h1>
+		<h1 class="py-4 text-center">Tabella Alias</h1>
 		<form action="checkAliases" method="GET">
-			<table class="table table-striped">
+			<table class="table table-striped text-center">
 				<thead>
 					<tr>
 						<th scope="col">Alias</th>
-						<th scope="col">Country</th>
+						<th scope="col">Paese</th>
 						<th scope="col">Algoritmo</th>
 						<th scope="col">Soglia</th>
-						<th scope="col">Approved</th>
+						<th scope="col">Approva</th>
+						<th scope="col">Cancella</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -57,6 +56,7 @@ if(currentUser != null && currentUser.isAdmin())
 							Iterator<?> it = aliases.iterator();
 							while (it.hasNext()) {
 								Alias a = (Alias) it.next();
+								if(a.isFound()) {
 						%>
 						<td><%=a.getCountryAlias()%></td>
 						<td><%=a.getCountryName().getCountryName()%></td>
@@ -64,8 +64,10 @@ if(currentUser != null && currentUser.isAdmin())
 						<td><%=a.getThresholdValue()%></td>
 						<td><input type="checkbox" name="checkAlias"
 							value="<%=a.getCountryAlias()%>"></td>
+						<td><a class="removeOptionCLass" href="removeAlias?aliasRemove=<%=a.getCountryAlias()%>"><i class="fas fa-trash-alt"></i></a></td>
 					</tr>
 					<%
+								}
 					}
 					}
 					%>

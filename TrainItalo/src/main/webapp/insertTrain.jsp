@@ -31,7 +31,7 @@ if(currentUser != null && currentUser.isAdmin())
 <!-- SCRIPT -->
 	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js" integrity="sha384-mQ93GR66B00ZXjt0YO5KlohRA5SY2XofN4zfuZxLkoj1gXtW8ANNCe9d5Y3eG5eD" crossorigin="anonymous"></script>
-<title>InsertTrain Admin</title>
+<title>Trainterland - Inserimento Treni</title>
 </head>
 <body class="bg-white">
 	<jsp:include page="/menuLogged.jsp"></jsp:include>
@@ -42,7 +42,7 @@ if(currentUser != null && currentUser.isAdmin())
     <input type="text" class="form-control" id="inputMatricolaTreno" name="inputMatricolaTreno" placeholder="HCCCPR" required>
   </div>
   <div class="col-md-4">
-    <label for="trainFactoryName" class="form-label">Train Brand</label>
+    <label for="trainFactoryName" class="form-label">Azienda Treno</label>
     <select id="trainFactoryName" class="form-select" name="trainFactoryName">
       <%
 						if (factories != null && factories.size() != 0) {
@@ -113,8 +113,8 @@ if(currentUser != null && currentUser.isAdmin())
 		 	L'inserimento dell'arrivo non pu&ograve; essere precedente alla partenza
 		</div>
 	  <div class="col-12 text-center">
-	    <button id="addTrainButton" type="submit" class="btn ms-btn m-2">Add Train</button>
-		  <button type="reset" class="btn ms-btn m-2">Reset Parameters</button>
+	    <button id="addTrainButton" type="submit" class="btn ms-btn m-2">Aggiungi Treno</button>
+		  <button type="reset" class="btn ms-btn m-2">Resetta Parametri</button>
 	  </div>
 	</form>
 </div>

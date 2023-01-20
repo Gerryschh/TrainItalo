@@ -149,3 +149,11 @@
 .footer {
 	height:300px;
 }
+
+.removeOptionCLass {
+	color: var(--otherRed);
+}
+
+.removeOptionCLass:hover {
+	color: var(--red);
+}

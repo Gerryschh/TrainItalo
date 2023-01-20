@@ -30,7 +30,7 @@
 	<!-- SCRIPT -->
 	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js" integrity="sha384-mQ93GR66B00ZXjt0YO5KlohRA5SY2XofN4zfuZxLkoj1gXtW8ANNCe9d5Y3eG5eD" crossorigin="anonymous"></script>
-<title>TrainGame</title>
+<title>Trainterland - TrainGame</title>
 </head>
 <body id="b01" onkeydown="checkKeyDown(event);" onkeypress="checkKeyPress(event)">
 	<jsp:include page="../menuLogged.jsp"></jsp:include>
@@ -109,7 +109,7 @@
 						<input id="usernameGame" name="usernameGame" value="<%=currentUser.getUserName() %>" readonly></input><br/>
 						<label for="emailUser">Email:</label><br/>
 						<input id="emailUser" name="emailUser" value="<%=currentUser.getUserMail() %>" readonly></input><br/>
-						<label for="scoreGame">Score:</label><br/>
+						<label for="scoreGame">Punteggio:</label><br/>
 						<input id="scoreGame" name="scoreGame" value="${scoreGame}" readonly></input><br/><br/>
 						<input class="btnRegScore" type="submit" value="Registra punteggio">
 					</form>
@@ -125,8 +125,8 @@
 					<table class="table table-white table-striped">
 						<thead>
 							<tr>
-								<th scope="col">Player</th>
-								<th scope="col">Score</th>
+								<th scope="col">Giocatore</th>
+								<th scope="col">Punteggio</th>
 							</tr>
 						</thead>
 						<tbody>

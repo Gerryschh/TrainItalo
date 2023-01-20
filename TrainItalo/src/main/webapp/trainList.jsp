@@ -27,14 +27,14 @@ if(currentUser != null && currentUser.isAdmin())
 <!-- SCRIPT -->
 	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js" integrity="sha384-mQ93GR66B00ZXjt0YO5KlohRA5SY2XofN4zfuZxLkoj1gXtW8ANNCe9d5Y3eG5eD" crossorigin="anonymous"></script>
-<title>TrainList Admin</title>
+<title>Trainterland - Lista Treni</title>
 </head>
 <body class="bg-white">
 	<jsp:include page="/menuLogged.jsp"></jsp:include>
 	
 	<div class="ms-container">
-		<h1 class="py-4 text-center">TrainList</h1>
-			<table class="table table-striped">
+		<h1 class="py-4 text-center">Elenco Treni</h1>
+			<table class="table table-striped text-center">
 				<thead>
 					<tr>
 						<th scope="col">ID</th>
@@ -44,6 +44,7 @@ if(currentUser != null && currentUser.isAdmin())
 						<th scope="col">Arrivo</th>
 						<th scope="col">Data e ora Partenza</th>
 						<th scope="col">Data e ora Arrivo</th>
+						<th scope="col">Rimuovi</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -61,6 +62,7 @@ if(currentUser != null && currentUser.isAdmin())
 						<td><%=t.getArrival().getCountryName()%></td>
 						<td><%=t.getDepartureDatetime()%></td>
 						<td><%=t.getArrivalDatetime()%></td>
+						<td><a class="removeOptionCLass" href="removeTrain?trainRemove=<%=t.getIdTrain()%>"><i class="fas fa-trash-alt"></i></a></td>
 					</tr>
 					<%
 					}

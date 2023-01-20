@@ -93,5 +93,9 @@ public class TrainManager {
 		}
 		else throw new FactoryException(trainFactoryName,"Factory non consentita!");
 	}
+	
+	public void removeTrain(int trainRemove) {
+		trainDAO.removeTrain(trainRemove);
+	}
 }
 
