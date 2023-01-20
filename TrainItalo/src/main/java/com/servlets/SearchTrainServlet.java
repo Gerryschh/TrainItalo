@@ -25,8 +25,6 @@ import com.strategy.StrategyDB;
 
 @WebServlet("/SearchTrainServlet")
 public class SearchTrainServlet extends HttpServlet{
-	private String newDeparture;
-	private String newArrival;
 
 	/**
 	 * 
@@ -54,10 +52,10 @@ public class SearchTrainServlet extends HttpServlet{
 		Collection<Country> countryList = cm.getAllCountries();
 		boolean trovatoDep = false;
 		boolean trovatoArr = false;
-		
+
 		String departureRes = chain.check(departure);
 		String arrivalRes = chain.check(arrival);
-		
+
 		if (countryList != null && countryList.size() != 0) {
 			Iterator<?> it = countryList.iterator();
 			while (it.hasNext()) {
@@ -70,15 +68,17 @@ public class SearchTrainServlet extends HttpServlet{
 				}
 			}
 		}
-		
+
 		if(departureRes != null && !trovatoDep) {
 			Alias departureBean = am.getAlias(departureRes);
-			if(departureBean != null && departureBean.isApproved()) {
-				session.setAttribute("statusDeparture", "true");
-				session.setAttribute("departure", departureRes);
-			} else {
-				session.setAttribute("statusDeparture", "false");
-				session.setAttribute("departure", departureRes);
+			if(departureBean != null) {
+				if(departureBean.isApproved()) {
+					session.setAttribute("statusDeparture", "true");
+					session.setAttribute("departure", departureRes);
+				} else {
+					session.setAttribute("statusDeparture", "false");
+					session.setAttribute("departure", departureRes);
+				}
 			}
 		} else if(trovatoDep) {
 			session.setAttribute("statusDeparture", "true");
@@ -87,15 +87,17 @@ public class SearchTrainServlet extends HttpServlet{
 			session.setAttribute("statusDeparture", "invalidate");
 		}
 
-		
+
 		if(arrivalRes != null && !trovatoArr) {
 			Alias arrivalBean = am.getAlias(arrivalRes);
-			if(arrivalBean != null && arrivalBean.isApproved()) {
-				session.setAttribute("statusArrival", "true");
-				session.setAttribute("arrival", arrivalRes);
-			} else {
-				session.setAttribute("statusArrival", "false");
-				session.setAttribute("arrival", arrivalRes);
+			if(arrivalBean != null) {
+				if(arrivalBean.isApproved()) {
+					session.setAttribute("statusArrival", "true");
+					session.setAttribute("arrival", arrivalRes);
+				} else {
+					session.setAttribute("statusArrival", "false");
+					session.setAttribute("arrival", arrivalRes);
+				}
 			}
 		} else if(trovatoArr) {
 			session.setAttribute("statusArrival", "true");
@@ -107,14 +109,14 @@ public class SearchTrainServlet extends HttpServlet{
 		TrainManager tm = new TrainManager();
 		if(departureRes != null && arrivalRes != null) {
 			if(factoryName.equals("none")) {
-				Collection<Train> collectionTrains = tm.getTrainsWithoutFactory(departure, arrival);
+				Collection<Train> collectionTrains = tm.getTrainsWithoutFactory(departureRes, arrivalRes);
 				session.setAttribute("trainList", collectionTrains);
 			} else {
-				Collection<Train> collectionTrains = tm.getTrainsWithParameter(factoryName, departure, arrival);
+				Collection<Train> collectionTrains = tm.getTrainsWithParameter(factoryName, departureRes, departureRes);
 				session.setAttribute("trainList", collectionTrains);
 			}
 		}
-		
+
 		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/searchingTrain.jsp");
 		dispatcher.forward(request, response);
 	}
