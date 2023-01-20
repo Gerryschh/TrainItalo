@@ -29,23 +29,32 @@ public class RegisterServlet extends HttpServlet{
 		UserManager um = new UserManager();
 		String email = request.getParameter("email");
 		String password = request.getParameter("password");
-		String name = request.getParameter("name");
+		String username = request.getParameter("username");
 		String surname = request.getParameter("surname");
-		User u = new User();
-		u.setUserMail(email);
-		u.setUserPassword(password);
-		u.setUserName(name);
-		u.setUserSurname(surname);
-		u.setAdmin(false);
-		um.addUser(u);
 		HttpSession session = request.getSession(true);
-		session.setAttribute("email", email);
-		session.setAttribute("name", name);
-		session.setAttribute("surname", surname);
-		session.setAttribute("isAdmin", false);
 		
-		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/index.jsp");
-		dispatcher.forward(request, response);
+		if(email != null && password != null && username != null && surname != null) {
+			User u = new User();
+			u.setUserMail(email);
+			u.setUserPassword(password);
+			u.setUserName(username);
+			u.setUserSurname(surname);
+			u.setAdmin(false);
+			u.setTrainGameScore(0);
+			um.addUser(u);
+			
+			session.setAttribute("user", u);
+			session.setAttribute("userName", username);
+			session.setAttribute("isAdmin", false);
+
+			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/index.jsp");
+			dispatcher.forward(request, response);
+		} else {
+			session.setAttribute("error", "");
+			
+			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/register.jsp");
+			dispatcher.forward(request, response);
+		}
 	}
 	
 	

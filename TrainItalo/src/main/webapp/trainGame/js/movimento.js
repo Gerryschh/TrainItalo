@@ -23,8 +23,9 @@ function checkKeyPress(event) {
 	//alert ("The Unicode character code is (key press): " + chCode);   
 }
 
-var biglietto = new Audio("audio1/ka-ching.mp3");
-var nemico = new Audio("audio1/kids.mp3");
+var pathAudio = "/TrainItalo/audio/";
+var biglietto = new Audio(pathAudio+"ka-ching.mp3");
+var nemico = new Audio(pathAudio+"kids.mp3");
 Audio.prototype.rewindAndPlay = function () {
 	this.currentTime = 0.0;
 	this.play();
@@ -56,7 +57,6 @@ function controllaCella(x, y) {
 			break;
 		default:
 			if (val > 0) { // toccato il serpente
-				alert("Ti sei mangiato le mani, eheheh");
 				gameOver();
 				return false;
 			}
@@ -68,14 +68,14 @@ function controllaCella(x, y) {
 }
 
 function gameOver(){
-	document.getElementById("punteggio").innerHTML = "Ecco il tuo punteggio:" + energiaWidth;
-	document.getElementById("pianoGioco").innerHTML = "hai perso!"; 
-	// musichetta di gameOver
+	document.getElementById("pianoGioco").innerHTML = "GAME OVER!"; 
+	document.getElementById("scoreGame").value = energiaWidth;
 	piano = null;
-	clearInterval(timer1); 
-	clearInterval(timer2); 
-	clearInterval(timerTempo); 
+	document.getElementById("ms-score-section").classList.remove("d-none");
+	document.getElementById("playButton").classList.add("d-none");
+	document.getElementById("ms-gioco-section").classList.add("d-none");
 } 
+
 
 
 function sposta(daX, daY, aX, aY) {

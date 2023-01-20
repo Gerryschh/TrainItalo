@@ -1,9 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"
-	import="java.util.*,com.beans.*"%>
+	import="java.util.*,com.beans.*,com.strategy.*,com.manager.*"%>
 <%
-			User currentUser = (User) session.getAttribute("user");
-			if(currentUser != null) {
+	UserManager um = new UserManager();
+	Collection<?> users = (Collection<?>) um.getAllUsers();
+	User currentUser = (User) session.getAttribute("user");
+	if(currentUser != null) {
+		
+				
 %>
 
 <!DOCTYPE html>
@@ -20,8 +24,8 @@
 	integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65"
 	crossorigin="anonymous">
 <!-- CSS only -->
-<link rel="stylesheet" href="../css/style.css">
-<link rel="stylesheet" href="./general.css">
+<link rel="stylesheet" href="/TrainItalo/css/style.css">
+<link rel="stylesheet" href="/TrainItalo/general.css">
 	
 	<!-- SCRIPT -->
 	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
@@ -30,81 +34,131 @@
 </head>
 <body id="b01" onkeydown="checkKeyDown(event);" onkeypress="checkKeyPress(event)">
 	<jsp:include page="../menuLogged.jsp"></jsp:include>
-	<div class="container">
-		<input type="button" onclick="play()" value="Play" class="btnPlay" id="playButton"></input>
-		<input type="button" onclick="mostraMatriceHTML()" value="mostra matrice"></input>
-		<input id="id01" type="button" onclick="om.muovi()" value="muovi oggetto"></input>
-		<!-- <audio id="myAudio" src="audio1/videoplayback.mp3" loop></audio> -->
-		<br><br>
-		<span id="punteggio"></span>
-		<div style="width:800px; background-color:rgb(50,50,50)">
-			<div id="energia" style="width:1px; background-color:rgb(0,0,255)">
-				<span>0</span>
-			</div>
-		</div>
-		<div style="width:800px; background-color:rgb(50,50,50)">
-
-			<div id="tempo" style="width:1000px; background-color:rgb(0,255,0)">
-				<span>1000</span>
-			</div>
-		</div>
-		<div id="pianoGioco">
-			
-		</div>
-	</div>
-	<br><br>
-	<p id="posizioneOmino"></p>
-	<p id="messaggioDebug"></p>
+	<div id="ms-gioco-section" class="ms-container">
+		<div class="text-center">
+		
+			<input type="button" onclick="play()" value="Play" class="btnPlay" id="playButton"></input>
+			<!-- <audio id="myAudio" src="audio1/videoplayback.mp3" loop></audio> -->
+			<br><br>
+			<span id="punteggio"></span>
+			<div id="counterSection" class="text-center d-flex flex-column align-items-center">
+				<span>Punteggio:</span>
+				<div class="rounded-pill ms-energy" id="energia">
+					<span>0</span>
+				</div>
 	
-	<!-- FORM PER L'INVIO DEL PUNTEGGIO AL DB -->
-	<form id="score-form" onsubmit="return handleSubmit()" action="TrainGameScoreServlet" method="POST">
-		<label for="username">Username:</label><br/>
-		<label for="username"><%=currentUser.getUserName() %></label><br/>
-		<label for="score">Score:</label><br/>
+				<div class="rounded-pill ms-time" id="tempo">
+					<span id="valTempo">1000</span>
+				</div>
+				<br>
+			</div>
+			<div id="pianoGioco" style="width: 650px;">
+				
+			</div>
+			
+			<div class="d-flex flex-column justify-content-center" id="frontLeaderboard">
+				<h1 class="py-4 text-center">LEADERBOARD</h1>
+				<!-- FORM PER LA VISUALIZZAZIONE DELLA LEADERBOARD. INIZIALMENTE LO SCORE DELL'UTENTE NON è VISIBILE.
+				 SE L'UTENTE REGISTRA IL PUNTEGGIO BISOGNA RIAGGIORNARE LA LEADERBOARD -->
+					<table class="table table-white table-striped">
+						<thead>
+							<tr>
+								<th scope="col">Player</th>
+								<th scope="col">Score</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<% 
+									if(users != null && users.size() != 0) {
+										Iterator<?> it = users.iterator();
+										while(it.hasNext()) {
+											User u = (User) it.next();
+								%>
+								<td><%=u.getUserName()%></td>
+								<td><%=u.getTrainGameScore()%></td>
+							</tr>
+								<%
+										}
 		
-		<!-- SCORE COME VARIABILE DI JAVSCRIPT -->
-		<!-- <label for="score">        </label><br/> -->
+									}
+								%>
+								
+						</tbody>
+					</table>
+			</div>
 		
-		<!-- <input class="btn-user" type="submit" value="Registra punteggio">  -->
-	</form>
-	<input type="button" onclick="play()" value="Riprova" class="btnPlay"></input>
-	<div class="container">
-		<h1 class="py-4 text-center text-white bg-dark">LEADERBOARD</h1>
-		<!-- FORM PER LA VISUALIZZAZIONE DELLA LEADERBOARD. INIZIALMENTE LO SCORE DELL'UTENTE NON è VISIBILE.
-		 SE L'UTENTE REGISTRA IL PUNTEGGIO BISOGNA RIAGGIORNARE LA LEADERBOARD -->
-		<!--  
-		<form action="TrainGameLeaderboardServlet" method="POST">
-			<table class="table table-dark table-striped">
-				<thead>
-					<tr>
-						<th scope="col">Player</th>
-						<th scope="col">Score</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr>
-					
-						
-					</tr>
-				</tbody>
-			</table>
-			<p class="text-center">
-				<input class="btn btn-outline-light" type="submit" value="Approve">
-			</p>
-		</form>
-		-->
-
+		</div>
+		
 	</div>
-
-
-
-
+	
+	<div id="ms-score-section" class="ms-container d-none">
+	
+		<div class="ms-loseBanner text-center">
+			<h2>Hai Perso! <i class="far fa-frown"></i></h4>
+			<span>Puoi salvare il tuo punteggio o ricominciare una nuova partita!</span>
+		</div>
+		
+		<div class="d-flex justify-content-around my-5">
+			<div class="col-5 card card-login text-center" style="width: 20rem;">
+		
+				<!-- FORM PER L'INVIO DEL PUNTEGGIO AL DB -->
+				<div id="scoreDiv" class="p-2">
+					<form id="scoreForm" action="/TrainItalo/TrainGameScoreServlet" method="POST">
+						<label for="usernameGame">Username: </label><br/>
+						<input id="usernameGame" name="usernameGame" value="<%=currentUser.getUserName() %>" readonly></input><br/>
+						<label for="emailUser">Email:</label><br/>
+						<input id="emailUser" name="emailUser" value="<%=currentUser.getUserMail() %>" readonly></input><br/>
+						<label for="scoreGame">Score:</label><br/>
+						<input id="scoreGame" name="scoreGame" value="${scoreGame}" readonly></input><br/><br/>
+						<input class="btnRegScore" type="submit" value="Registra punteggio">
+					</form>
+					<br/>
+					<a type="button" class="btn ms-restartBtn" href="/TrainItalo/trainGame/trainGame.jsp">Riprova</a>
+				</div>
+			</div>
+			
+			<div class="col-7" id="leaderboard">
+				<h1 class="py-4 text-center">LEADERBOARD</h1>
+				<!-- FORM PER LA VISUALIZZAZIONE DELLA LEADERBOARD. INIZIALMENTE LO SCORE DELL'UTENTE NON è VISIBILE.
+				 SE L'UTENTE REGISTRA IL PUNTEGGIO BISOGNA RIAGGIORNARE LA LEADERBOARD -->
+					<table class="table table-white table-striped">
+						<thead>
+							<tr>
+								<th scope="col">Player</th>
+								<th scope="col">Score</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<% 
+									if(users != null && users.size() != 0) {
+										Iterator<?> it = users.iterator();
+										while(it.hasNext()) {
+											User u = (User) it.next();
+								%>
+								<td><%=u.getUserName()%></td>
+								<td><%=u.getTrainGameScore()%></td>
+							</tr>
+								<%
+										}
+		
+									}
+								%>
+								
+						</tbody>
+					</table>
+			</div>
+		</div>
+		
+			
+	</div>
 
 
 	<jsp:include page="../fragments/footer.jsp"></jsp:include>
 
-	<script type="text/javascript" src="js/mappa.js"></script>
-	<script type="text/javascript" src="js/movimento.js"></script>
+	<script type="text/javascript" src="/TrainItalo/trainGame/js/mappa.js"></script>
+	<script type="text/javascript" src="/TrainItalo/trainGame/js/movimento.js"></script>
 	
 </body>
 </html>
