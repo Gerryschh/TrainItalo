@@ -44,7 +44,9 @@ if(session.getAttribute("email") != null && session.getAttribute("error") != nul
 					<input type="text" id="email" name="email" required><br/>
 					<label for="password">Password:</label><br/>
 					<input type="password" id="password" name="password" required><br/>
-	
+					<% if (session.getAttribute("mex") != null) { %>
+						<label for="mex" style="color: red">Non sei registrato</label><br/>
+					<%} %>
 					<input class="btn-user" type="submit" value="Accedi">
 				</form>
 				
