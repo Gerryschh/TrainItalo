@@ -39,7 +39,7 @@ public class LoginServlet extends HttpServlet{
 			dispatcher.forward(request, response);
 		} else {
 			session.setAttribute("error", "");
-			
+			session.setAttribute("mex", "");
 			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/login.jsp");
 			dispatcher.forward(request, response);
 		}
