@@ -60,49 +60,60 @@ public class SearchTrainServlet extends HttpServlet{
 			Iterator<?> it = countryList.iterator();
 			while (it.hasNext()) {
 				Country c = (Country) it.next();
-				if(c.getCountryName().equals(departureRes)) {
+				if(c.getCountryName().equals(departure)) {
 					trovatoDep = true;
 				}
-				if(c.getCountryName().equals(arrivalRes)) {
+				if(c.getCountryName().equals(arrival)) {
 					trovatoArr = true;
 				}
 			}
 		}
 
-		if(departureRes != null && !trovatoDep) {
-			Alias departureBean = am.getAlias(departureRes);
-			if(departureBean != null) {
-				if(departureBean.isApproved()) {
-					session.setAttribute("statusDeparture", "true");
-					session.setAttribute("departure", departureRes);
-				} else {
-					session.setAttribute("statusDeparture", "false");
-					session.setAttribute("departure", departureRes);
-				}
+
+		if(departureRes != null) {
+			Country c = cm.getCountry(departureRes);
+			if(!trovatoDep) {
+				Alias departureBean = am.getAlias(departureRes);
+				if(departureBean != null) {
+					if(departureBean.isApproved()) {
+						session.setAttribute("statusDeparture", "true");
+						session.setAttribute("departure", departureRes);
+						session.setAttribute("departureAlphaCode", c.getAlpha2code());
+					} else {
+						session.setAttribute("statusDeparture", "false");
+						session.setAttribute("departure", departureRes);
+					}
+				}			
+			} else {
+				session.setAttribute("statusDeparture", "true");
+				session.setAttribute("departure", departureRes);
+				session.setAttribute("departureAlphaCode", c.getAlpha2code());
 			}
-		} else if(trovatoDep) {
-			session.setAttribute("statusDeparture", "true");
-			session.setAttribute("departure", departureRes);
 		} else {
 			session.setAttribute("statusDeparture", "invalidate");
 		}
 
 
-		if(arrivalRes != null && !trovatoArr) {
-			Alias arrivalBean = am.getAlias(arrivalRes);
-			if(arrivalBean != null) {
-				if(arrivalBean.isApproved()) {
-					session.setAttribute("statusArrival", "true");
-					session.setAttribute("arrival", arrivalRes);
-				} else {
-					session.setAttribute("statusArrival", "false");
-					session.setAttribute("arrival", arrivalRes);
+		if(arrivalRes != null) {
+			Country c = cm.getCountry(arrival);
+			if(!trovatoArr) {
+				Alias arrivalBean = am.getAlias(arrivalRes);
+				if(arrivalBean != null) {
+					if(arrivalBean.isApproved()) {
+						session.setAttribute("statusArrival", "true");
+						session.setAttribute("arrival", arrivalRes);
+						session.setAttribute("arrivalAlphaCode", c.getAlpha2code());
+					} else {
+						session.setAttribute("statusArrival", "false");
+						session.setAttribute("arrival", arrivalRes);
+					}
 				}
-			}
-		} else if(trovatoArr) {
-			session.setAttribute("statusArrival", "true");
-			session.setAttribute("arrival", arrivalRes);
-		} else {
+			} else {
+				session.setAttribute("statusArrival", "true");
+				session.setAttribute("arrival", arrivalRes);
+				session.setAttribute("arrivalAlphaCode", c.getAlpha2code());
+			} 
+		}else {
 			session.setAttribute("statusArrival", "invalidate");
 		}
 
