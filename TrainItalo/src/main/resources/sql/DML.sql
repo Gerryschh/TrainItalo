@@ -269,13 +269,12 @@ INSERT INTO train (mat_train, factory, departure, arrival, departure_datetime, a
 ('HPPRPP', 'Italo', 'San Marino', 'Italia', '2023-01-12 07:30:00', '2023-01-12 09:30:00');
 
 INSERT INTO alias (country_alias, country_name, approved, algorithm, threshold_value, is_found) VALUES
-('Itaia','Italia',0,'JaroDistance',0.0,0),
-('Germ','Germania',0,'JaroDistance',0.0,0),
-('Buridi','Burundi',1,'JaroDistance',0.0,0),
-('Austra','Austria',0,'JaroDistance',0.0,0),
-('Itaglia','Italia',1,'JaroDistance',0.0,0),
-('Bur','Burundi',0,'JaroDistance',0.0,0),
-('Aus','Austria',0,'JaroDistance',0.0,0);
+('Aus','Austria',0,'Levenshtein',1.0,1),
+('Germagna','Germania',0,'Levenshtein',1.0,1),
+('Burandi','Burundi',1,'Levenshtein',2.0,1),
+('Austra','Australia',0,'Contained',0.0,1),
+('Itaglia','Italia',1,'Levenshtein',1.0,1),
+('Buridi','Burundi',0,'Levenshtein',2.0,1);
 
 
 

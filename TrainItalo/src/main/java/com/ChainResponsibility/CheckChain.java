@@ -18,9 +18,13 @@ public abstract class CheckChain {
 	}
 	public final String check(String input) {
 		String result = checkInternal(input);
-		System.out.println(this.getClass().getSimpleName());
+
+		// input == alias
+		// result == country
 		if(result != null) {
-			if(!this.getClass().getSimpleName().equals(EqualsStandardCS.class.getSimpleName())) {
+			Alias tempAlias = aliasManager.getAlias(input);
+			if(!this.getClass().getSimpleName().equals(EqualsStandardCS.class.getSimpleName()) 
+					&& !(tempAlias != null && !tempAlias.isApproved()) ) {
 				Alias a = new Alias();
 				a.setCountryAlias(input);
 				a.setCountryName(countryManager.getCountry(result));

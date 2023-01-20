@@ -3,7 +3,6 @@ package com.servlets;
 import java.io.IOException;
 import java.util.Collection;
 import java.util.Iterator;
-import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -26,8 +25,6 @@ import com.strategy.StrategyDB;
 
 @WebServlet("/SearchTrainServlet")
 public class SearchTrainServlet extends HttpServlet{
-	private String newDeparture;
-	private String newArrival;
 
 	/**
 	 * 
@@ -49,89 +46,84 @@ public class SearchTrainServlet extends HttpServlet{
 
 		session.setAttribute("train", factoryName);
 
-		/*		
-		if (countryDeparture != null) {
-			newDeparture = countryDeparture.getCountryName();
-			session.setAttribute("statusDeparture", "true");
-		} else {
-			AliasManager am = new AliasManager();
-			List<Alias> listAlias = (List<Alias>) am.getAllAliases(); //take all aliases
-			session.setAttribute("statusDeparture", "false");
-			for (Alias a : listAlias) {
-				if (a.getCountryAlias().equals(departure) && a.isApproved()) { // find it and it is approved
-					session.setAttribute("statusDeparture", "true");
-					newDeparture = a.getCountryName().getCountryName();;
-					break;
-				} else if (a.getCountryAlias().equals(departure) && !a.isApproved()) { //find it but not approved
-					session.setAttribute("statusDeparture", "false");
-					newDeparture = a.getCountryName().getCountryName();;
-					break;
-				}
-			}
-
-		}
-		 */
 		CheckChain chain = CheckChainBuilder.getChain(s);
 		AliasManager am = new AliasManager();
 		CountryManager cm = new CountryManager();
 		Collection<Country> countryList = cm.getAllCountries();
 		boolean trovatoDep = false;
 		boolean trovatoArr = false;
-		
+
 		String departureRes = chain.check(departure);
 		String arrivalRes = chain.check(arrival);
-		
+
 		if (countryList != null && countryList.size() != 0) {
 			Iterator<?> it = countryList.iterator();
 			while (it.hasNext()) {
 				Country c = (Country) it.next();
-				if(c.getCountryName().equals(departureRes)) {
+				if(c.getCountryName().equals(departure)) {
 					trovatoDep = true;
 				}
-				if(c.getCountryName().equals(arrivalRes)) {
+				if(c.getCountryName().equals(arrival)) {
 					trovatoArr = true;
 				}
 			}
 		}
-		
-		if(departureRes != null && !trovatoDep) {
-			Alias departureBean = am.getAlias(departureRes);
-			if(departureBean != null && departureBean.isApproved()) {
-				session.setAttribute("statusDeparture", "true");
+
+
+		if(departureRes != null) {
+			Country c = cm.getCountry(departureRes);
+			if(!trovatoDep) {
+				Alias departureBean = am.getAlias(departure);
+				if(departureBean == null || !departureBean.isApproved()) {
+					session.setAttribute("statusDeparture", "false");
+					session.setAttribute("departure", departureRes);
+				} else {
+					session.setAttribute("statusDeparture", "true");
+					session.setAttribute("departure", departureRes);
+					session.setAttribute("departureAlphaCode", c.getAlpha2code());
+				}			
 			} else {
-				session.setAttribute("statusDeparture", "false");
+				session.setAttribute("statusDeparture", "true");
+				session.setAttribute("departure", departureRes);
+				session.setAttribute("departureAlphaCode", c.getAlpha2code());
 			}
-		} else if(trovatoDep) {
-			session.setAttribute("statusDeparture", "true");
 		} else {
 			session.setAttribute("statusDeparture", "invalidate");
 		}
 
-		
-		if(arrivalRes != null && !trovatoArr) {
-			Alias arrivalBean = am.getAlias(arrivalRes);
-			if(arrivalBean != null && arrivalBean.isApproved()) {
-				session.setAttribute("statusArrival", "true");
+
+		if(arrivalRes != null) {
+			Country c = cm.getCountry(arrivalRes);
+			if(!trovatoArr) {
+				Alias arrivalBean = am.getAlias(arrival);
+				if(arrivalBean == null || !arrivalBean.isApproved()) {
+					session.setAttribute("statusArrival", "false");
+					session.setAttribute("arrival", arrivalRes);
+				} else {
+					session.setAttribute("statusArrival", "true");
+					session.setAttribute("arrival", arrivalRes);
+					session.setAttribute("arrivalAlphaCode", c.getAlpha2code());
+				}
 			} else {
-				session.setAttribute("statusArrival", "false");
-			}
-		} else if(trovatoArr) {
-			session.setAttribute("statusArrival", "true");
-		} else {
+				session.setAttribute("statusArrival", "true");
+				session.setAttribute("arrival", arrivalRes);
+				session.setAttribute("arrivalAlphaCode", c.getAlpha2code());
+			} 
+		}else {
 			session.setAttribute("statusArrival", "invalidate");
 		}
 
 		TrainManager tm = new TrainManager();
 		if(departureRes != null && arrivalRes != null) {
 			if(factoryName.equals("none")) {
-				Collection<Train> collectionTrains = tm.getTrainsWithoutFactory(departure, arrival);
+				Collection<Train> collectionTrains = tm.getTrainsWithoutFactory(departureRes, arrivalRes);
 				session.setAttribute("trainList", collectionTrains);
 			} else {
-				Collection<Train> collectionTrains = tm.getTrainsWithParameter(factoryName, departure, arrival);
+				Collection<Train> collectionTrains = tm.getTrainsWithParameter(factoryName, departureRes, departureRes);
 				session.setAttribute("trainList", collectionTrains);
 			}
 		}
-		
+
 		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/searchingTrain.jsp");
 		dispatcher.forward(request, response);
 	}
